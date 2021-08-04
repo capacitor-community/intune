@@ -45,6 +45,10 @@ repositories {
     google()
     jcenter()
     mavenCentral()
+    maven {
+        url 'https://pkgs.dev.azure.com/MicrosoftDeviceSDK/DuoSDK-Public/_packaging/Duo-SDK-Feed/maven/v1'
+        name 'Duo-SDK-Feed'
+    }
 }
 
 
@@ -55,4 +59,7 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+
+    implementation files("../ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
+    implementation 'com.microsoft.identity.client:msal:1.5.5'
 }
