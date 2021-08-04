@@ -1,0 +1,7 @@
+{
+  "redirects": [
+  ],
+  "rewrites": [
+    { "source": "/docs/intune/:match*", "destination": "/:match*" }
+  ]
+}
