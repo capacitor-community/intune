@@ -15,3 +15,12 @@ Update the native project config files:
 
 ```xml
 ```
+
+## Installing Intune SDK
+
+Microsoft doesn't allow distributing the Intune App SDK in other packages, so it must be installed manually.
+
+To do so, review the README, license terms, and privacy policy of the official Intune App SDKs and download the latest release of each:
+
+ * Android: [ms-intune-app-sdk-android](https://github.com/msintuneappsdk/ms-intune-app-sdk-android)
+ * iOS: [ms-intune-app-sdk-ios](https://github.com/msintuneappsdk/ms-intune-app-sdk-ios)
