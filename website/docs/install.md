@@ -24,3 +24,7 @@ To do so, review the README, license terms, and privacy policy of the official I
 
  * Android: [ms-intune-app-sdk-android](https://github.com/msintuneappsdk/ms-intune-app-sdk-android)
  * iOS: [ms-intune-app-sdk-ios](https://github.com/msintuneappsdk/ms-intune-app-sdk-ios)
+
+## Android: Configuring Gradle Plugin
+
+On Android, the Intune App SDK functions by wrapping key Android API classes with Intune-managed ones, using a Gradle plugin to replace Android API class references at build time. This Gradle plugin must be manually configured in your app to enable Intune MAM features in your app.
