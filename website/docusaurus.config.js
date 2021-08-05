@@ -10,6 +10,9 @@ module.exports = {
   projectName: 'enterprise-intune',
   titleDelimiter: '-',
   themeConfig: {
+    prism: {
+      additionalLanguages: ['java', 'groovy']
+    },
     navbar: {
       logo: {
         alt: 'Ionic Logo',

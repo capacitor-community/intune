@@ -22,7 +22,7 @@ Next, open the `build.gradle` file for your main application (this is typically 
 
 At the top, there should be a `buildscript` definition, and two new dependencies below need to be added to the `dependencies` definition:
 
-```gradle
+```groovy
 buildscript {
     
     repositories {
@@ -43,7 +43,7 @@ buildscript {
 
 Next, add the following lines to make sure the Intune App SDK Gradle plugin properly transforms these external libraries. Add any extra libraries your app uses that also need to be transformed:
 
-```gradle
+```groovy
 intunemam {
     includeExternalLibraries = [
             "androidx.*",
@@ -54,7 +54,7 @@ intunemam {
 
 Finally, there's an issue with the current version of the Intune App SDK for Android that requires the following maven repo for the `Duo-SDK-Feed` to be added to the `allprojects` `repositories` definition below the above `buildscript` definition:
 
-```gradle
+```groovy
 allprojects {
     repositories {
         google()
