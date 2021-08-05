@@ -3,7 +3,7 @@ title: Usage
 sidebar_label: Usage
 ---
 
-__Intune support is currently in preview. Interested in using it?__ [Get in touch](https://ionic.io/contact/sales).
+__Interested in Intune support?__ [Get in touch](https://ionic.io/contact/sales).
 
 ## Logging in and Enrolling Account
 
