@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Intune',
+  title: 'Intune (Preview)',
   tagline: 'Support for Microsoft Intune MAM/MDM with Azure AD auth',
   url: 'https://ionic.io',
   baseUrl: '/docs/intune/',

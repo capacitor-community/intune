@@ -11,6 +11,7 @@ module.exports = {
       ]
     },
     'usage',
+    'brokered-auth',
     'troubleshooting'
   ]
 };

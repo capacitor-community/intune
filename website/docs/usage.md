@@ -3,6 +3,8 @@ title: Usage
 sidebar_label: Usage
 ---
 
+__Intune support is currently in preview. Interested in using it?__ [Get in touch](https://ionic.io/contact/sales).
+
 ## Logging in and Enrolling Account
 
 To acquire a user token and enroll them, use `loginAndEnrollAccount`

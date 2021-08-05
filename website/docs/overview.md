@@ -6,9 +6,9 @@ slug: /
 
 import WistiaVideo from '@site/src/components/WistiaVideo';
 
-Ionic's Intune support makes it easy to add Intune MAM and MDM features into your app, such as Intune security policies and brokered auth with Microsoft Authenticator and/or the Intune Company Portal app.
+__Intune support is currently in preview. Interested in using it?__ [Get in touch](https://ionic.io/contact/sales).
 
-__Don't have an Intune subscription?__ [Get in touch to learn more](https://ionic.io/contact/sales).
+Ionic's Intune support makes it easy to add Intune MAM and MDM features into your app, such as Intune security policies and brokered auth with Microsoft Authenticator and/or the Intune Company Portal app.
 
 Intune support is built and supported by the Ionic's native mobile experts and includes ongoing updates and maintenance, including new API features, patches, updates, and compatibility upgrades for new iOS & Android releases.
 

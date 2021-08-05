@@ -25,6 +25,8 @@ To the MSAL auth configuration JSON.
 
 ## iOS
 
+Coming soon
+
 ## Android
 
 First, ensure the correct `<queries>` have been added to the `AndroidManifest.xml` by following the Android Installation instructions.
