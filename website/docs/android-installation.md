@@ -54,7 +54,7 @@ intunemam {
 
 Finally, there's an issue with the current version of the Intune App SDK for Android that requires the following maven repo for the `Duo-SDK-Feed` to be added to the `allprojects` `repositories` definition below the above `buildscript` definition:
 
-```
+```gradle
 allprojects {
     repositories {
         google()
