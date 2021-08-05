@@ -1,5 +1,6 @@
 ---
-title: Installation - Android
-sidebar_label: Android
+title: Installation - iOS
+sidebar_label: iOS
 ---
+
 ## iOS Installation
