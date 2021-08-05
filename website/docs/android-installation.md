@@ -121,6 +121,26 @@ When selecting `View` on a `Redirect URI` entry:
 
 ### Setting Android Manifest Configuration
 
+Add to your `<application` declaration this attribute at the end:
+
+```xml
+android:name="com.ionicframework.intune.IntuneApplication"
+```
+
+So your `<application>` declaration will look similar to:
+
+```xml
+<application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme"
+    android:name="com.ionicframework.intune.IntuneApplication">
+```
+
+
 To use brokered auth with Microsoft Authenticator or the Intune Company Portal app, add these `<queries>` to the top level of your `AndroidManifest.xml` file (directly inside the top-level `<manifest>` declaration). Note: this is required as of Android 12 API Level 30, apps targeting older versions may function fine without it.
 
 ```xml
