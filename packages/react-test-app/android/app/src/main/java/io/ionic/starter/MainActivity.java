@@ -11,7 +11,7 @@ import com.getcapacitor.BridgeActivity;
 
 import java.security.MessageDigest;
 
-import io.ionic.starter.intune.IntuneMAM;
+// import io.ionic.starter.intune.IntuneMAM;
 
 public class MainActivity extends BridgeActivity {
   @Override
@@ -31,6 +31,5 @@ public class MainActivity extends BridgeActivity {
       Log.e("exception", e.toString());
     }
     super.onCreate(savedInstanceState);
-    registerPlugin(IntuneMAM.class);
   }
 }
