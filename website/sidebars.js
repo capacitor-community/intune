@@ -1,7 +1,6 @@
 module.exports = {
   sidebar: [
     'overview',
-    'install',
     {
       type: 'category',
       label: 'Installation',
@@ -11,6 +10,7 @@ module.exports = {
         'ios-installation'
       ]
     },
-    'getting-started'
+    'usage',
+    'troubleshooting'
   ]
 };

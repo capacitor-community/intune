@@ -1,6 +1,6 @@
 ---
-title: Getting Started
-sidebar_label: Getting Started
+title: Usage
+sidebar_label: Usage
 ---
 
 ## Logging in and Enrolling Account

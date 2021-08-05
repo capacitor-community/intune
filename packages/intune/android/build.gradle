@@ -60,6 +60,6 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
 
-    implementation files("../ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
+    implementation files("./ms-intune-app-sdk-android-7.6.0/Microsoft.Intune.MAM.SDK.aar")
     implementation 'com.microsoft.identity.client:msal:1.5.5'
 }

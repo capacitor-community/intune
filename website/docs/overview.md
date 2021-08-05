@@ -16,4 +16,4 @@ Intune support is built and supported by the Ionic's native mobile experts and i
 
 Microsoft Intune is a complex product, and integrating the native Intune App SDKs for iOS and Android is very challenging and time consuming. With Ionic's Intune support, developers can get up and running with Intune integration in their app with considerably less work and native development experience required.
 
-Ionic's Intune support is drop-in ready for iOS and Android, with the only configuration required being setting up the Azure AD and Intune policies unique to your organization.
+Ionic's Intune support is practically drop-in ready for iOS and Android, with minimal native configuration required. The majority of the configuration required involves setting up the Azure AD and Intune policies in Azure that are unique to your organization.

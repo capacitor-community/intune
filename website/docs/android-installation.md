@@ -70,6 +70,35 @@ allprojects {
 
 ### Setting Auth Configuration
 
+Configuring Auth involves two steps: finding your app's signing signature hash, and copying the MSAL config for your app's Redirect URIs from Azure AD
+
+#### Finding the Signature Hash
+
+MSAL requires your app's signature hash in order to correctly use your app's Redirect URIs. To find this hash, read the [MSAL FAQ for Redirect URI Issues](https://github.com/AzureAD/microsoft-authentication-library-for-android/wiki/MSAL-FAQ#redirect-uri-issues).
+
+If you are still struggling to find the correct hash for your app, this code may be dropped into the `MainActivity` `onCreate` method to log the package hash key for development, but keep in mind this should only be used for development mode. For production, follow the above FAQ:
+
+```java
+try {
+    PackageInfo info = getPackageManager().getPackageInfo("your.package.name", PackageManager.GET_SIGNATURES);
+    for (Signature signature : info.signatures) {
+        MessageDigest md;
+        md = MessageDigest.getInstance("SHA");
+        md.update(signature.toByteArray());
+        String something = new String(Base64.encode(md.digest(), 0));
+        Log.e("hash key", something);
+    }
+} catch (Exception e) {
+    Log.e("exception", e.toString());
+}
+```
+
+Once you have the correct hash, register your Redirect URI in the Azure AD dashboard:
+
+[Android AAD MSAL Dashboard](/img/intune/android-aad-msal-config.png)
+
+#### Creating Configuration JSON File
+
 The Intune App SDK for Android reads the JSON portion of your Azure AD auth configuration to configure the underlying Microsoft Authentication Library (MSAL).
 
 This file must be named `auth_config.json` and placed in a new `raw` resource directory in your app. First, create the new resource directory by right-clicking on the `res` folder and choosing New -> Android Resource Directory:
