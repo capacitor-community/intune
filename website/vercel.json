@@ -1,6 +1,5 @@
 {
-  "redirects": [
-  ],
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/docs/intune/:match*", "destination": "/:match*" }
   ]
