@@ -2,7 +2,9 @@ module.exports = {
   title: 'Intune',
   tagline: 'Support for Microsoft Intune MAM/MDM with Azure AD and brokered auth',
   url: 'https://ionic.io',
+  trailingSlash: false,
   baseUrl: '/docs/intune/',
+  baseUrlIssueBanner: false,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/intune-icon.svg',
@@ -11,12 +13,13 @@ module.exports = {
   titleDelimiter: '-',
   themeConfig: {
     prism: {
-      additionalLanguages: ['java', 'groovy']
+      additionalLanguages: ['java', 'groovy'],
     },
     navbar: {
+      title: 'Intune',
       logo: {
-        alt: 'Ionic Logo',
-        src: 'img/logo.svg',
+        alt: 'Intune Logo',
+        src: 'img/logo.png',
       },
       items: [
         {
@@ -47,7 +50,7 @@ module.exports = {
               rel: null,
             },
             {
-              to: '/',
+              to: 'https://ionic.io/docs/identity-vault',
               label: 'Identity Vault',
             },
             {
@@ -79,7 +82,7 @@ module.exports = {
       trackingID: 'GTM-TKMGCBC',
     },
   },
-  plugins: ['@ionic-internal/docusaurus-plugin-tag-manager'],
+  plugins: ['@ionic-internal/docusaurus-plugin-tag-manager', 'docusaurus-plugin-sass'],
   themes: ['@ionic-internal/docusaurus-theme'],
   presets: [
     [
@@ -95,7 +98,6 @@ module.exports = {
           versions: {
             current: {
               label: '1.0',
-              
             },
           },
         },
