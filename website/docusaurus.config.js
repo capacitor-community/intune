@@ -78,6 +78,10 @@ module.exports = {
     tagManager: {
       trackingID: 'GTM-TKMGCBC',
     },
+    prism: {
+      theme: { plain: {}, styles: [] },
+      additionalLanguages: ['shell-session'],
+    },
   },
   plugins: ['@ionic-internal/docusaurus-plugin-tag-manager', 'docusaurus-plugin-sass'],
   themes: ['@ionic-internal/docusaurus-theme'],
@@ -85,21 +89,15 @@ module.exports = {
     [
       '@docusaurus/preset-classic',
       {
-        theme: {
-          customCss: ['prismjs/themes/prism-tomorrow.css'],
-        },
         docs: {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          lastVersion: 'current',
-          versions: {
-            current: {
-              label: '1.0',
-            },
-          },
         },
         blog: false,
         pages: false,
+        theme: {
+          customCss: ['prismjs/themes/prism-tomorrow.css'],
+        },
       },
     ],
   ],
