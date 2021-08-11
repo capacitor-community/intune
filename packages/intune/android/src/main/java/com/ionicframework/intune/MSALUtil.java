@@ -20,6 +20,7 @@ import com.microsoft.identity.client.ICurrentAccountResult;
 import com.microsoft.identity.client.IMultipleAccountPublicClientApplication;
 import com.microsoft.identity.client.IPublicClientApplication;
 import com.microsoft.identity.client.ISingleAccountPublicClientApplication;
+import com.microsoft.identity.client.PublicClientApplication;
 import com.microsoft.identity.client.exception.MsalException;
 import com.microsoft.identity.client.exception.MsalUiRequiredException;
 
@@ -219,7 +220,8 @@ public final class MSALUtil {
       msalLogger.setLogLevel(com.microsoft.identity.client.Logger.LogLevel.VERBOSE);
       msalLogger.setEnablePII(true);
 
-      // mMsalClientApplication = PublicClientApplication.create(appContext, R.raw.auth_config);
+      int authConfig = appContext.getResources().getIdentifier("auth_config", "raw", appContext.getPackageName());
+      mMsalClientApplication = PublicClientApplication.create(appContext, authConfig);
     }
   }
 }
