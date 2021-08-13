@@ -7,6 +7,7 @@
 		<string>$(AppIdentifierPrefix)io.ionic.intuneDemo</string>
 		<string>$(AppIdentifierPrefix)com.microsoft.intune.mam</string>
 		<string>$(AppIdentifierPrefix)com.microsoft.adalcache</string>
+		<string>$(AppIdentifierPrefix)io.ionic.intuneDemo.intunemam</string>
 	</array>
 </dict>
 </plist>

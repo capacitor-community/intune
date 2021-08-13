@@ -8,7 +8,7 @@ class EnrollmentDelegateClass: NSObject, IntuneMAMEnrollmentDelegate {
         super.init()
         self.presentingViewController = nil
     }
-    
+
 
     func enrollmentRequest(with status: IntuneMAMEnrollmentStatus) {
         if status.didSucceed {

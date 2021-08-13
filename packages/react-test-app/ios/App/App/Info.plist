@@ -24,6 +24,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>msauth.com.microsoft.intunemam</string>
+                <string>msauth.$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			</array>
 		</dict>
 	</array>
@@ -33,6 +34,9 @@
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>msauthv2</string>
+		<string>msauthv3</string>
+		<string>msauth-intunemam</string>
 		<string>mvisionmobile</string>
 		<string>scmx</string>
 		<string>lookoutwork-ase</string>
@@ -82,5 +86,14 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>IntuneMAMSettings</key>
+	<dict>
+		<key>ADALRedirectUri</key>
+		<string>msauth.io.ionic.intuneDemo://auth</string>
+		<key>ADALClientId</key>
+		<string>f80e2e59-01b2-4f88-be80-4895a63eae7e</string>
+		<key>ADALAuthority</key>
+		<string>https://login.microsoftonline.com/453daf0a-cd18-4085-bfd7-fb9431630f11</string>
+	</dict>
 </dict>
 </plist>

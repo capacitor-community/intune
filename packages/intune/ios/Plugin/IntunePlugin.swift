@@ -11,7 +11,6 @@ public class IntuneMAM: CAPPlugin {
         print("IntuneMAM Loading")
         IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
         IntuneMAMPolicyManager.instance().delegate = policyDelegate
-        
         //register for the IntuneMAMAppConfigDidChange notification
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(onIntuneMAMAppConfigDidChange),
@@ -35,9 +34,6 @@ public class IntuneMAM: CAPPlugin {
     @objc func onIntuneMAMPolicyDidChange() {
         print("Intune policy did change")
         notifyListeners("policyChange", data: nil)
-        
-        let policy = IntuneMAMPolicyManager.instance().policy(forIdentity: "test@driftyco.onmicrosoft.com")
-        print("Policy here", policy)
     }
     
     @objc public func loginAndEnrollAccount(_ call: CAPPluginCall) {
