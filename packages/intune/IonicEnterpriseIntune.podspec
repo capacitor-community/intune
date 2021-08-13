@@ -14,4 +14,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target  = '12.0'
   s.dependency 'Capacitor'
   s.swift_version = '5.1'
+  s.ios.vendored_frameworks = 'ios/IntuneMAMSwift.xcframework', 'ios/IntuneMAMSwiftStub.xcframework'
 end
