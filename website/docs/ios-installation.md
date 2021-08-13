@@ -3,19 +3,41 @@ title: Installation - iOS
 sidebar_label: iOS
 ---
 
-## Frameworks
+The following steps attempt to distill the [official Intune App SDK iOS integration documentation](https://docs.microsoft.com/en-us/mem/intune/developer/app-sdk-ios#build-the-sdk-into-your-mobile-app) to the basics needed to integrate into your Ionic/Capacitor app. Please refer to that documentation for the most up-to-date authoritative installation instructions.
+
+## 1. Add Frameworks
 
 The Intune App SDK requires the following Core iOS frameworks be added to your app project:
 
 ![iOS Frameworks](/img/intune/ios-frameworks.png)
 
-## Target iOS Version
+## 2. Configure Keychain
+
+Add the following keychain groups under Signing &amp; Capabilities, making sure to substitute your app's Bundle ID for the first group:
+
+![iOS Keychain](/img/intune/ios-keychain.png)
+
+## 3. Enable Application Queries Schemes
+
+Open `Info.plist` and add a new Row with the name `LSApplicationQueriesSchemes` of type `Array` containing all of the protocols your app will attempt to open, for example by using the [App Launcher](https://capacitorjs.com/docs/apis/app-launcher) API in Capacitor.
+
+Any custom protocols your app launches must have two entries: the original protocol and a new one with `-intunemam` appended.
+
+Additionally, the following intune-specific protocols must be added :
+
+![iOS Application Queries Schemes](/img/intune/ios-queries-schemes.png)
+
+## 4. Set a NSFaceIDUsageDescription
+
+To enable Face ID support, add a description for `NSFaceIDUsageScription` also known as `Privacy - Face ID Usage Description` in `Info.plist`
+
+## 5. Update Target iOS Version
 
 The Intune App SDK only supports iOS 12.2 and above, make sure to set the Deployment target for your app to 12.2 or higher:
 
 ![iOS 12.2](/img/intune/ios-12.png)
 
-## Disable Bitcode
+## 6. Disable Bitcode
 
 The Intune App SDK does not support Bitcode. In the Build Settings for your app in Xcode, set `Strip Swift Symbols` and `Enable Bitcode` to `NO`:
 
@@ -34,3 +56,5 @@ post_install do |installer|
   end
 end
 ```
+
+## 7. Run IntuneMAMConfigurator
