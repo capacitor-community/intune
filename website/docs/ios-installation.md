@@ -3,7 +3,17 @@ title: Installation - iOS
 sidebar_label: iOS
 ---
 
-## iOS Installation
+## Frameworks
+
+The Intune App SDK requires the following Core iOS frameworks be added to your app project:
+
+![iOS Frameworks](/img/intune/ios-frameworks.png)
+
+## Target iOS Version
+
+The Intune App SDK only supports iOS 12.2 and above, make sure to set the Deployment target for your app to 12.2 or higher:
+
+![iOS 12.2](/img/intune/ios-12.png)
 
 ## Disable Bitcode
 

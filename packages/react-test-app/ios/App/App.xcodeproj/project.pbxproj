@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2FAD9763203C412B000D30F8 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2FAD9762203C412B000D30F8 /* config.xml */; };
+		5010E65C26C6CB9D005F80FA /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CC4CE426AA648D0033405C /* libsqlite3.tbd */; };
+		5010E65D26C6CBA7005F80FA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CC4CE526AA64990033405C /* libc++.tbd */; };
 		50379B232058CBB4000EE86E /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
 		504EC30D1FED79650016851F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
@@ -23,12 +25,6 @@
 		50CC4CEB26AA64B30033405C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CC4CEA26AA64B30033405C /* AudioToolbox.framework */; };
 		50CC4CED26AA64BF0033405C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CC4CEC26AA64BF0033405C /* QuartzCore.framework */; };
 		50CC4CEF26AA64C50033405C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CC4CEE26AA64C50033405C /* WebKit.framework */; };
-		50CC4CF226AB0D7F0033405C /* IntuneMAMSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CC4CF126AB0D7F0033405C /* IntuneMAMSwift.xcframework */; };
-		50CC4CF326AB0D7F0033405C /* IntuneMAMSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 50CC4CF126AB0D7F0033405C /* IntuneMAMSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		50CC4CF626AB0D810033405C /* IntuneMAMSwiftStub.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CC4CF526AB0D810033405C /* IntuneMAMSwiftStub.xcframework */; };
-		50CC4CF726AB0D810033405C /* IntuneMAMSwiftStub.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 50CC4CF526AB0D810033405C /* IntuneMAMSwiftStub.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		50CC4CF926AB0D840033405C /* MSAL.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CC4CF826AB0D840033405C /* MSAL.xcframework */; };
-		50CC4CFA26AB0D840033405C /* MSAL.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 50CC4CF826AB0D840033405C /* MSAL.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,9 +35,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				50CC4CFA26AB0D840033405C /* MSAL.xcframework in Embed Frameworks */,
-				50CC4CF726AB0D810033405C /* IntuneMAMSwiftStub.xcframework in Embed Frameworks */,
-				50CC4CF326AB0D7F0033405C /* IntuneMAMSwift.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,9 +63,6 @@
 		50CC4CEC26AA64BF0033405C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		50CC4CEE26AA64C50033405C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		50CC4CF026AA65300033405C /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
-		50CC4CF126AB0D7F0033405C /* IntuneMAMSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = IntuneMAMSwift.xcframework; sourceTree = "<group>"; };
-		50CC4CF526AB0D810033405C /* IntuneMAMSwiftStub.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = IntuneMAMSwiftStub.xcframework; sourceTree = "<group>"; };
-		50CC4CF826AB0D840033405C /* MSAL.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = MSAL.xcframework; sourceTree = "<group>"; };
 		AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
 		FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -83,18 +73,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50CC4CF226AB0D7F0033405C /* IntuneMAMSwift.xcframework in Frameworks */,
 				50CC4CE726AA64A10033405C /* ImageIO.framework in Frameworks */,
 				50CC4CE926AA64A90033405C /* LocalAuthentication.framework in Frameworks */,
 				50CC4CEF26AA64C50033405C /* WebKit.framework in Frameworks */,
 				50CC4CED26AA64BF0033405C /* QuartzCore.framework in Frameworks */,
 				50CC4CE326AA64800033405C /* SystemConfiguration.framework in Frameworks */,
 				50CC4CE126AA646C0033405C /* CoreServices.framework in Frameworks */,
+				5010E65D26C6CBA7005F80FA /* libc++.tbd in Frameworks */,
 				50CC4CDF26AA64630033405C /* Security.framework in Frameworks */,
 				50CC4CEB26AA64B30033405C /* AudioToolbox.framework in Frameworks */,
 				50CC4CDD26AA645C0033405C /* MessageUI.framework in Frameworks */,
-				50CC4CF626AB0D810033405C /* IntuneMAMSwiftStub.xcframework in Frameworks */,
-				50CC4CF926AB0D840033405C /* MSAL.xcframework in Frameworks */,
+				5010E65C26C6CB9D005F80FA /* libsqlite3.tbd in Frameworks */,
 				A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,9 +94,6 @@
 		27E2DDA53C4D2A4D1A88CE4A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				50CC4CF826AB0D840033405C /* MSAL.xcframework */,
-				50CC4CF526AB0D810033405C /* IntuneMAMSwiftStub.xcframework */,
-				50CC4CF126AB0D7F0033405C /* IntuneMAMSwift.xcframework */,
 				50CC4CEE26AA64C50033405C /* WebKit.framework */,
 				50CC4CEC26AA64BF0033405C /* QuartzCore.framework */,
 				50CC4CEA26AA64B30033405C /* AudioToolbox.framework */,
@@ -409,8 +395,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -426,11 +411,8 @@
 				DEVELOPMENT_TEAM = 9YN2HU59K8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = App/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = io.ionic.intuneDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -453,11 +435,8 @@
 				DEVELOPMENT_TEAM = 9YN2HU59K8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = App/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.ionic.intuneDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_SWIFT_SYMBOLS = NO;
