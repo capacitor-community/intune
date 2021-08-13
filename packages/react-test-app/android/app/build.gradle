@@ -39,7 +39,6 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
-    implementation files("c:/Users/Max/GitHub/ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
     implementation 'com.microsoft.identity.client:msal:1.5.5'
 }
 
