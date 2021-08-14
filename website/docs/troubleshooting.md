@@ -7,9 +7,11 @@ sidebar_label: Troubleshooting
 
 Refer first to Microsoft's [official troubleshooting documentation](https://docs.microsoft.com/en-us/troubleshoot/mem/intune/troubleshoot-mam) to find solutions to common issues.
 
+Additionally, for authentication issues, the `Sign-in logs` section of the Azure Active Directory app registration portal often has helpful error messages that point to Azure-side configuration issues. Please contact your administrator for access to this resource in Azure.
+
 ## iOS
 
-### "Unexpected failure"
+### "Unexpected failure" when performing brokered auth
 
 This error is the same as the one mentioned in [this issue](https://github.com/msintuneappsdk/ms-intune-app-sdk-ios/issues/175).
 
@@ -28,7 +30,11 @@ To fix it, some additional configuration for MSAL is required. Make sure you've 
 	</array>
 ```
 
-THis enables your app to launch the authenticator.
+This enables your app to launch the authenticator.
+
+### MSALErrorDomain -50000 when using brokered auth
+
+This is a configuration issue in the Azure Active Directory Portal. Ensure the app registration has permission to access the `Microsoft Mobile Application Management` API. Please contact your administrator to enable your app to access the necessary APIs.
 
 ### Enable logging
 
