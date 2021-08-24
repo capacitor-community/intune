@@ -7,7 +7,7 @@ module.exports = {
   baseUrlIssueBanner: false,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/intune-icon.svg',
+  favicon: 'img/logo.png',
   organizationName: 'ionic-team',
   projectName: 'enterprise-intune',
   titleDelimiter: '-',
