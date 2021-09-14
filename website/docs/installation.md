@@ -13,4 +13,6 @@ In your app, run:
 npm install @ionic-enterprise/intune
 ```
 
-Then follow the steps to finish the native installation and configuration for iOS and/or Android.
+Then make sure to sync your platforms per the [Capacitor development workflow](https://capacitorjs.com/docs/basics/workflow).
+
+When finished, follow the steps to complete the native installation and configuration for iOS and/or Android.

@@ -41,20 +41,7 @@ buildscript {
 }
 ```
 
-Next, open the `build.gradle` file for the `Module: android.app` and add the following lines to make sure the Intune App SDK Gradle plugin properly transforms these external libraries. Add any extra libraries your app uses that also need to be transformed:
-
-```groovy
-apply plugin: 'com.microsoft.intune.mam'
-
-intunemam {
-    includeExternalLibraries = [
-            "androidx.*",
-            "com.getcapacitor.*"
-    ]
-}
-```
-
-Finally, there's an issue with the current version of the Intune App SDK for Android that requires the following maven repo for the `Duo-SDK-Feed` to be added to the `allprojects` `repositories` definition below the above `buildscript` definition:
+Next, there's an issue with the current version of the Intune App SDK for Android that requires the following maven repo for the `Duo-SDK-Feed` to be added to the `allprojects` `repositories` definition below the above `buildscript` definition:
 
 ```groovy
 allprojects {
@@ -67,6 +54,19 @@ allprojects {
             name 'Duo-SDK-Feed'
         }
     }
+}
+```
+
+Finally, open the `build.gradle` file for the `Module: android.app` and add the following lines to make sure the Intune App SDK Gradle plugin properly transforms these external libraries. Add any extra libraries your app uses that also need to be transformed:
+
+```groovy
+apply plugin: 'com.microsoft.intune.mam'
+
+intunemam {
+    includeExternalLibraries = [
+            "androidx.*",
+            "com.getcapacitor.*"
+    ]
 }
 ```
 
@@ -112,6 +112,29 @@ To use brokered auth with Microsoft Authenticator or the Intune Company Portal a
         <action android:name="android.support.customtabs.action.CustomTabsService" />
     </intent>
 </queries>
+```
+
+Finally, a new intent filter needs to be added inside your root `<application>`. Replace the `YOUR_PACKAGE` and `YOUR_HASH` with the relevant values:
+
+```xml
+<!-- Must be specified to allow users to login via MSAL -->
+<activity android:name="com.microsoft.identity.client.BrowserTabActivity">
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <!--
+            Add in your scheme/host from registered redirect URI
+            note that the leading "/" is required for android:path
+        -->
+        <data
+            android:host="YOUR_PACKAGE"
+            android:path="/YOUR_HASH"
+            android:scheme="msauth" />
+    </intent-filter>
+</activity>
 ```
 
 ### Setting Auth Configuration
