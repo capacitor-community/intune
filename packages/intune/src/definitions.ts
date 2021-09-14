@@ -28,7 +28,7 @@ export interface IntuneMAMPolicy {
   [key: string]: any;
 }
 
-interface IntunePlugin {
+export interface IntunePlugin {
   enrolledAccount: () => Promise<IntuneMAMUser>;
   loginAndEnrollAccount: () => Promise<void>;
   deRegisterAndUnenrollAccount: (user: IntuneMAMUser) => Promise<void>;
