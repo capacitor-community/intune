@@ -6,6 +6,7 @@ module.exports = {
       label: 'Installation',
       collapsed: false,
       items: [
+        'installation',
         'android-installation',
         'ios-installation'
       ]
