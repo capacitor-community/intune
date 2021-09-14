@@ -1,16 +1,15 @@
 {
   "name": "@ionic-enterprise/intune",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Support for Microsoft Intune",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "unpkg": "dist/plugin.js",
   "files": [
-    "android/src/main/",
-    "android/build.gradle",
+    "android",
     "dist/",
-    "ios/Plugin/",
+    "ios",
     "IonicEnterpriseIntune.podspec"
   ],
   "author": "",
