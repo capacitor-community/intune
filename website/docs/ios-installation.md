@@ -61,6 +61,12 @@ end
 
 As a final step, Microsoft has provided a command line utility to finish configuring your app. To use it, [follow step #7](https://docs.microsoft.com/en-us/mem/intune/developer/app-sdk-ios#build-the-sdk-into-your-mobile-app) on the official SDK integration docs from Microsoft.
 
+For example, the command might look like:
+
+```shell
+/path/to/ms-intune-app-sdk-ios-14.6.0/IntuneMAMConfigurator -i ios/App/App/Info.plist -e ios/App/App/App.entitlements
+```
+
 ## 8. Configure MSAL
 
 MSAL configuration is required to enable brokered auth and other common Azure Active Directory authentication integrations.
