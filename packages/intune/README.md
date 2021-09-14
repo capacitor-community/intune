@@ -33,7 +33,7 @@ addListener(eventName: 'appConfigChange', listenerFunc: () => void) => Promise<P
 | **`eventName`**    | <code>"appConfigChange"</code> |
 | **`listenerFunc`** | <code>() =&gt; void</code>     |
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
 --------------------
 
@@ -49,7 +49,7 @@ addListener(eventName: 'policyChange', listenerFunc: () => void) => Promise<Plug
 | **`eventName`**    | <code>"policyChange"</code> |
 | **`listenerFunc`** | <code>() =&gt; void</code>  |
 
-**Returns:** <code>any</code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
 
 --------------------
 
@@ -59,9 +59,9 @@ addListener(eventName: 'policyChange', listenerFunc: () => void) => Promise<Plug
 
 #### PluginListenerHandle
 
-| Prop         | Type                      |
-| ------------ | ------------------------- |
-| **`remove`** | <code>() =&gt; any</code> |
+| Prop         | Type                                      |
+| ------------ | ----------------------------------------- |
+| **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
 
 
 #### IntuneMAMUser

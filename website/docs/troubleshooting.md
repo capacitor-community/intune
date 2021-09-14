@@ -36,6 +36,16 @@ This enables your app to launch the authenticator.
 
 This is a configuration issue in the Azure Active Directory Portal. Ensure the app registration has permission to access the `Microsoft Mobile Application Management` API. Please contact your administrator to enable your app to access the necessary APIs.
 
+### Build error: Undefined symbols and 12.0 deployment target warning
+
+If you see this error:
+
+![intune undefined symbols](/img/intune/ios-troubleshooting-undefined-symbols.png)
+
+The issue could be not setting the minimum deployment target for your App to 12.2 or above or the Podfile extra script to disable bitcode in all targets was not added.
+
+See the [iOS Installation](./ios-installation) guide and follow the deployment target and Podfile recommendations to resolve the issue.
+
 ### Enable logging
 
 See [this troubleshooting tip](https://techcommunity.microsoft.com/t5/intune-customer-success/support-tip-troubleshooting-intune-app-protection-policy-using/ba-p/330372)
