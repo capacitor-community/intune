@@ -1,7 +1,6 @@
 ---
 title: Installation
-sidebar_label: Overview
-slug: /
+sidebar_label: Installation
 ---
 
 To install the Intune plugin, your app must be using Capacitor 3.2.0 or above. You must also have [an active Ionic Enterprise install key](https://ionic.io/docs/supported-plugins/setup) with access to Intune.
