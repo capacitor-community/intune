@@ -70,6 +70,50 @@ allprojects {
 }
 ```
 
+### Setting Android Manifest Configuration
+
+Add to your `<application` declaration this attribute at the end:
+
+```xml
+android:name="com.ionicframework.intune.IntuneApplication"
+```
+
+So your `<application>` declaration will look similar to:
+
+```xml
+<application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme"
+    android:name="com.ionicframework.intune.IntuneApplication">
+```
+
+
+To use brokered auth with Microsoft Authenticator or the Intune Company Portal app, add these `<queries>` to the top level of your `AndroidManifest.xml` file (directly inside the top-level `<manifest>` declaration). Note: this is required as of Android 12 API Level 30, apps targeting older versions may function fine without it.
+
+```xml
+<queries>
+    <package android:name="com.azure.authenticator" />
+    <package android:name="YOUR_PACKAGE" />
+    <package android:name="com.microsoft.windowsintune.companyportal" />
+    <!-- Required for API Level 30 to make sure the app detect browsers
+        (that don't support custom tabs) -->
+    <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="https" />
+    </intent>
+    <!-- Required for API Level 30 to make sure the app can detect browsers that support custom tabs -->
+    <!-- https://developers.google.com/web/updates/2020/07/custom-tabs-android-11#detecting_browsers_that_support_custom_tabs -->
+    <intent>
+        <action android:name="android.support.customtabs.action.CustomTabsService" />
+    </intent>
+</queries>
+```
+
 ### Setting Auth Configuration
 
 Configuring Auth involves two steps: finding your app's signing signature hash, and copying the MSAL config for your app's Redirect URIs from Azure AD
@@ -120,47 +164,3 @@ When selecting `View` on a `Redirect URI` entry:
 ![Android AAD MSAL Config](/img/intune/android-aad-msal-config.png)
 
 ![Android AAD MSAL Config JSON](/img/intune/android-aad-msal-config-json.png)
-
-### Setting Android Manifest Configuration
-
-Add to your `<application` declaration this attribute at the end:
-
-```xml
-android:name="com.ionicframework.intune.IntuneApplication"
-```
-
-So your `<application>` declaration will look similar to:
-
-```xml
-<application
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/AppTheme"
-    android:name="com.ionicframework.intune.IntuneApplication">
-```
-
-
-To use brokered auth with Microsoft Authenticator or the Intune Company Portal app, add these `<queries>` to the top level of your `AndroidManifest.xml` file (directly inside the top-level `<manifest>` declaration). Note: this is required as of Android 12 API Level 30, apps targeting older versions may function fine without it.
-
-```xml
-<queries>
-    <package android:name="com.azure.authenticator" />
-    <package android:name="YOUR_PACKAGE" />
-    <package android:name="com.microsoft.windowsintune.companyportal" />
-    <!-- Required for API Level 30 to make sure the app detect browsers
-        (that don't support custom tabs) -->
-    <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="https" />
-    </intent>
-    <!-- Required for API Level 30 to make sure the app can detect browsers that support custom tabs -->
-    <!-- https://developers.google.com/web/updates/2020/07/custom-tabs-android-11#detecting_browsers_that_support_custom_tabs -->
-    <intent>
-        <action android:name="android.support.customtabs.action.CustomTabsService" />
-    </intent>
-</queries>
-```
