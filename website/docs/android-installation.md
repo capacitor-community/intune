@@ -36,14 +36,16 @@ buildscript {
         // ADD THIS:
         classpath "org.javassist:javassist:3.27.0-GA"
         // ADD THE REFERENCE TO THE GRADLE PLUGIN:
-        classpath files("../ms-intune-app-sdk-android/GradlePlugin/com.microsoft.intune.mam.build.jar")
+        classpath files("../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/GradlePlugin/com.microsoft.intune.mam.build.jar")
     }
 }
 ```
 
-Next, add the following lines to make sure the Intune App SDK Gradle plugin properly transforms these external libraries. Add any extra libraries your app uses that also need to be transformed:
+Next, open the `build.gradle` file for the `Module: android.app` and add the following lines to make sure the Intune App SDK Gradle plugin properly transforms these external libraries. Add any extra libraries your app uses that also need to be transformed:
 
 ```groovy
+apply plugin: 'com.microsoft.intune.mam'
+
 intunemam {
     includeExternalLibraries = [
             "androidx.*",
