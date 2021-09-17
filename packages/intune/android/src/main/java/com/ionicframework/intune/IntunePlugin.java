@@ -13,6 +13,7 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 import com.microsoft.identity.client.AuthenticationCallback;
 import com.microsoft.identity.client.IAccount;
 import com.microsoft.identity.client.IAuthenticationResult;
+import com.microsoft.identity.client.ICurrentAccountResult;
 import com.microsoft.identity.client.exception.MsalException;
 import com.microsoft.identity.client.exception.MsalIntuneAppProtectionPolicyRequiredException;
 import com.microsoft.identity.client.exception.MsalUserCancelException;
@@ -36,329 +37,304 @@ import org.json.JSONObject;
 @CapacitorPlugin(name = "IntuneMAM")
 public class IntunePlugin extends Plugin {
 
-    private static final String SETTINGS_PATH = "io.ionic.starter";
+  private static final String SETTINGS_PATH = "io.ionic.starter";
 
-    public static final String[] MSAL_SCOPES = { "https://graph.microsoft.com/User.Read" };
+  public static final String[] MSAL_SCOPES = { "https://graph.microsoft.com/User.Read" };
 
-    AppAccount mUserAccount;
+  AppAccount mUserAccount;
 
-    MAMEnrollmentManager mEnrollmentManager;
+  MAMEnrollmentManager mEnrollmentManager;
 
-    PluginCall mLastEnrollCall;
+  PluginCall mLastEnrollCall;
 
-    private JSObject getAuthConfigJson() {
-        int authConfig = getContext().getResources().getIdentifier("auth_config", "raw", getContext().getPackageName());
-        InputStream is = getContext().getResources().openRawResource(authConfig);
+  @Override
+  public void load() {
+    super.load();
+    mEnrollmentManager = MAMComponents.get(MAMEnrollmentManager.class);
 
-        Writer writer = new StringWriter();
-        char[] buffer = new char[1024];
-        try {
-            Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-            int n;
-            while ((n = reader.read(buffer)) != -1) {
-                writer.write(buffer, 0, n);
+    final SharedPreferences prefs = getContext().getSharedPreferences(SETTINGS_PATH, Context.MODE_PRIVATE);
+    mUserAccount = AppAccount.readFromSettings(prefs);
+  }
+
+  private void _acquireToken(PluginCall call, boolean interactive) {
+    mLastEnrollCall = call;
+
+    String upn = call.getString("upn");
+
+    String[] scopesArray = null;
+
+    try {
+      JSArray scopes = call.getArray("scopes");
+      scopesArray = scopes.toList().toArray(new String[0]);
+    } catch (Exception ex) {
+      call.reject("Must provide scopes list", ex);
+      return;
+    }
+
+    final String[] scopes = scopesArray;
+
+    // initiate the MSAL authentication on a background thread
+    Thread thread = new Thread(
+            () -> {
+              Logger.info("Starting interactive auth");
+
+              try {
+                if (interactive) {
+                  MSALUtil.acquireToken(getActivity(), MSAL_SCOPES, null, new AuthCallback());
+                } else {
+                  MSALUtil.acquireTokenSilent(getActivity(), upn, scopes, new AuthCallback());
+                }
+              } catch (MsalException | InterruptedException e) {
+                Logger.error("Authentication exception occurred", e);
+                showMessage("Authentication exception occurred - check logcat for more details.");
+              }
             }
-        } catch (IOException ex) {
-            return new JSObject();
-        } finally {
-            try {
-                is.close();
-            } catch (IOException ex) {
-                return new JSObject();
+    );
+    thread.start();
+  }
+
+  @PluginMethod
+  public void acquireToken(PluginCall call) {
+    _acquireToken(call, true);
+  }
+
+  @PluginMethod
+  public void acquireTokenSilent(PluginCall call) {
+    _acquireToken(call, false);
+  }
+
+  @PluginMethod
+  public void registerAndEnrollAccount(PluginCall call) {
+    if (mUserAccount != null) {
+      mEnrollmentManager.registerAccountForMAM(mUserAccount.getUPN(), mUserAccount.getAADID(), mUserAccount.getTenantID(), mUserAccount.getAuthority());
+    } else {
+      call.reject("No user account. Call acquireToken first");
+      return;
+    }
+    call.resolve();
+  }
+
+  @PluginMethod
+  public void loginAndEnrollAccount(PluginCall call) {
+    mLastEnrollCall = call;
+
+    // initiate the MSAL authentication on a background thread
+    Thread thread = new Thread(
+            () -> {
+              Logger.info("Starting interactive auth");
+
+              try {
+                String loginHint = null;
+                if (mUserAccount != null) {
+                  loginHint = mUserAccount.getUPN();
+                }
+                MSALUtil.acquireToken(getActivity(), MSAL_SCOPES, loginHint, new AuthCallback());
+              } catch (MsalException | InterruptedException e) {
+                Logger.error("Authentication exception occurred", e);
+                showMessage("Authentication exception occurred - check logcat for more details.");
+              }
             }
-        }
+    );
+    thread.start();
+  }
 
-        String jsonString = writer.toString();
+  @PluginMethod
+  public void enrolledAccount(PluginCall call) {
+    JSObject data = new JSObject();
+    if (mUserAccount != null) {
+      data.put("upn", mUserAccount.getUPN());
+    } else {
+      data.put("upn", "");
+    }
+    call.resolve(data);
+  }
 
-        try {
-            return new JSObject(jsonString);
-        } catch (Exception ex) {
-            Logger.error("Unable to parse auth_config.json", ex);
-            return new JSObject();
-        }
+  @PluginMethod
+  public void deRegisterAndUnenrollAccount(PluginCall call) {
+    // Initiate an MSAL sign out on a background thread.
+    final AppAccount effectiveAccount = mUserAccount;
+
+    Thread thread = new Thread(
+            () -> {
+              try {
+                MSALUtil.signOutAccount(getContext(), effectiveAccount.getAADID());
+                call.resolve();
+              } catch (MsalException | InterruptedException e) {
+                call.reject("Unable to log user out", e);
+                Logger.error("Failed to sign out user " + effectiveAccount.getAADID(), e);
+              }
+
+              mEnrollmentManager.unregisterAccountForMAM(effectiveAccount.getUPN());
+
+              final SharedPreferences prefs = getContext().getSharedPreferences(SETTINGS_PATH, Context.MODE_PRIVATE);
+              AppAccount.clearFromSettings(prefs);
+
+              mUserAccount = null;
+            }
+    );
+    thread.start();
+  }
+
+  @PluginMethod
+  public void appConfig(PluginCall call) {
+    String upn = call.getString("upn");
+
+    if (upn == null) {
+      call.reject("No upn provided");
+      return;
+    }
+
+    MAMAppConfigManager configManager = MAMComponents.get(MAMAppConfigManager.class);
+    MAMAppConfig appConfig = configManager.getAppConfig(upn);
+
+    JSObject data = new JSObject();
+    data.put("fullData", appConfig.getFullData());
+    call.resolve(data);
+  }
+
+  @PluginMethod
+  public void groupName(PluginCall call) {
+    String upn = call.getString("upn");
+
+    if (upn == null) {
+      call.reject("No upn provided");
+      return;
+    }
+
+    MAMAppConfigManager configManager = MAMComponents.get(MAMAppConfigManager.class);
+    MAMAppConfig data = configManager.getAppConfig(upn);
+
+    String groupNameKey = "GroupName";
+
+    String groupName;
+
+    if (!data.hasConflict(groupNameKey)) {
+      groupName = data.getStringForKey(groupNameKey, MAMAppConfig.StringQueryType.Any);
+    } else {
+      groupName = data.getStringForKey(groupNameKey, MAMAppConfig.StringQueryType.Max);
+    }
+
+    call.resolve(
+            new JSObject() {
+              {
+                put("value", groupName);
+              }
+            }
+    );
+  }
+
+  @PluginMethod
+  @SuppressWarnings("unused")
+  public void getPolicy(PluginCall call) {
+    AppPolicy policy = MAMPolicyManager.getPolicy(getActivity());
+
+    JSObject data = new JSObject();
+    data.put("contactSyncAllowed", policy.getIsContactSyncAllowed());
+    data.put("pinRequired", policy.getIsPinRequired());
+    data.put("managedBrowserRequired", policy.getIsManagedBrowserRequired());
+    data.put("screenCaptureAllowed", policy.getIsScreenCaptureAllowed());
+    call.resolve(data);
+  }
+
+  @PluginMethod
+  public void sdkVersion(PluginCall call) {
+    MAMSDKVersion version = MAMComponents.get(MAMSDKVersion.class);
+
+    JSObject data = new JSObject();
+    data.put("version", version.VER_MAJOR + "." + version.VER_MINOR + "." + version.VER_PATCH);
+    call.resolve(data);
+  }
+
+  @PluginMethod
+  public void displayDiagnosticConsole(PluginCall call) {
+    MAMPolicyManager.showDiagnostics(getContext());
+    call.resolve();
+  }
+
+  private void showMessage(final String message) {
+    bridge
+            .getActivity()
+            .runOnUiThread(
+                    () -> {
+                      Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+            );
+  }
+
+  private class AuthCallback implements AuthenticationCallback {
+
+    @Override
+    public void onError(final MsalException exc) {
+      Logger.error("authentication failed", exc);
+
+      if (mLastEnrollCall != null) {
+        mLastEnrollCall.reject("Authentication error", exc);
+        mLastEnrollCall = null;
+      }
+
+      if (exc instanceof MsalIntuneAppProtectionPolicyRequiredException) {
+        MsalIntuneAppProtectionPolicyRequiredException appException = (MsalIntuneAppProtectionPolicyRequiredException) exc;
+
+        // Note: An app that has enabled APP CA with Policy Assurance would need to pass these values to `remediateCompliance`.
+        // For more information, see https://docs.microsoft.com/en-us/mem/intune/developer/app-sdk-android#app-ca-with-policy-assurance
+        final String upn = appException.getAccountUpn();
+        final String aadid = appException.getAccountUserId();
+        final String tenantId = appException.getTenantId();
+        final String authorityURL = appException.getAuthorityUrl();
+
+        // The user cannot be considered "signed in" at this point, so don't save it to the settings.
+        mUserAccount = new AppAccount(upn, aadid, tenantId, authorityURL);
+
+        final String message = "Intune App Protection Policy required.";
+        showMessage(message);
+
+        Logger.info("MsalIntuneAppProtectionPolicyRequiredException received.");
+        Logger.info(
+                String.format("Data from broker: UPN: %s; AAD ID: %s; Tenant ID: %s; Authority: %s", upn, aadid, tenantId, authorityURL)
+        );
+      } else if (exc instanceof MsalUserCancelException) {
+        showMessage("User cancelled sign-in request");
+      } else {
+        showMessage("Exception occurred - check logcat");
+      }
     }
 
     @Override
-    public void load() {
-        super.load();
-        mEnrollmentManager = MAMComponents.get(MAMEnrollmentManager.class);
+    public void onSuccess(final IAuthenticationResult result) {
+      IAccount account = result.getAccount();
 
-        final SharedPreferences prefs = getContext().getSharedPreferences(SETTINGS_PATH, Context.MODE_PRIVATE);
-        mUserAccount = AppAccount.readFromSettings(prefs);
-    }
+      final String upn = account.getUsername();
+      final String aadId = account.getId();
+      final String tenantId = account.getTenantId();
+      final String authorityURL = account.getAuthority();
+      final String token = result.getAccessToken();
+      final String accountId = account.getId();
 
-    private void _acquireToken(PluginCall call, boolean interactive) {
-        mLastEnrollCall = call;
-        JSObject authConfig = getAuthConfigJson();
+      String message = "Authentication succeeded for user " + upn;
+      Logger.info(message);
 
-        String upn = call.getString("upn");
+      // Save the user account in the settings, since the user is now "signed in".
+      mUserAccount = new AppAccount(upn, aadId, tenantId, authorityURL);
 
-        String[] scopesArray = null;
+      final SharedPreferences prefs = getContext().getSharedPreferences(SETTINGS_PATH, Context.MODE_PRIVATE);
+      mUserAccount.saveToSettings(prefs);
 
-        try {
-            JSArray scopes = call.getArray("scopes");
-            scopesArray = scopes.toList().toArray(new String[0]);
-        } catch (Exception ex) {
-            call.reject("Must provide scopes list", ex);
-            return;
-        }
+      // Register the account for MAM.
+      mEnrollmentManager.registerAccountForMAM(upn, aadId, tenantId, authorityURL);
 
-        String clientId = authConfig.getString("client_id");
-
-        final String[] scopes = scopesArray;
-
-        // initiate the MSAL authentication on a background thread
-        Thread thread = new Thread(
-            () -> {
-                Logger.info("Starting interactive auth");
-
-                try {
-                    String loginHint = null;
-
-                    if (interactive) {
-                        MSALUtil.acquireToken(getActivity(), MSAL_SCOPES, loginHint, new AuthCallback());
-                    } else {
-                        MSALUtil.acquireTokenSilent(getActivity(), upn, scopes, new AuthCallback());
-                    }
-                } catch (MsalException | InterruptedException e) {
-                    Logger.error("Authentication exception occurred", e);
-                    showMessage("Authentication exception occurred - check logcat for more details.");
-                }
-            }
-        );
-        thread.start();
-    }
-
-    @PluginMethod
-    public void acquireToken(PluginCall call) {
-        _acquireToken(call, true);
-    }
-
-    @PluginMethod
-    public void acquireTokenSilent(PluginCall call) {
-        _acquireToken(call, false);
-    }
-
-    @PluginMethod
-    public void registerAndEnrollAccount(PluginCall call) {}
-
-    @PluginMethod
-    public void loginAndEnrollAccount(PluginCall call) {
-        mLastEnrollCall = call;
-
-        // initiate the MSAL authentication on a background thread
-        Thread thread = new Thread(
-            () -> {
-                Logger.info("Starting interactive auth");
-
-                try {
-                    String loginHint = null;
-                    if (mUserAccount != null) {
-                        loginHint = mUserAccount.getUPN();
-                    }
-                    MSALUtil.acquireToken(getActivity(), MSAL_SCOPES, loginHint, new AuthCallback());
-                } catch (MsalException | InterruptedException e) {
-                    Logger.error("Authentication exception occurred", e);
-                    showMessage("Authentication exception occurred - check logcat for more details.");
-                }
-            }
-        );
-        thread.start();
-    }
-
-    @PluginMethod
-    public void enrolledAccount(PluginCall call) {
+      if (mLastEnrollCall != null) {
         JSObject data = new JSObject();
-        if (mUserAccount != null) {
-            data.put("upn", mUserAccount.getUPN());
-        } else {
-            data.put("upn", "");
-        }
-        call.resolve(data);
+        data.put("upn", upn);
+        data.put("accessToken", token);
+        data.put("accountIdentifier", accountId);
+        mLastEnrollCall.resolve(data);
+        mLastEnrollCall = null;
+      }
     }
 
-    @PluginMethod
-    public void deRegisterAndUnenrollAccount(PluginCall call) {
-        // Initiate an MSAL sign out on a background thread.
-        final AppAccount effectiveAccount = mUserAccount;
-
-        Thread thread = new Thread(
-            () -> {
-                try {
-                    MSALUtil.signOutAccount(getContext(), effectiveAccount.getAADID());
-                    call.resolve();
-                } catch (MsalException | InterruptedException e) {
-                    call.reject("Unable to log user out", e);
-                    Logger.error("Failed to sign out user " + effectiveAccount.getAADID(), e);
-                }
-
-                mEnrollmentManager.unregisterAccountForMAM(effectiveAccount.getUPN());
-
-                final SharedPreferences prefs = getContext().getSharedPreferences(SETTINGS_PATH, Context.MODE_PRIVATE);
-                AppAccount.clearFromSettings(prefs);
-
-                mUserAccount = null;
-            }
-        );
-        thread.start();
+    @Override
+    public void onCancel() {
+      showMessage("User cancelled auth attempt");
     }
-
-    @PluginMethod
-    public void appConfig(PluginCall call) {
-        String upn = call.getString("upn");
-
-        if (upn == null) {
-            call.reject("No upn provided");
-            return;
-        }
-
-        MAMAppConfigManager configManager = MAMComponents.get(MAMAppConfigManager.class);
-        MAMAppConfig appConfig = configManager.getAppConfig(upn);
-
-        JSObject data = new JSObject();
-        data.put("fullData", appConfig.getFullData());
-        call.resolve(data);
-    }
-
-    @PluginMethod
-    public void groupName(PluginCall call) {
-        String upn = call.getString("upn");
-
-        if (upn == null) {
-            call.reject("No upn provided");
-            return;
-        }
-
-        MAMAppConfigManager configManager = MAMComponents.get(MAMAppConfigManager.class);
-        MAMAppConfig data = configManager.getAppConfig(upn);
-
-        String groupNameKey = "GroupName";
-
-        String groupName;
-
-        if (!data.hasConflict(groupNameKey)) {
-            groupName = data.getStringForKey(groupNameKey, MAMAppConfig.StringQueryType.Any);
-        } else {
-            groupName = data.getStringForKey(groupNameKey, MAMAppConfig.StringQueryType.Max);
-        }
-
-        call.resolve(
-            new JSObject() {
-                {
-                    put("value", groupName);
-                }
-            }
-        );
-    }
-
-    @PluginMethod
-    @SuppressWarnings("unused")
-    public void getPolicy(PluginCall call) {
-        AppPolicy policy = MAMPolicyManager.getPolicy(getActivity());
-
-        JSObject data = new JSObject();
-        data.put("contactSyncAllowed", policy.getIsContactSyncAllowed());
-        data.put("pinRequired", policy.getIsPinRequired());
-        data.put("managedBrowserRequired", policy.getIsManagedBrowserRequired());
-        data.put("screenCaptureAllowed", policy.getIsScreenCaptureAllowed());
-        call.resolve(data);
-    }
-
-    @PluginMethod
-    public void sdkVersion(PluginCall call) {
-        MAMSDKVersion version = MAMComponents.get(MAMSDKVersion.class);
-
-        JSObject data = new JSObject();
-        data.put("version", version.VER_MAJOR + "." + version.VER_MINOR + "." + version.VER_PATCH);
-        call.resolve(data);
-    }
-
-    @PluginMethod
-    public void displayDiagnosticConsole(PluginCall call) {
-        MAMPolicyManager.showDiagnostics(getContext());
-        call.resolve();
-    }
-
-    private void showMessage(final String message) {
-        bridge
-            .getActivity()
-            .runOnUiThread(
-                () -> {
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            );
-    }
-
-    private class AuthCallback implements AuthenticationCallback {
-
-        @Override
-        public void onError(final MsalException exc) {
-            Logger.error("authentication failed", exc);
-
-            if (mLastEnrollCall != null) {
-                mLastEnrollCall.reject("Authentication error", exc);
-                mLastEnrollCall = null;
-            }
-
-            if (exc instanceof MsalIntuneAppProtectionPolicyRequiredException) {
-                MsalIntuneAppProtectionPolicyRequiredException appException = (MsalIntuneAppProtectionPolicyRequiredException) exc;
-
-                // Note: An app that has enabled APP CA with Policy Assurance would need to pass these values to `remediateCompliance`.
-                // For more information, see https://docs.microsoft.com/en-us/mem/intune/developer/app-sdk-android#app-ca-with-policy-assurance
-                final String upn = appException.getAccountUpn();
-                final String aadid = appException.getAccountUserId();
-                final String tenantId = appException.getTenantId();
-                final String authorityURL = appException.getAuthorityUrl();
-
-                // The user cannot be considered "signed in" at this point, so don't save it to the settings.
-                mUserAccount = new AppAccount(upn, aadid, tenantId, authorityURL);
-
-                final String message = "Intune App Protection Policy required.";
-                showMessage(message);
-
-                Logger.info("MsalIntuneAppProtectionPolicyRequiredException received.");
-                Logger.info(
-                    String.format("Data from broker: UPN: %s; AAD ID: %s; Tenant ID: %s; Authority: %s", upn, aadid, tenantId, authorityURL)
-                );
-            } else if (exc instanceof MsalUserCancelException) {
-                showMessage("User cancelled sign-in request");
-            } else {
-                showMessage("Exception occurred - check logcat");
-            }
-        }
-
-        @Override
-        public void onSuccess(final IAuthenticationResult result) {
-            IAccount account = result.getAccount();
-
-            final String upn = account.getUsername();
-            final String aadId = account.getId();
-            final String tenantId = account.getTenantId();
-            final String authorityURL = account.getAuthority();
-
-            String message = "Authentication succeeded for user " + upn;
-            Logger.info(message);
-
-            // Save the user account in the settings, since the user is now "signed in".
-            mUserAccount = new AppAccount(upn, aadId, tenantId, authorityURL);
-
-            final SharedPreferences prefs = getContext().getSharedPreferences(SETTINGS_PATH, Context.MODE_PRIVATE);
-            mUserAccount.saveToSettings(prefs);
-
-            // Register the account for MAM.
-            mEnrollmentManager.registerAccountForMAM(upn, aadId, tenantId, authorityURL);
-
-            if (mLastEnrollCall != null) {
-                JSObject data = new JSObject();
-                data.put("upn", upn);
-                mLastEnrollCall.resolve(data);
-                mLastEnrollCall = null;
-            }
-        }
-
-        @Override
-        public void onCancel() {
-            showMessage("User cancelled auth attempt");
-        }
-    }
+  }
 }
