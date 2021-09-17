@@ -10,6 +10,7 @@ export interface IntuneMAMAcquireTokenSilentOptions
 }
 
 export interface IntuneMAMAcquireToken {
+  upn: string;
   accessToken: string;
   accountIdentifier: string;
 }
