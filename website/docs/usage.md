@@ -30,6 +30,16 @@ await IntuneMAM.registerAndEnrollAccount({
 });
 ```
 
+The response from `acquireToken` and `acquireTokenSilent` will be of the form:
+
+```typescript
+export interface IntuneMAMAcquireToken {
+  upn: string;
+  accessToken: string;
+  accountIdentifier: string;
+}
+```
+
 Then, on subsequent loads, the app should request a token silently using `acquireTokenSilent` and passing in the `upn` for the user. If that fails, then the app must present the interactive authentication flow again, for example:
 
 ```typescript
