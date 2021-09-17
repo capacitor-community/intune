@@ -10,7 +10,7 @@ sidebar_label: Usage
 Import from `@ionic-enterprise/intune`, for example:
 
 ```typescript
-import { IntuneMAM } from '@ionic-enterprise/intune`;
+import { IntuneMAM } from '@ionic-enterprise/intune';
 ```
 
 ## MSAL Acquire Token and Intune Register Flow
