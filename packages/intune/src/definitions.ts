@@ -46,7 +46,7 @@ export interface IntuneMAMPolicy {
   [key: string]: any;
 }
 
-export interface IntuneMAM {
+export interface IntuneMAMPlugin {
   enrolledAccount: () => Promise<IntuneMAMUser>;
   acquireToken: (
     options: IntuneMAMAcquireTokenOptions,
@@ -78,7 +78,7 @@ export interface IntuneMAM {
 
 // const IntuneMAM = registerPlugin<IntuneMAMPlugin>('IntuneMAM');
 
-export default IntuneMAM;
+export default IntuneMAMPlugin;
 
 /*
 export interface IntunePlugin {
