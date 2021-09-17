@@ -1,8 +1,8 @@
 import { registerPlugin } from '@capacitor/core';
 
-import type { IntunePlugin } from './definitions';
+import type { IntuneMAM } from './definitions';
 
-const Intune = registerPlugin<IntunePlugin>('Intune', {});
+const Intune = registerPlugin<IntuneMAM>('Intune', {});
 
 export * from './definitions';
 export { Intune };

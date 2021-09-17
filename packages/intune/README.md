@@ -33,7 +33,7 @@ addListener(eventName: 'appConfigChange', listenerFunc: () => void) => Promise<P
 | **`eventName`**    | <code>"appConfigChange"</code> |
 | **`listenerFunc`** | <code>() =&gt; void</code>     |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+**Returns:** <code>any</code>
 
 --------------------
 
@@ -49,7 +49,7 @@ addListener(eventName: 'policyChange', listenerFunc: () => void) => Promise<Plug
 | **`eventName`**    | <code>"policyChange"</code> |
 | **`listenerFunc`** | <code>() =&gt; void</code>  |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+**Returns:** <code>any</code>
 
 --------------------
 
@@ -59,12 +59,41 @@ addListener(eventName: 'policyChange', listenerFunc: () => void) => Promise<Plug
 
 #### PluginListenerHandle
 
-| Prop         | Type                                      |
-| ------------ | ----------------------------------------- |
-| **`remove`** | <code>() =&gt; Promise&lt;void&gt;</code> |
+| Prop         | Type                      |
+| ------------ | ------------------------- |
+| **`remove`** | <code>() =&gt; any</code> |
 
 
 #### IntuneMAMUser
+
+| Prop      | Type                |
+| --------- | ------------------- |
+| **`upn`** | <code>string</code> |
+
+
+#### IntuneMAMAcquireTokenOptions
+
+| Prop         | Type            |
+| ------------ | --------------- |
+| **`scopes`** | <code>{}</code> |
+
+
+#### IntuneMAMAcquireToken
+
+| Prop                    | Type                |
+| ----------------------- | ------------------- |
+| **`accessToken`**       | <code>string</code> |
+| **`accountIdentifier`** | <code>string</code> |
+
+
+#### IntuneMAMAcquireTokenSilentOptions
+
+| Prop      | Type                |
+| --------- | ------------------- |
+| **`upn`** | <code>string</code> |
+
+
+#### IntuneMAMRegisterAndEnrollAccountOptions
 
 | Prop      | Type                |
 | --------- | ------------------- |

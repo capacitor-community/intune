@@ -4,7 +4,8 @@ export interface IntuneMAMAcquireTokenOptions {
   scopes: string[];
 }
 
-export interface IntuneMAMAcquireTokenSilentOptions extends IntuneMAMAcquireTokenOptions {
+export interface IntuneMAMAcquireTokenSilentOptions
+  extends IntuneMAMAcquireTokenOptions {
   upn: string;
 }
 
@@ -45,11 +46,17 @@ export interface IntuneMAMPolicy {
   [key: string]: any;
 }
 
-export interface IntunePlugin {
+export interface IntuneMAM {
   enrolledAccount: () => Promise<IntuneMAMUser>;
-  acquireToken: (options: IntuneMAMAcquireTokenOptions) => Promise<IntuneMAMAcquireToken>;
-  acquireTokenSilent: (options: IntuneMAMAcquireTokenSilentOptions) => Promise<IntuneMAMAcquireToken>;
-  registerAndEnrollAccount: (options: IntuneMAMRegisterAndEnrollAccountOptions) => Promise<void>;
+  acquireToken: (
+    options: IntuneMAMAcquireTokenOptions,
+  ) => Promise<IntuneMAMAcquireToken>;
+  acquireTokenSilent: (
+    options: IntuneMAMAcquireTokenSilentOptions,
+  ) => Promise<IntuneMAMAcquireToken>;
+  registerAndEnrollAccount: (
+    options: IntuneMAMRegisterAndEnrollAccountOptions,
+  ) => Promise<void>;
   loginAndEnrollAccount: () => Promise<void>;
   deRegisterAndUnenrollAccount: (user: IntuneMAMUser) => Promise<void>;
   appConfig: (user: IntuneMAMUser) => Promise<IntuneMAMAppConfig>;
@@ -71,7 +78,7 @@ export interface IntunePlugin {
 
 // const IntuneMAM = registerPlugin<IntuneMAMPlugin>('IntuneMAM');
 
-export default IntunePlugin;
+export default IntuneMAM;
 
 /*
 export interface IntunePlugin {
