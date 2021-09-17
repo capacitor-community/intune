@@ -5,6 +5,9 @@
 // each method the plugin supports using the CAP_PLUGIN_METHOD macro.
 CAP_PLUGIN(IntuneMAM, "IntuneMAM",
   CAP_PLUGIN_METHOD(loginAndEnrollAccount, CAPPluginReturnPromise);
+  CAP_PLUGIN_METHOD(acquireToken, CAPPluginReturnPromise);
+  CAP_PLUGIN_METHOD(acquireTokenSilent, CAPPluginReturnPromise);
+  CAP_PLUGIN_METHOD(registerAndEnrollAccount, CAPPluginReturnPromise);
   CAP_PLUGIN_METHOD(enrolledAccount, CAPPluginReturnPromise);
   CAP_PLUGIN_METHOD(deRegisterAndUnenrollAccount, CAPPluginReturnPromise);
   CAP_PLUGIN_METHOD(getPolicy, CAPPluginReturnPromise);
