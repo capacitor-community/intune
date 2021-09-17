@@ -1,5 +1,22 @@
 import { PluginListenerHandle } from '@capacitor/core';
 
+export interface IntuneMAMAcquireTokenOptions {
+  scopes: string[];
+}
+
+export interface IntuneMAMAcquireTokenSilentOptions extends IntuneMAMAcquireTokenOptions {
+  upn: string;
+}
+
+export interface IntuneMAMAcquireToken {
+  accessToken: string;
+  accountIdentifier: string;
+}
+
+export interface IntuneMAMRegisterAndEnrollAccountOptions {
+  upn: string;
+}
+
 export interface IntuneMAMUser {
   upn: string;
 }
@@ -30,6 +47,9 @@ export interface IntuneMAMPolicy {
 
 export interface IntunePlugin {
   enrolledAccount: () => Promise<IntuneMAMUser>;
+  acquireToken: (options: IntuneMAMAcquireTokenOptions) => Promise<IntuneMAMAcquireToken>;
+  acquireTokenSilent: (options: IntuneMAMAcquireTokenSilentOptions) => Promise<IntuneMAMAcquireToken>;
+  registerAndEnrollAccount: (options: IntuneMAMRegisterAndEnrollAccountOptions) => Promise<void>;
   loginAndEnrollAccount: () => Promise<void>;
   deRegisterAndUnenrollAccount: (user: IntuneMAMUser) => Promise<void>;
   appConfig: (user: IntuneMAMUser) => Promise<IntuneMAMAppConfig>;

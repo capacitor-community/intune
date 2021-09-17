@@ -1,6 +1,7 @@
 import Foundation
 import Capacitor
 import IntuneMAMSwift
+import MSAL
 
 @objc(IntuneMAM)
 public class IntuneMAM: CAPPlugin {
@@ -22,7 +23,7 @@ public class IntuneMAM: CAPPlugin {
                                                selector: #selector(onIntuneMAMPolicyDidChange),
                                                name: NSNotification.Name.IntuneMAMPolicyDidChange,
                                                object: IntuneMAMPolicyManager.instance())
-        
+
     }
     
     @objc func onIntuneMAMAppConfigDidChange() {
@@ -36,6 +37,124 @@ public class IntuneMAM: CAPPlugin {
         notifyListeners("policyChange", data: nil)
     }
     
+    func _acquireToken(_ call: CAPPluginCall, interactive: Bool) {
+
+        // Used for refreshing a token
+        let upn = call.getString("upn")
+        if !interactive && upn == nil {
+            call.reject("upn must be provided to refresh token")
+            return
+        }
+        
+        guard let scopes = call.getArray("scopes") as? [String] else {
+            call.reject("scopes not provided")
+            return
+        }
+        
+        guard let intuneSettings = Bundle.main.object(forInfoDictionaryKey: "IntuneMAMSettings") as? [AnyHashable:AnyHashable] else {
+            call.reject("IntuneMAMSettings must be set in Info.plist to use this method. See https://docs.microsoft.com/en-us/mem/intune/developer/app-sdk-ios#configure-msal-settings-for-the-intune-app-sdk")
+            return
+        }
+        
+        guard let clientId = intuneSettings["ADALClientId"] as? String else {
+            call.reject("ADALClientId must be specified in IntuneMAMSettings in Info.plist")
+            return
+        }
+        
+        let redirectUri = intuneSettings["ADALRedirectUri"] as? String
+        let authorityUriValue = intuneSettings["ADALAuthority"] as? String
+        
+        
+        var authority: MSALAuthority?
+        if let authorityUri = authorityUriValue {
+            if let u = URL(string: authorityUri) {
+                authority = try? MSALAuthority(url: u)
+            }
+        }
+        
+
+        DispatchQueue.main.async { [weak self] in
+            do {
+                var config: MSALPublicClientApplicationConfig?
+                
+                if redirectUri != nil {
+                    config = MSALPublicClientApplicationConfig(clientId: clientId, redirectUri: redirectUri, authority: authority)
+                } else {
+                    config = MSALPublicClientApplicationConfig(clientId: clientId)
+                }
+                
+                if let application = try? MSALPublicClientApplication(configuration: config!) {
+                    guard let self = self else {
+                        call.reject("No self")
+                        return
+                    }
+                    let viewController = self.bridge!.viewController!
+                    let webviewParameters = MSALWebviewParameters(authPresentationViewController: viewController)
+                    
+                    
+                    
+                    let completionBlock: MSALCompletionBlock = { (result, error) in
+                                
+                        guard let authResult = result, error == nil else {
+                            print(error!.localizedDescription)
+                            call.reject("Unable to login: \(error!.localizedDescription)")
+                            return
+                        }
+                                    
+                        // Get access token from result
+                        let accessToken = authResult.accessToken
+                        guard let upn = authResult.account.username else {
+                            call.reject("No username provided for account, unable to register")
+                            return
+                        }
+                        // You'll want to get the account identifier to retrieve and reuse the account for later acquireToken calls
+                        let accountIdentifier = authResult.account.identifier ?? ""
+                        
+                        call.resolve([
+                            "accessToken": accessToken,
+                            "accountIdentifier": accountIdentifier,
+                            "upn": upn
+                        ])
+                    }
+                    
+                    if (interactive) {
+                        let interactiveParameters = MSALInteractiveTokenParameters(scopes: scopes, webviewParameters: webviewParameters)
+                        application.acquireToken(with: interactiveParameters, completionBlock: completionBlock)
+                    } else {
+                        guard let account = try? application.account(forUsername: upn!) else {
+                            call.reject("Unable to find account to refresh, must call acquireToken for interactive flow")
+                            return
+                        }
+                        let silentParameters = MSALSilentTokenParameters(scopes: scopes, account: account)
+                        application.acquireTokenSilent(with: silentParameters, completionBlock: completionBlock)
+                    }
+                } else {
+                    call.reject("Unable to create MSAL Application")
+                }
+            }
+        }
+    }
+    
+
+    @objc public func acquireToken(_ call: CAPPluginCall) {
+        _acquireToken(call, interactive: true)
+    }
+    
+    @objc public func acquireTokenSilent(_ call: CAPPluginCall) {
+        _acquireToken(call, interactive: false)
+    }
+    
+    @objc public func registerAndEnrollAccount(_ call: CAPPluginCall) {
+        guard let upn = call.getString("upn") else {
+            call.reject("upn must be provided. Call acquireToken first")
+            return
+        }
+        
+        IntuneMAMEnrollmentManager.instance().registerAndEnrollAccount(upn)
+        
+        call.resolve()
+    }
+    
     @objc public func loginAndEnrollAccount(_ call: CAPPluginCall) {
         IntuneMAMEnrollmentManager.instance().loginAndEnrollAccount(nil)
         
@@ -44,7 +163,7 @@ public class IntuneMAM: CAPPlugin {
     
     @objc public func enrolledAccount(_ call: CAPPluginCall) {
         let user = IntuneMAMEnrollmentManager.instance().enrolledAccount()
-        
+
         call.resolve([
             "upn": user ?? ""
         ])
