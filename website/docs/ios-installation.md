@@ -72,3 +72,18 @@ For example, the command might look like:
 MSAL configuration is required to enable brokered auth and other common Azure Active Directory authentication integrations.
 
 Follow the [MSAL Configuration](https://docs.microsoft.com/en-us/mem/intune/developer/app-sdk-ios#configure-msal-settings-for-the-intune-app-sdk) docs to finish setting up MSAL in your app.
+
+Additionally, in `AppDelegate.swift`, `import MSAL` and override the `application(_:open:options:)` method:
+
+```swift
+import MSAL
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        // Called when the app was launched with a url. Feel free to add additional processing here,
+        // but if you want the App API to support tracking app url opens, make sure to keep this call
+        // return ApplicationDelegateProxy.shared.application(app, open: url, options: options)
+        return MSALPublicClientApplication.handleMSALResponse(url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String)
+    }
+```
