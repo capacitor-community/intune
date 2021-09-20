@@ -36,6 +36,8 @@ This enables your app to launch the authenticator.
 
 This is a configuration issue in the Azure Active Directory Portal. Ensure the app registration has permission to access the `Microsoft Mobile Application Management` API. Please contact your administrator to enable your app to access the necessary APIs.
 
+Another thing to try is setting `AutoEnrollOnLaunch` to `1` in the `IntuneMAMSettings` in `Info.plist`.
+
 ![Azure Troubleshooting 5000 ios](/img/intune/ios-troubleshooting-5000.png)
 
 ### Build error: Undefined symbols and 12.0 deployment target warning
