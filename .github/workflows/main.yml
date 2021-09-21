@@ -35,6 +35,7 @@ jobs:
     - name: Build test app for Android
       run: |
         cd packages/react-test-app
+        npm install
         npm run build
         npx cap sync android
         cd android
