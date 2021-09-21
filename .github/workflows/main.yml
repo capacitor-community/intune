@@ -1,0 +1,34 @@
+name: .NET Build and Pack
+
+on:
+  push:
+    branches: [ main, 1.x ]
+  pull_request:
+    branches: [ main, 1.x ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest # For a list of available runner types, refer to
+                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        
+    # Start npm/platform tasks
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14
+        
+    # Build platform package including template and CLI scripts
+    - name: Build platform
+      run: cd packages/intune && npm install && npm run build
+      
+    - uses: JS-DevTools/npm-publish@v1
+      with:
+        token: ${{ secrets.NPM_TOKEN }}
+        package: packages/intune/package.json
+        
