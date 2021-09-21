@@ -26,6 +26,19 @@ jobs:
     # Build platform package including template and CLI scripts
     - name: Build platform
       run: cd packages/intune && npm install && npm run build
+
+    - uses: actions/setup-java@v2
+      with:
+        distribution: 'zulu' # See 'Supported distributions' for available options
+        java-version: '8'
+
+    - name: Build test app for Android
+      run: |
+        cd packages/react-test-app
+        npm run build
+        npx cap sync android
+        cd android
+        bash gradlew app:assembleDebug
       
     - uses: JS-DevTools/npm-publish@v1
       with:
