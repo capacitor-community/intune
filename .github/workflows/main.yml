@@ -34,10 +34,9 @@ jobs:
 
     - name: Build test app for Android
       run: |
-        cd packages/react-test-app
+        cd packages/intune
         npm install
         npm run build
-        npx cap sync android
         cd android
         bash gradlew app:assembleDebug
       
