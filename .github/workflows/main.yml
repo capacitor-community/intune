@@ -34,6 +34,7 @@ jobs:
 
     - name: Build test app for Android
       run: |
+        npm instal -g npm
         cd packages/react-test-app
         npm install
         npm run build
