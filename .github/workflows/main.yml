@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  build:
+  build-android:
     runs-on: ubuntu-latest # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
@@ -41,7 +41,25 @@ jobs:
         npx cap sync android
         cd android
         bash gradlew app:assembleDebug
-      
+
+  
+# build-ios:
+#   runs-on: macos-latest
+
+  publish:
+    runs-on: ubuntu-latest # For a list of available runner types, refer to
+                             # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        
+    # Start npm/platform tasks
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14
     - uses: JS-DevTools/npm-publish@v1
       with:
         token: ${{ secrets.NPM_TOKEN }}
