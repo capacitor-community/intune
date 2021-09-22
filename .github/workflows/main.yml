@@ -43,8 +43,24 @@ jobs:
         bash gradlew app:assembleDebug
 
   
-# build-ios:
-#   runs-on: macos-latest
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    steps:
+      - name: Build
+      run: |
+        cd packages/react-test-app
+        npm install
+        npm run build
+        npx cap sync ios
+        cd ios/App
+        xcodebuild clean build -sdk iphonesimulator -workspace App.xcworkspace -scheme App -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
   publish:
     runs-on: ubuntu-latest # For a list of available runner types, refer to
