@@ -45,6 +45,7 @@ jobs:
   
   build-ios:
     runs-on: macos-latest
+    timeout-minutes: 10
 
     steps:
     - name: Checkout
@@ -53,7 +54,7 @@ jobs:
         fetch-depth: 0
 
     steps:
-      - name: Build
+    - name: Build
       run: |
         cd packages/react-test-app
         npm install
