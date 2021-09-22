@@ -55,6 +55,7 @@ jobs:
 
     - name: Build
       run: |
+        npm install -g npm
         cd packages/react-test-app
         npm install
         npm run build
