@@ -44,7 +44,8 @@ jobs:
 
   
   build-ios:
-    runs-on: macos-latest
+    # Run on 11 which has Xcode 13
+    runs-on: macos-11
     timeout-minutes: 10
 
     steps:
