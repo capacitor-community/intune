@@ -56,6 +56,12 @@ See [this troubleshooting tip](https://techcommunity.microsoft.com/t5/intune-cus
 
 ## Android
 
+### com.microsoft.identity.client.exception.MsalClientException: The redirect URI in the configuration file doesn't match
+
+The error `com.microsoft.identity.client.exception.MsalClientException: The redirect URI in the configuration file doesn't match with the one generated with package name and signature hash. Please verify the uri in the config file and your app registration in Azure portal.` is thrown when attempting to authenticate using `acquireToken` or `loginAndEnrollAccount`.
+
+This issue is thrown because the hash used for your redirect uri in `auth_config.json` and/or `AndroidManifest.xml` isn't correct. Follow the [Android installation]('./android-installation) guide to find and set the correct hash for your app.
+
 ### Gradle sync error: Null extracted folder for artifact
 
 This happens when the reference to the Intune App SDK for Android AAR file (Microsoft.Intune.MAM.SDK.aar) cannot be found.
