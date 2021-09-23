@@ -80,7 +80,7 @@ module.exports = {
     },
     prism: {
       theme: { plain: {}, styles: [] },
-      additionalLanguages: ['shell-session'],
+      additionalLanguages: ['shell-session', 'java', 'groovy'],
     },
   },
   plugins: ['@ionic-internal/docusaurus-plugin-tag-manager', 'docusaurus-plugin-sass'],
