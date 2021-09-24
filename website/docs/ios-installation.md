@@ -5,6 +5,10 @@ sidebar_label: iOS
 
 The following steps attempt to distill the [official Intune App SDK iOS integration documentation](https://docs.microsoft.com/en-us/mem/intune/developer/app-sdk-ios#build-the-sdk-into-your-mobile-app) to the basics needed to integrate into your Ionic/Capacitor app. Please refer to that documentation for the most up-to-date authoritative installation instructions.
 
+## 0. Before starting
+
+Note that version 2.x of `@ionic-enterprise/intune` requires Xcode 13 and is necessary for targeting iOS 15. For Xcode 12, use 1.x
+
 ## 1. Add Frameworks
 
 The Intune App SDK requires the following Core iOS frameworks be added to your app project:
