@@ -3,7 +3,7 @@ title: Cordova Installation
 sidebar_label: Cordova Installation
 ---
 
-For teams using Cordova instead of [Capacitor](https://capacitorjs.com/) can follow the below instructions to install and configure the plugin.
+For teams using Cordova instead of [Capacitor](https://capacitorjs.com/), follow the below instructions to install and configure the plugin.
 
 Note: We strongly recommend teams transition to [Capacitor](https://capacitorjs.com/) for the best experience with this and other Ionic native solutions.
 
