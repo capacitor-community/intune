@@ -5,13 +5,39 @@ sidebar_label: Usage
 
 **Interested in Intune support?** [Get in touch](https://ionic.io/contact/sales).
 
-## Importing
+## Capacitor: Importing
 
 Import from `@ionic-enterprise/intune`, for example:
 
 ```typescript
 import { IntuneMAM } from '@ionic-enterprise/intune';
 ```
+
+## Cordova: Importing, TypeScript, and Usage
+
+Cordova developers can access `IntuneMAM` directly on `window`.
+
+For using TypeScript, import the types as such (note the `import type`):
+
+```
+import type {
+  IntuneMAMPlugin,
+  // If using, other types can be imported as such:
+  IntuneMAMAppConfig,
+  IntuneMAMGroupName,
+  IntuneMAMPolicy,
+  IntuneMAMUser,
+  IntuneMAMVersionInfo,
+} from "@ionic-enterprise/intune/cordova/definitions";
+```
+
+Then, when accessing `IntuneMAM`, it can be typed like this:
+
+```
+const IntuneMAM = (window as any).IntuneMAM as IntuneMAMPlugin;
+```
+
+Accessing `IntuneMAM` should be done _after_ `deviceready` fires, regardless of the above.
 
 ## MSAL Acquire Token and Intune Register Flow
 
