@@ -5,7 +5,7 @@ module.exports = {
       type: 'category',
       label: 'Installation',
       collapsed: false,
-      items: ['installation', 'android-installation', 'ios-installation'],
+      items: ['installation', 'android-installation', 'ios-installation', 'cordova'],
     },
     'usage',
     'brokered-auth',
