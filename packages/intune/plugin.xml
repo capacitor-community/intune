@@ -80,6 +80,20 @@
         <source-file src="android/src/main/java/com/ionicframework/intune/AuthenticationCallback.java" target-dir="src/com/ionicframework/intune"/>
         <source-file src="android/src/main/java/com/ionicframework/intune/IntuneApplication.java" target-dir="src/com/ionicframework/intune"/>
         <source-file src="android/src/main/java/com/ionicframework/intune/MSALUtil.java" target-dir="src/com/ionicframework/intune"/>
+
+
+        <source-file src="cordova/src/android/com/getcapacitor/Bridge.java" target-dir="src/com/getcapacitor" />
+        <source-file src="cordova/src/android/com/getcapacitor/JSArray.java" target-dir="src/com/getcapacitor" />
+        <source-file src="cordova/src/android/com/getcapacitor/JSObject.java" target-dir="src/com/getcapacitor" />
+        <source-file src="cordova/src/android/com/getcapacitor/Logger.java" target-dir="src/com/getcapacitor" />
+        <source-file src="cordova/src/android/com/getcapacitor/Plugin.java" target-dir="src/com/getcapacitor" />
+        <source-file src="cordova/src/android/com/getcapacitor/PluginCall.java" target-dir="src/com/getcapacitor" />
+        <source-file src="cordova/src/android/com/getcapacitor/PluginHandle.java" target-dir="src/com/getcapacitor" />
+        <source-file src="cordova/src/android/com/getcapacitor/PluginMethod.java" target-dir="src/com/getcapacitor" />
+        <source-file src="cordova/src/android/com/getcapacitor/PluginMethodHandle.java" target-dir="src/com/getcapacitor" />
+        <source-file src="cordova/src/android/com/getcapacitor/annotation/CapacitorPlugin.java" target-dir="src/com/getcapacitor/annotation" />
+        <source-file src="cordova/src/android/com/getcapacitor/annotation/Permission.java" target-dir="src/com/getcapacitor/annotation" />
+        <source-file src="cordova/src/android/com/getcapacitor/util/PermissionHelper.java" target-dir="src/com/getcapacitor/util" />
     </platform>
     <!-- ios -->
     <platform name="ios">

@@ -2,7 +2,10 @@
 title: Installation - Android
 sidebar_label: Android
 ---
+
 ## Android Installation
+
+The following instructions are for [Capacitor](https://capacitorjs.com/) only. For Cordova instructions, follow the [./cordova](Cordova install guide).
 
 ### Configuring Gradle Plugin
 
@@ -11,7 +14,7 @@ On Android, the Intune App SDK functions by wrapping key Android API classes wit
 To start, open your Capacitor app in Android Studio using one of the following commands:
 
 ```shell
-npx cap open android 
+npx cap open android
 # or
 ionic capacitor open android
 ```
@@ -24,7 +27,7 @@ At the top, there should be a `buildscript` definition, and two new dependencies
 
 ```groovy
 buildscript {
-    
+
     repositories {
         google()
         jcenter()
@@ -90,7 +93,6 @@ So your `<application>` declaration will look similar to:
     android:theme="@style/AppTheme"
     android:name="com.ionicframework.intune.IntuneApplication">
 ```
-
 
 To use brokered auth with Microsoft Authenticator or the Intune Company Portal app, add these `<queries>` to the top level of your `AndroidManifest.xml` file (directly inside the top-level `<manifest>` declaration). Note: this is required as of Android 12 API Level 30, apps targeting older versions may function fine without it.
 
