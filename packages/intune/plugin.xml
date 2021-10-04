@@ -134,7 +134,7 @@
         <source-file src="cordova/src/ios/CAPPluginCall.m"/>
         <source-file src="cordova/src/ios/CAPPluginCall.swift"/>
 
-
+        <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
     </platform>
     <author email="hi@ionic.io" href="https://ionicframework.com">Ionic Team</author>
 </plugin>
