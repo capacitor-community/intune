@@ -139,6 +139,8 @@ await IntuneMAM.getPolicy(user);
 
 ## Listen for Policy and Config changes
 
+**Note: not yet supported for Cordova.**
+
 To listen for remote app configuration or policy changes, the following events can be subscribed to:
 
 ```typescript
