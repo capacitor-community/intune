@@ -41,7 +41,7 @@ buildscript {
         // Capacitor users: add reference to the gradle plugin
         classpath files("../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/GradlePlugin/com.microsoft.intune.mam.build.jar")
         // Cordova users: add this line instead
-        classpath files("./app/src/main/libs/com.microsoft.intune.mam.build.jar")
+        // classpath files("./app/src/main/libs/com.microsoft.intune.mam.build.jar")
     }
 }
 ```
