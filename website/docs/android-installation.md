@@ -5,13 +5,13 @@ sidebar_label: Android
 
 ## Android Installation
 
-The following instructions are for [Capacitor](https://capacitorjs.com/) only. For Cordova instructions, follow the [./cordova](Cordova install guide).
-
 ### Configuring Gradle Plugin
 
 On Android, the Intune App SDK functions by wrapping key Android API classes with Intune-managed ones, using a Gradle plugin to replace Android API class references at build time. This Gradle plugin must be manually configured in your app to enable Intune MAM features in your app.
 
-To start, open your Capacitor app in Android Studio using one of the following commands:
+To start, open your app in Android Studio.
+
+If using Capacitor, run one of the following commands. If using Cordova, manually open your `platforms/android` folder in Android Studio.
 
 ```shell
 npx cap open android
@@ -38,11 +38,15 @@ buildscript {
 
         // ADD THIS:
         classpath "org.javassist:javassist:3.27.0-GA"
-        // ADD THE REFERENCE TO THE GRADLE PLUGIN:
+        // Capacitor users: add reference to the gradle plugin
         classpath files("../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/GradlePlugin/com.microsoft.intune.mam.build.jar")
+        // Cordova users: add this line instead
+        classpath files("./app/src/main/libs/com.microsoft.intune.mam.build.jar")
     }
 }
 ```
+
+**Capacitor only:**
 
 Next, there's an issue with the current version of the Intune App SDK for Android that requires the following maven repo for the `Duo-SDK-Feed` to be added to the `allprojects` `repositories` definition below the above `buildscript` definition:
 
@@ -59,6 +63,8 @@ allprojects {
     }
 }
 ```
+
+**Capacitor only:**
 
 Finally, open the `build.gradle` file for the `Module: android.app` and add the following lines to make sure the Intune App SDK Gradle plugin properly transforms these external libraries. Add any extra libraries your app uses that also need to be transformed:
 
