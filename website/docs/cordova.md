@@ -29,7 +29,18 @@ ionic cordova plugin add @ionic-enterprise/intune
 
 ### Configuring Project
 
-See the [iOS Installation](./ios-installation) guide and follow Steps 1-6 to configure your app project.
+See the [iOS Installation](./ios-installation) guide and follow Steps 1-6 to configure your app project. Note the two extra steps required below:
+
+### Swift and Bridging Header
+
+Open your project in Xcode and click on your project in the sidebar, then choose `Build Settings`, and search for "swift". Then, set the `Swift Language Version` to `4.2`.
+
+Finally, open `Bridging-Header.h` and add:
+
+```objc
+#import "CAPPlugin.h"
+#import "CAPPluginCall.h"
+```
 
 ### AppDelegate
 
