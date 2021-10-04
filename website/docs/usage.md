@@ -19,7 +19,7 @@ Cordova developers can access `IntuneMAM` directly on `window`.
 
 For using TypeScript, import the types as such (note the `import type`):
 
-```
+```typescript
 import type {
   IntuneMAMPlugin,
   // If using, other types can be imported as such:
@@ -28,12 +28,12 @@ import type {
   IntuneMAMPolicy,
   IntuneMAMUser,
   IntuneMAMVersionInfo,
-} from "@ionic-enterprise/intune/cordova/definitions";
+} from '@ionic-enterprise/intune/cordova/definitions';
 ```
 
 Then, when accessing `IntuneMAM`, it can be typed like this:
 
-```
+```typescript
 const IntuneMAM = (window as any).IntuneMAM as IntuneMAMPlugin;
 ```
 
