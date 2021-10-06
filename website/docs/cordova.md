@@ -18,10 +18,8 @@ This plugin requires Cordova 10. Once you are running the latest version of Cord
 Cordova support is available starting in 1.2.0 and 2.1.0. Version 1.2.0 should be used for teams targeting iOS < 15. 2.1.0 requires Xcode 13 and enables teams to target iOS 15.
 
 ```shell
-cordova plugin add cordova-plugin-add-swift-support --save
 cordova plugin add @ionic-enterprise/intune --save
 # or if in an Angular app:
-ionic cordova plugin add cordova-plugin-add-swift-support --save
 ionic cordova plugin add @ionic-enterprise/intune
 ```
 
