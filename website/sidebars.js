@@ -7,6 +7,7 @@ module.exports = {
       collapsed: false,
       items: ['installation', 'android-installation', 'ios-installation', 'cordova'],
     },
+    'azure',
     'usage',
     'brokered-auth',
     'demo-app',
