@@ -17,7 +17,7 @@ To correctly configure the app, you'll need to come ready with the Signature Has
 
 Add new configurations for both iOS and Android as shown below (with an Android app for example):
 
-[Android AAD MSAL Dashboard](/img/intune/android-aad-msal-config.png)
+![Android AAD MSAL Dashboard](/img/intune/android-aad-msal-config.png)
 
 ## App Registration Configuration
 
