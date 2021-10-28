@@ -5,6 +5,8 @@ sidebar_label: Azure Configuration
 
 Much of the work in enabling Intune and Microsoft Authentication support requires configuration in Azure AD and the Microsoft Endpoint Manager.
 
+This list of tasks can be shared with your Azure administrator if necessary to help correctly configure the backend to enable Intune and Microsoft Authentication to work correctly.
+
 ## Registering Apps
 
 Your apps need to be registered in Azure in two places:
