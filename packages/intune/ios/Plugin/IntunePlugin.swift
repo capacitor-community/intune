@@ -121,6 +121,11 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                     let completionBlock: MSALCompletionBlock = { (result, error) in
                                 
                         guard let authResult = result, error == nil else {
+                            if let error = error as NSError? {
+                                if error.code == MSALError.serverProtectionPoliciesRequired.rawValue {
+                                    IntuneMAMComplianceManager.instance().remediateCompliance(forIdentity: error.userInfo[MSALDisplayableUserIdKey] as! String, silent: false)
+                                }
+                            }
                             print(error!.localizedDescription)
                             call.reject("Unable to login: \(error!.localizedDescription)")
                             return
