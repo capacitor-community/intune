@@ -4,7 +4,7 @@ import IntuneMAMSwift
 import MSAL
 
 @objc(IntuneMAM)
-public class IntuneMAM: CAPPlugin {
+public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
     let enrollmentDelegate = EnrollmentDelegateClass()
     let policyDelegate = PolicyDelegateClass()
     
@@ -13,6 +13,8 @@ public class IntuneMAM: CAPPlugin {
         IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
         IntuneMAMPolicyManager.instance().delegate = policyDelegate
         //register for the IntuneMAMAppConfigDidChange notification
+        IntuneMAMComplianceManager.instance().delegate = self
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(onIntuneMAMAppConfigDidChange),
                                                name: NSNotification.Name.IntuneMAMAppConfigDidChange,
@@ -25,6 +27,27 @@ public class IntuneMAM: CAPPlugin {
                                                object: IntuneMAMPolicyManager.instance())
 
     }
+    
+    public func identity(_ identity: String, hasComplianceStatus status: IntuneMAMComplianceStatus, withErrorMessage errMsg: String, andErrorTitle errTitle: String) {
+        switch status {
+          case .compliant:
+             //Handle successful compliance
+            print("Compliant!")
+          case .notCompliant, .networkFailure,.serviceFailure,.userCancelled:
+              DispatchQueue.main.async {
+                let alert = UIAlertController(title: errTitle, message: errMsg, preferredStyle: .alert)
+                  alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                      exit(0)
+                  }))
+                  self.bridge?.viewController?.present(alert, animated: true, completion: nil)
+              }
+          case .interactionRequired:
+              IntuneMAMComplianceManager.instance().remediateCompliance(forIdentity: identity, silent: false)
+        default:
+            print("Unknown compliance status value")
+      }
+    }
+    
     
     @objc func onIntuneMAMAppConfigDidChange() {
         // Emit event
@@ -82,6 +105,8 @@ public class IntuneMAM: CAPPlugin {
                 } else {
                     config = MSALPublicClientApplicationConfig(clientId: clientId)
                 }
+                
+                config?.clientApplicationCapabilities = ["ProtApp"]
                 
                 if let application = try? MSALPublicClientApplication(configuration: config!) {
                     guard let self = self else {
