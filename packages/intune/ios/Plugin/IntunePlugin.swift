@@ -133,6 +133,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                                     
                         // Get access token from result
                         let accessToken = authResult.accessToken
+                        let idToken = authResult.idToken
                         guard let upn = authResult.account.username else {
                             call.reject("No username provided for account, unable to register")
                             return
@@ -142,6 +143,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                         
                         call.resolve([
                             "accessToken": accessToken,
+                            "idToken": idToken,
                             "accountIdentifier": accountIdentifier,
                             "upn": upn
                         ])

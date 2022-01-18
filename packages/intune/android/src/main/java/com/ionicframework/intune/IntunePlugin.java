@@ -308,6 +308,7 @@ public class IntunePlugin extends Plugin {
       final String tenantId = account.getTenantId();
       final String authorityURL = account.getAuthority();
       final String token = result.getAccessToken();
+      final String idToken = result.getAccount().getIdToken();
       final String accountId = account.getId();
 
       String message = "Authentication succeeded for user " + upn;
@@ -326,6 +327,7 @@ public class IntunePlugin extends Plugin {
         JSObject data = new JSObject();
         data.put("upn", upn);
         data.put("accessToken", token);
+        data.put("idToken", idToken);
         data.put("accountIdentifier", accountId);
         mLastEnrollCall.resolve(data);
         mLastEnrollCall = null;
