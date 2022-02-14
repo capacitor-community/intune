@@ -9,5 +9,11 @@
   "workspaces": [
     "packages/intune"
   ],
-  "scripts": {}
+  "scripts": {
+    "build": "turbo run build"
+  },
+  "volta": {
+    "node": "16.13.2",
+    "npm": "8.3.0"
+  }
 }
