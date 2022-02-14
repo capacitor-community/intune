@@ -163,14 +163,6 @@
     <li class="api apilevel-">
   <a href="../../../../../com/microsoft/intune/mam/client/strict/package-summary.html">com.microsoft.intune.mam.client.strict</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../com/microsoft/intune/mam/client/support/v4/app/package-summary.html">com.microsoft.intune.mam.client.support.v4.app</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../com/microsoft/intune/mam/client/support/v4/content/package-summary.html">com.microsoft.intune.mam.client.support.v4.content</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../com/microsoft/intune/mam/client/support/v4/print/package-summary.html">com.microsoft.intune.mam.client.support.v4.print</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../com/microsoft/intune/mam/client/support/v7/app/package-summary.html">com.microsoft.intune.mam.client.support.v7.app</a></li>
-    <li class="api apilevel-">
   <a href="../../../../../com/microsoft/intune/mam/log/package-summary.html">com.microsoft.intune.mam.log</a></li>
     <li class="selected api apilevel-">
   <a href="../../../../../com/microsoft/intune/mam/policy/package-summary.html">com.microsoft.intune.mam.policy</a></li>
@@ -393,6 +385,42 @@
             boolean
         </td>
         <td class="jd-linkcol" width="100%">
+        <span class="sympad"><a href="../../../../../com/microsoft/intune/mam/policy/AppPolicy.html#diagnosticHasOpenRestriction()">diagnosticHasOpenRestriction</a></span>()
+        
+        <div class="jd-descrdiv">Test whether there are any OpenLocation restrictions.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">
+            abstract
+            
+            
+            
+            
+            boolean
+        </td>
+        <td class="jd-linkcol" width="100%">
+        <span class="sympad"><a href="../../../../../com/microsoft/intune/mam/policy/AppPolicy.html#diagnosticHasSaveRestriction()">diagnosticHasSaveRestriction</a></span>()
+        
+        <div class="jd-descrdiv">Test whether there are any SaveLocation restrictions.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">
+            abstract
+            
+            
+            
+            
+            boolean
+        </td>
+        <td class="jd-linkcol" width="100%">
         <span class="sympad"><a href="../../../../../com/microsoft/intune/mam/policy/AppPolicy.html#diagnosticIsFileEncryptionInUse()">diagnosticIsFileEncryptionInUse</a></span>()
         
         <div class="jd-descrdiv">This method is intended for diagnostic/telemetry purposes only.</div>
@@ -447,6 +475,24 @@
             boolean
         </td>
         <td class="jd-linkcol" width="100%">
+        <span class="sympad"><a href="../../../../../com/microsoft/intune/mam/policy/AppPolicy.html#getIsOpenFromContentUriAllowed(android.net.Uri)">getIsOpenFromContentUriAllowed</a></span>(Uri location)
+        
+        <div class="jd-descrdiv">Check if policy prohibits opening from a content provider location.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">
+            abstract
+            
+            
+            
+            
+            boolean
+        </td>
+        <td class="jd-linkcol" width="100%">
         <span class="sympad"><a href="../../../../../com/microsoft/intune/mam/policy/AppPolicy.html#getIsOpenFromLocalStorageAllowed(java.io.File)">getIsOpenFromLocalStorageAllowed</a></span>(File file)
         
         <div class="jd-descrdiv">Determines if the provided File in local storage can be opened.</div>
@@ -455,7 +501,7 @@
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             abstract
             
@@ -473,7 +519,7 @@
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             abstract
             
@@ -491,7 +537,7 @@
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             abstract
             
@@ -509,7 +555,7 @@
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             abstract
             
@@ -527,7 +573,7 @@
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             abstract
             
@@ -545,7 +591,7 @@
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             abstract
             
@@ -563,7 +609,7 @@
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             abstract
             
@@ -581,7 +627,7 @@
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             abstract
             
@@ -695,6 +741,97 @@
 </div>
 
 
+<a id="diagnosticHasOpenRestriction()"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+        abstract 
+         
+        boolean
+      </span>
+      <span class="sympad">diagnosticHasOpenRestriction</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Test whether there are any OpenLocation restrictions. This may be used for diagnostic purposes or UX purposes, for example
+ when deciding to show text warning users that policy may restrict their actions.
+
+ When a specific open action is being performed, your app must call getIsOpenFromLocationAllowed to test it -- do not use this
+ method for policy enforcement decisions. For example, if this AppPolicy object represents policy for an unmanaged user,
+ this method will return false, but getIsOpenFromLocationAllowed(OpenLocation.SHAREPOINT, managedUserUpn) could still return
+ false (disallowed).</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>whether any OpenLocation restrictions exist
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+<a id="diagnosticHasSaveRestriction()"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+        abstract 
+         
+        boolean
+      </span>
+      <span class="sympad">diagnosticHasSaveRestriction</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Test whether there are any SaveLocation restrictions. This may be used for diagnostic purposes or UX purposes, for example
+ when deciding to show text warning users that policy may restrict their actions.
+
+ When a specific open action is being performed, your app must call getIsSaveToLocationAllowed to test it -- do not use this
+ method for policy enforcement decisions. For example, if this AppPolicy object represents policy for an unmanaged user,
+ this method will return false, but getIsSaveToLocationAllowed(SaveLocation.SHAREPOINT, managedUserUpn) could still return
+ false (disallowed).
+
+ See also </p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>whether any SaveLocation restrictions exist
+</li></ul>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">See Also</h5>
+      <ul class="nolist"><li>diagnosticHasOpenRestriction</li>
+      </ul>
+  </div>
+
+    </div>
+</div>
+
+
 <a id="diagnosticIsFileEncryptionInUse()"></a>
 
 <div class="jd-details api apilevel-"> 
@@ -797,6 +934,51 @@
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
       <ul class="nolist"><li>True if the Managed Browser is required, false otherwise
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+<a id="getIsOpenFromContentUriAllowed(android.net.Uri)"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+        abstract 
+         
+        boolean
+      </span>
+      <span class="sympad">getIsOpenFromContentUriAllowed</span>
+      <span class="normal">(Uri location)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Check if policy prohibits opening from a content provider location.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>location</th>
+          <td>a content URI to check</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>True if location is not a content URI or if policy does not prohibit opening from the content location.
 </li></ul>
   </div>
 
@@ -1133,7 +1315,10 @@
  not show any notifications for the user associated with this policy. If
  <code><a href="../../../../../com/microsoft/intune/mam/policy/NotificationRestriction.html#BLOCK_ORG_DATA">BLOCK_ORG_DATA</a></code>, the app must show
  a modified notification that does not contain organization data. If
- <code><a href="../../../../../com/microsoft/intune/mam/policy/NotificationRestriction.html#UNRESTRICTED">UNRESTRICTED</a></code>, all notifications are allowed.</p></div>
+ <code><a href="../../../../../com/microsoft/intune/mam/policy/NotificationRestriction.html#UNRESTRICTED">UNRESTRICTED</a></code>, all notifications are allowed.
+
+ Note that under certain policies this call may be slow -- it should be called on a background thread when showing
+ notifications and not on the main thread.</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
       <ul class="nolist"><li>The notification restriction.

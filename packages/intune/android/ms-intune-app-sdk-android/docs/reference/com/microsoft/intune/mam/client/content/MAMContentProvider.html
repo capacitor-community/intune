@@ -141,13 +141,21 @@
               <ul>
                 
     <li class="api apilevel-">
+  <a href="../../../../../../com/microsoft/intune/mam/client/package-summary.html">com.microsoft.intune.mam.client</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/app/package-summary.html">com.microsoft.intune.mam.client.app</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/app/backup/package-summary.html">com.microsoft.intune.mam.client.app.backup</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../com/microsoft/intune/mam/client/app/startup/package-summary.html">com.microsoft.intune.mam.client.app.startup</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../com/microsoft/intune/mam/client/app/ui/package-summary.html">com.microsoft.intune.mam.client.app.ui</a></li>
     <li class="selected api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/content/package-summary.html">com.microsoft.intune.mam.client.content</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/identity/package-summary.html">com.microsoft.intune.mam.client.identity</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../com/microsoft/intune/mam/client/notification/package-summary.html">com.microsoft.intune.mam.client.notification</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/os/package-summary.html">com.microsoft.intune.mam.client.os</a></li>
     <li class="api apilevel-">
@@ -155,13 +163,13 @@
     <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/strict/package-summary.html">com.microsoft.intune.mam.client.strict</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v4/app/package-summary.html">com.microsoft.intune.mam.client.support.v4.app</a></li>
+  <a href="../../../../../../com/microsoft/intune/mam/log/package-summary.html">com.microsoft.intune.mam.log</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v4/content/package-summary.html">com.microsoft.intune.mam.client.support.v4.content</a></li>
+  <a href="../../../../../../com/microsoft/intune/mam/policy/package-summary.html">com.microsoft.intune.mam.policy</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v4/print/package-summary.html">com.microsoft.intune.mam.client.support.v4.print</a></li>
+  <a href="../../../../../../com/microsoft/intune/mam/policy/appconfig/package-summary.html">com.microsoft.intune.mam.policy.appconfig</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v7/app/package-summary.html">com.microsoft.intune.mam.client.support.v7.app</a></li>
+  <a href="../../../../../../com/microsoft/intune/mam/policy/notification/package-summary.html">com.microsoft.intune.mam.policy.notification</a></li>
               </ul><br/>
             </div> <!-- end packages -->
           </div> <!-- end resize-packages -->
@@ -896,8 +904,10 @@ android.content.ComponentCallbacks2
             void
         </td>
         <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/content/MAMContentProvider.html#onMAMIdentitySwitchRequired(java.lang.String, com.microsoft.intune.mam.client.app.AppIdentitySwitchResultCallback)">onMAMIdentitySwitchRequired</a></span>(String identity, AppIdentitySwitchResultCallback callback)
+        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/content/MAMContentProvider.html#onMAMIdentitySwitchRequired(java.lang.String, com.microsoft.intune.mam.client.app.AppIdentitySwitchResultCallback)">onMAMIdentitySwitchRequired</a></span>(String identity, <a href="../../../../../../com/microsoft/intune/mam/client/app/AppIdentitySwitchResultCallback.html">AppIdentitySwitchResultCallback</a> callback)
         
+        <div class="jd-descrdiv">Called by MAM to notify the app that an incoming intent requires a temporary identity switch on this thread.</div>
+  
   </td></tr>
 
 
@@ -1439,6 +1449,22 @@ From class
             final
             
             
+            AttributionSource
+        </td>
+        <td class="jd-linkcol" width="100%">
+        <span class="sympad">getCallingAttributionSource</span>()
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">
+            
+            
+            final
+            
+            
             String
         </td>
         <td class="jd-linkcol" width="100%">
@@ -1448,7 +1474,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1464,7 +1490,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1480,7 +1506,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1496,7 +1522,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1512,7 +1538,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1528,7 +1554,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1544,7 +1570,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             abstract
             
@@ -1560,7 +1586,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1576,7 +1602,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1592,7 +1618,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             abstract
             
@@ -1608,7 +1634,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1624,7 +1650,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1640,7 +1666,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1656,7 +1682,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             abstract
             
@@ -1672,7 +1698,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1688,7 +1714,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1704,7 +1730,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1720,7 +1746,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1736,7 +1762,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1752,7 +1778,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1768,7 +1794,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1784,7 +1810,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1800,7 +1826,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1816,7 +1842,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1832,7 +1858,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1848,7 +1874,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1864,7 +1890,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             abstract
             
@@ -1880,7 +1906,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1896,7 +1922,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1912,7 +1938,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1928,7 +1954,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1944,7 +1970,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1960,7 +1986,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1976,7 +2002,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1992,7 +2018,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -2008,7 +2034,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -2024,7 +2050,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             abstract
             
@@ -2356,7 +2382,7 @@ From interface
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  com.microsoft.intune.mam.client.app.MAMIdentityRequirementListener
+  <a href="../../../../../../com/microsoft/intune/mam/client/app/MAMIdentityRequirementListener.html">com.microsoft.intune.mam.client.app.MAMIdentityRequirementListener</a>
 
 <div id="inherited-methods-com.microsoft.intune.mam.client.app.MAMIdentityRequirementListener">
   <div id="inherited-methods-com.microsoft.intune.mam.client.app.MAMIdentityRequirementListener-list"
@@ -2378,8 +2404,10 @@ From interface
             void
         </td>
         <td class="jd-linkcol" width="100%">
-        <span class="sympad">onMAMIdentitySwitchRequired</span>(String arg0, AppIdentitySwitchResultCallback arg1)
+        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMIdentityRequirementListener.html#onMAMIdentitySwitchRequired(java.lang.String, com.microsoft.intune.mam.client.app.AppIdentitySwitchResultCallback)">onMAMIdentitySwitchRequired</a></span>(String identity, <a href="../../../../../../com/microsoft/intune/mam/client/app/AppIdentitySwitchResultCallback.html">AppIdentitySwitchResultCallback</a> callback)
         
+        <div class="jd-descrdiv">Called by MAM to notify the app that an incoming intent requires a temporary identity switch on this thread.</div>
+  
   </td></tr>
 
 
@@ -3829,7 +3857,7 @@ From interface
         void
       </span>
       <span class="sympad">onMAMIdentitySwitchRequired</span>
-      <span class="normal">(String identity, AppIdentitySwitchResultCallback callback)</span>
+      <span class="normal">(String identity, <a href="../../../../../../com/microsoft/intune/mam/client/app/AppIdentitySwitchResultCallback.html">AppIdentitySwitchResultCallback</a> callback)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -3841,7 +3869,30 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Called by MAM to notify the app that an incoming intent requires a temporary identity switch on this thread. The application
+ must call <code>callback.reportIdentitySwitchResult</code> to tell MAM whether the identity switch is allowed. In general,
+ applications should allow identity switches. The default implementation allows all identity switches.
+
+ Service calls will block until the callback is made. For services which run on the UI thread, the callback must be made
+ before this function returns, otherwise the application will be nonresponsive. If a FAILED result is reported,
+ then the service operation that initiated the identity switch will be cancelled.
+
+ Activities should instead override the three-argument version of this method from
+ <code><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMActivityIdentityRequirementListener.html">MAMActivityIdentityRequirementListener</a></code>.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>identity</th>
+          <td>identity being switched to</td>
+        </tr>
+        <tr>
+          <th>callback</th>
+          <td>must be called to notify MAM whether to allow the switch.
+</td>
+        </tr>
+      </table>
+  </div>
 
     </div>
 </div>

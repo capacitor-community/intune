@@ -163,14 +163,6 @@
     <li class="selected api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/strict/package-summary.html">com.microsoft.intune.mam.client.strict</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v4/app/package-summary.html">com.microsoft.intune.mam.client.support.v4.app</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v4/content/package-summary.html">com.microsoft.intune.mam.client.support.v4.content</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v4/print/package-summary.html">com.microsoft.intune.mam.client.support.v4.print</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v7/app/package-summary.html">com.microsoft.intune.mam.client.support.v7.app</a></li>
-    <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/log/package-summary.html">com.microsoft.intune.mam.log</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/policy/package-summary.html">com.microsoft.intune.mam.policy</a></li>
@@ -433,29 +425,89 @@ Summary:
     
     <tr class=" api apilevel-" >
         <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
+        <td class="jd-linkcol">AUTHENTICATION_CALLBACK_NOT_REGISTERED&nbsp;</td>
+        <td class="jd-descrcol" width="100%">The MAMServiceAuthenticationCallback was not registered in the Application's onCreate method.&nbsp;</td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
+        <td class="jd-linkcol">CLEAR_PROTECTED_FLAG_SECURE&nbsp;</td>
+        <td class="jd-descrcol" width="100%">Window.clearFlags() was called on FLAG_SECURE when app had a configured policy that restricts screenshots.&nbsp;</td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+        <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
+        <td class="jd-linkcol">CONFIG_ONLY_BAD_INIT_CALL&nbsp;</td>
+        <td class="jd-descrcol" width="100%">We expect config-only apps to call MAMComponents.initialize() via Application.onCreate().&nbsp;</td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
+        <td class="jd-linkcol">CONFIG_ONLY_BAD_INTEGRATION&nbsp;</td>
+        <td class="jd-descrcol" width="100%">The config-only app was improperly integrated with the MAM SDK.&nbsp;</td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+        <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
+        <td class="jd-linkcol">CONFIG_ONLY_CA_UNSUPPORTED&nbsp;</td>
+        <td class="jd-descrcol" width="100%">Conditional Access is not supported for config-only mode apps, but the application tried to remediate compliance
+ for a user.&nbsp;</td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
+        <td class="jd-linkcol">CONTENT_INTENT_WITHOUT_IDENTITY&nbsp;</td>
+        <td class="jd-descrcol" width="100%">An intent was started to transfer content to another app without an identity,
+ while the foreground activity does have an identity set.&nbsp;</td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+        <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
+        <td class="jd-linkcol">CONTENT_RESOLVER_NO_IDENTITY&nbsp;</td>
+        <td class="jd-descrcol" width="100%">A multi-identity app used a ContentResolver without any identity set on the context the resolver was retrieved from or
+ on the thread/process.&nbsp;</td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
         <td class="jd-linkcol">DEPRECATED_API&nbsp;</td>
         <td class="jd-descrcol" width="100%">Call to an API which we have deprecated and which has the potential to result in an incorrect customer outcome.&nbsp;</td>
     </tr>
     
     
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
         <td class="jd-linkcol">IDENTITY_NO_SUCH_FILE&nbsp;</td>
         <td class="jd-descrcol" width="100%">Attempt to protect a file which does not exist.&nbsp;</td>
     </tr>
     
     
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
         <td class="jd-linkcol">INCOMING_IDENTITY_SWITCH&nbsp;</td>
         <td class="jd-descrcol" width="100%">An incoming activity identity switch was not handled properly.&nbsp;</td>
     </tr>
     
     
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
         <td class="jd-linkcol">INTENT_IDENTITY_MISMATCH&nbsp;</td>
         <td class="jd-descrcol" width="100%">Mismatch between the identity tag for an intent and a file transferred by that intent.&nbsp;</td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
+        <td class="jd-linkcol">INVALID_MAM_SERVICE_TOKEN&nbsp;</td>
+        <td class="jd-descrcol" width="100%">There was a mismatch between the user's passed in aadId and resourceId, and the decoded aadId and resourceId from the
+ MAMService token returned by MAMServiceAuthenticationCallback.&nbsp;</td>
     </tr>
     
     
@@ -490,22 +542,37 @@ Summary:
     
     <tr class=" api apilevel-" >
         <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
-        <td class="jd-linkcol">SAVE_TO_ODB_MISSING_UPN&nbsp;</td>
-        <td class="jd-descrcol" width="100%">Use of getIsSaveToLocationAllowed for OneDrive for Business/Sharepoint but not UPN provided for the ODB account.&nbsp;</td>
+        <td class="jd-linkcol">SAVE_TO_LOCATION_MISSING_UPN&nbsp;</td>
+        <td class="jd-descrcol" width="100%">Use of getIsSaveToLocationAllowed for OneDrive for Business/Sharepoint/an account document but no UPN provided.&nbsp;</td>
     </tr>
     
     
     <tr class="alt-color api apilevel-" >
+        <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
+        <td class="jd-linkcol">SAVE_TO_ODB_MISSING_UPN&nbsp;</td>
+        <td class="jd-descrcol" width="100%">No longer used.&nbsp;</td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
         <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
         <td class="jd-linkcol">SEVERE_EVENT&nbsp;</td>
         <td class="jd-descrcol" width="100%">An internal error occurred which is not expected in the course of normal operation.&nbsp;</td>
     </tr>
     
     
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
         <td class="jd-linkcol">TARGET_API&nbsp;</td>
         <td class="jd-descrcol" width="100%">Ensure the app is not using a newer target Android SDK than the current MAMSDK version supports.&nbsp;</td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+        <td class="jd-descrcol"><a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>&nbsp;</td>
+        <td class="jd-linkcol">UPDATE_TOKEN_WITHIN_ACQUIRE_TOKEN&nbsp;</td>
+        <td class="jd-descrcol" width="100%">The MAMEnrollmentManager's updateToken() method was called from within the provided MAMServiceAuthenticationCallback's
+ acquireToken() method.&nbsp;</td>
     </tr>
     
     
@@ -1084,6 +1151,230 @@ From interface
 
 
 
+<a id="AUTHENTICATION_CALLBACK_NOT_REGISTERED"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        <a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>
+      </span>
+        AUTHENTICATION_CALLBACK_NOT_REGISTERED
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>The MAMServiceAuthenticationCallback was not registered in the Application's onCreate method.
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<a id="CLEAR_PROTECTED_FLAG_SECURE"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        <a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>
+      </span>
+        CLEAR_PROTECTED_FLAG_SECURE
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Window.clearFlags() was called on FLAG_SECURE when app had a configured policy that restricts screenshots. This will
+ allow users to bypass the MAM policy and take screenshots.
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<a id="CONFIG_ONLY_BAD_INIT_CALL"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        <a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>
+      </span>
+        CONFIG_ONLY_BAD_INIT_CALL
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>We expect config-only apps to call MAMComponents.initialize() via Application.onCreate(). However, initialize()
+ was called from a different place.
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<a id="CONFIG_ONLY_BAD_INTEGRATION"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        <a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>
+      </span>
+        CONFIG_ONLY_BAD_INTEGRATION
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>The config-only app was improperly integrated with the MAM SDK. For example, its Application class may extend
+ MAMApplication. Config-only apps should never leverage the build plugin or manually integrate wrappers.
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<a id="CONFIG_ONLY_CA_UNSUPPORTED"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        <a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>
+      </span>
+        CONFIG_ONLY_CA_UNSUPPORTED
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Conditional Access is not supported for config-only mode apps, but the application tried to remediate compliance
+ for a user.
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<a id="CONTENT_INTENT_WITHOUT_IDENTITY"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        <a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>
+      </span>
+        CONTENT_INTENT_WITHOUT_IDENTITY
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>An intent was started to transfer content to another app without an identity,
+ while the foreground activity does have an identity set. This likely indicates a failure to plumb through the identity.
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<a id="CONTENT_RESOLVER_NO_IDENTITY"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        <a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>
+      </span>
+        CONTENT_RESOLVER_NO_IDENTITY
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>A multi-identity app used a ContentResolver without any identity set on the context the resolver was retrieved from or
+ on the thread/process. This indicates likelihood that the app is performing app-to-app communication on a background thread
+ without proper consideration of what account the operation is running under.
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
 <a id="DEPRECATED_API"></a>
 
 <div class="jd-details api apilevel-"> 
@@ -1207,6 +1498,38 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Mismatch between the identity tag for an intent and a file transferred by that intent.
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<a id="INVALID_MAM_SERVICE_TOKEN"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        <a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>
+      </span>
+        INVALID_MAM_SERVICE_TOKEN
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>There was a mismatch between the user's passed in aadId and resourceId, and the decoded aadId and resourceId from the
+ MAMService token returned by MAMServiceAuthenticationCallback.
 </p></div>
 
     
@@ -1341,6 +1664,37 @@ From interface
 
 
 
+<a id="SAVE_TO_LOCATION_MISSING_UPN"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        <a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>
+      </span>
+        SAVE_TO_LOCATION_MISSING_UPN
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Use of getIsSaveToLocationAllowed for OneDrive for Business/Sharepoint/an account document but no UPN provided.
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
 <a id="SAVE_TO_ODB_MISSING_UPN"></a>
 
 <div class="jd-details api apilevel-"> 
@@ -1363,7 +1717,7 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Use of getIsSaveToLocationAllowed for OneDrive for Business/Sharepoint but not UPN provided for the ODB account.
+  <div class="jd-tagdata jd-tagdescr"><p>No longer used. Replaced by SAVE_TO_LOCATION_MISSING_UPN
 </p></div>
 
     
@@ -1426,6 +1780,38 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Ensure the app is not using a newer target Android SDK than the current MAMSDK version supports.
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<a id="UPDATE_TOKEN_WITHIN_ACQUIRE_TOKEN"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        <a href="../../../../../../com/microsoft/intune/mam/client/strict/MAMStrictCheck.html">MAMStrictCheck</a>
+      </span>
+        UPDATE_TOKEN_WITHIN_ACQUIRE_TOKEN
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>The MAMEnrollmentManager's updateToken() method was called from within the provided MAMServiceAuthenticationCallback's
+ acquireToken() method.  This is not the intended purpose of updateToken(), and could cause a deadlock.
 </p></div>
 
     

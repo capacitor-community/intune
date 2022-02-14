@@ -26,7 +26,8 @@ typedef NS_ENUM(NSInteger, IntuneMAMOpenLocation)
     IntuneMAMOpenLocationSharePoint = 1<<1,
     IntuneMAMOpenLocationCamera = 1<<2,
     IntuneMAMOpenLocationLocalStorage = 1<<3,
-    IntuneMAMOpenLocationAccountDocument = 1<<4, // When opening a document that has a managed account identity or the location is not listed in this enum but is accessed with a managed account, use this value
+    IntuneMAMOpenLocationPhotos = 1<<4,
+    IntuneMAMOpenLocationAccountDocument = 1<<5, // When opening a document that has a managed account identity or the location is not listed in this enum but is accessed with a managed account, use this value
 };
 
 // IntuneMAMNotificationPolicyAllow - All notifications for the managed user should be allowed
@@ -104,6 +105,20 @@ __attribute__((visibility("default")))
 // Applications can check this policy to customize their UI. Policy enforcement will be entirely handled
 // by the SDK.
 - (BOOL) isUniversalLinkAllowed: (NSURL*_Nonnull) url;
+
+#if TARGET_OS_IPHONE
+// Applications should check this method before displaying any data shared to it through a share extension.
+// Returns TRUE if the policy object's identity can receive an incoming item provider sent via a share
+// extension. If this method returns FALSE, then the data should be blocked by the app.
+// The item must be loaded prior to calling this method (e.g. by calling loadItemForTypeIdentifier).
+// This method can be called from the completion handler passed to the NSItemProvider load call.
+- (BOOL) canReceiveSharedItemProvider:(NSItemProvider*_Nonnull)itemProvider;
+#endif
+
+// Applications should check this method before displaying any new received files. Returns TRUE
+// if the policy object's identity can receive an incoming file. If this method returns FALSE,
+// then the data should be blocked by the app.
+- (BOOL) canReceiveSharedFile:(NSString*_Nonnull)path;
 
 // FALSE if the management policy blocks the specified document picker mode.  Returns TRUE
 // otherwise, regardless of whether there are managed document picker extensions in the

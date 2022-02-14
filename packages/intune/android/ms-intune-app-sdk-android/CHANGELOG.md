@@ -1,3 +1,100 @@
+Version 8.3.0
+-------------
+* Add new `com.microsoft.intune.mam.AllowIsolatedProcesses` manifest meta-data
+  item to allow isolated process execution. MAM cannot apply protections to
+  isolated processes. As the app developer, it is your responsibility to ensure
+  that your isolated processes cannot expose organization data.
+* Keep `MAMAppConfig` from being minified at build time.
+* Remove `GET_ACCOUNTS` permissions from the SDK manifest. This permission was
+  removed by Android in API23, which is the minimum supported version for MAM policy.
+
+Version 8.2.0
+-------------
+* The build plugin will now wrap calls to various `JobService` methods.
+  For multi-identity apps, the MAM SDK will not attempt to infer the
+  identity for a `JobService` or its individual jobs. Users of `JobService`
+  should take care to set an identity on the service context or background
+  thread as required by their `JobService` implementations. Relatedly, users
+  of `WorkManager` should take care to set a thread identity in
+  `Worker.doWork()` as required by their `Worker` implementations.
+  Avoid setting an identity on the `Worker` context, because this
+  context is shared across `Worker` instances.
+* Add `MAMUserStatusManager`, which may be used to check whether a
+  user is clocked out.
+* Add `CLOCK_STATUS_CHANGED` notification type. Apps may register for
+  this to be notified when Intune detects that a user has clocked out
+  or clocked-in again. No notifications will be delivered if policy
+  does not require the user to be clocked in. Handling this
+  notification is only necessary for apps which need to take extra
+  action to present a better user experience. Intune will
+  automatically apply any policies around clock-in regardless of
+  whether the app handles this notification.
+* Add `WIPE_COMPLETED` notification type. Apps may register for this
+  to be notified when Intune has finished processing a wipe, at least
+  as far as the current app process is concerned. Will be delivered
+  after `WIPE_USER_DATA` or `WIPE_USER_AUXILIARY_DATA`. If the app
+  reports a failure from its handler for the above notifications, this
+  notification will *not* be sent. Listening for this notification is
+  optional.
+* Improved error messages for certain data decryption failures.
+* Improvements to dialogs prompting the user to install or update the
+  Company Portal in cases when the Play Store is not available.
+
+Version 8.1.1
+-------------
+* Ensure MAM component initialization before execution of a
+  `MAMContentProvider`.
+
+Version 8.1.0
+-------------
+* Add the MAMLayoutInflaterManagement with build plugin support to handle application
+  usage of custom LayoutInflator.Factory and LayoutInflator.Factory2 instances.
+
+Version 8.0.0
+-------------
+* Enable Java 8 language feature support. SDK consumers must specify
+  'JavaVersion.VERSION_1_8' in 'compileOptions' if using an Android
+  Gradle Plugin version below 4.2.
+* Rename the `MAMPolicyManager` method `getPolicy()` to
+  `getCurrentThreadPolicy()` to avoid confusion. For a multi-identity
+  app, this is usually not the method you want to use, unless you have
+  set the thread (or process-wide) identity. The old name still exists
+  for now but is marked as deprecated.
+* `MAMAppConfig` will only read `com.microsoft.intune.mam.managedbrowser.proxyPacUrl.FailOpenEnabled`
+  from the MAM app config channel and not from Android Enterprise.
+* The build plugin now automatically includes all external libraries
+  and the `includeExternalLibraries` configuration option has been
+  removed.  This change was prompted by Android Gradle Plugin 4.2,
+  which no longer exposes library names to the Transform API on which
+  our plugin is built.
+* The legacy Android Support Libraries are no longer supported. Apps
+  are expected to be using AndroidX, either directly or through
+  enabling the Jetifier.
+* Fix bug in log pii filtering so null and empty strings are no longer hashed.
+* Add MAM Strict Mode check: `CLEAR_PROTECTED_FLAG_SECURE` to
+  ensure FLAG_SECURE isn't cleared when policy restricts screenshots.
+* The build plugin will now wrap calls to various `AppSearchManager`
+  classes/methods. This allows us to enforce transfer policy on data
+  stored in the new centralized search index on Android 12.
+* Add MAM Strict Mode check: 'INVALID_MAM_SERVICE_TOKEN' to validate user
+  passed values for aadId & resourceId while acquiring MAMService token.
+* Remove `MANAGE_ACCOUNTS` and `USE_CREDENTIALS` permissions from the
+  SDK manifest. These permissions supported ADAL usage for auth policy
+  and default enrollment, but were removed by Android in API23, which
+  is the minimum supported version for MAM policy.
+* Add MAM handling for the Android S data extraction rules for backup
+  and restore. New `meta-data com.microsoft.intune.mam.DataExtractionRules`
+  introduced that mimics the android:dataExtractionRules manifest tag.
+
+Version 7.6.2
+-------------
+* Fix build plugin issue with methods which use a more-derived return
+  type than the superclass method.
+
+Version 7.6.1
+-------------
+* Fix authentication callback issue for Microsoft Defender.
+
 Version 7.6.0
 -------------
 * Add MAM Strict Mode check: `CONTENT_INTENT_WITHOUT_IDENTITY` to

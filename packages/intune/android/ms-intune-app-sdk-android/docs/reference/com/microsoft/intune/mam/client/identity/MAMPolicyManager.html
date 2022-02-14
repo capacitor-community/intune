@@ -141,13 +141,21 @@
               <ul>
                 
     <li class="api apilevel-">
+  <a href="../../../../../../com/microsoft/intune/mam/client/package-summary.html">com.microsoft.intune.mam.client</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/app/package-summary.html">com.microsoft.intune.mam.client.app</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/app/backup/package-summary.html">com.microsoft.intune.mam.client.app.backup</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../com/microsoft/intune/mam/client/app/startup/package-summary.html">com.microsoft.intune.mam.client.app.startup</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../com/microsoft/intune/mam/client/app/ui/package-summary.html">com.microsoft.intune.mam.client.app.ui</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/content/package-summary.html">com.microsoft.intune.mam.client.content</a></li>
     <li class="selected api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/identity/package-summary.html">com.microsoft.intune.mam.client.identity</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../../com/microsoft/intune/mam/client/notification/package-summary.html">com.microsoft.intune.mam.client.notification</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/os/package-summary.html">com.microsoft.intune.mam.client.os</a></li>
     <li class="api apilevel-">
@@ -155,19 +163,27 @@
     <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/strict/package-summary.html">com.microsoft.intune.mam.client.strict</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v4/app/package-summary.html">com.microsoft.intune.mam.client.support.v4.app</a></li>
+  <a href="../../../../../../com/microsoft/intune/mam/log/package-summary.html">com.microsoft.intune.mam.log</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v4/content/package-summary.html">com.microsoft.intune.mam.client.support.v4.content</a></li>
+  <a href="../../../../../../com/microsoft/intune/mam/policy/package-summary.html">com.microsoft.intune.mam.policy</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v4/print/package-summary.html">com.microsoft.intune.mam.client.support.v4.print</a></li>
+  <a href="../../../../../../com/microsoft/intune/mam/policy/appconfig/package-summary.html">com.microsoft.intune.mam.policy.appconfig</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v7/app/package-summary.html">com.microsoft.intune.mam.client.support.v7.app</a></li>
+  <a href="../../../../../../com/microsoft/intune/mam/policy/notification/package-summary.html">com.microsoft.intune.mam.policy.notification</a></li>
               </ul><br/>
             </div> <!-- end packages -->
           </div> <!-- end resize-packages -->
           <div id="classes-nav">
             <ul>
               
+    <li><h2>Interfaces</h2>
+      <ul>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMDataProtectionInfo.html">MAMDataProtectionInfo</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMFileProtectionInfo.html">MAMFileProtectionInfo</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMProtectionInfo.html">MAMProtectionInfo</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMSetUIIdentityCallback.html">MAMSetUIIdentityCallback</a></li>
+      </ul>
+    </li>
               
     <li><h2>Classes</h2>
       <ul>
@@ -182,6 +198,11 @@
               
               
               
+    <li><h2>Exceptions</h2>
+      <ul>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMKeyNotAvailableException.html">MAMKeyNotAvailableException</a></li>
+      </ul>
+    </li>
               
             </ul><br/>
           </div><!-- end classes -->
@@ -445,11 +466,13 @@ Summary:
             
             static
             
-            boolean
+            <a href="../../../../../../com/microsoft/intune/mam/policy/AppPolicy.html">AppPolicy</a>
         </td>
         <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html#getIsIdentityManaged(java.lang.String)">getIsIdentityManaged</a></span>(String identity)
+        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html#getCurrentThreadPolicy()">getCurrentThreadPolicy</a></span>()
         
+        <div class="jd-descrdiv">Get the current app policy.</div>
+  
   </td></tr>
 
 
@@ -461,7 +484,23 @@ Summary:
             
             static
             
-            AppPolicy
+            boolean
+        </td>
+        <td class="jd-linkcol" width="100%">
+        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html#getIsIdentityManaged(java.lang.String)">getIsIdentityManaged</a></span>(String identity)
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">
+            
+            
+            
+            static
+            
+            <a href="../../../../../../com/microsoft/intune/mam/policy/AppPolicy.html">AppPolicy</a>
         </td>
         <td class="jd-linkcol" width="100%">
         <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html#getPolicy(android.content.Context)">getPolicy</a></span>(Context context)
@@ -472,24 +511,6 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
-            static
-            
-            AppPolicy
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html#getPolicy()">getPolicy</a></span>()
-        
-        <div class="jd-descrdiv">Get the current app policy.</div>
-  
-  </td></tr>
-
-
-	 
     <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
@@ -497,7 +518,25 @@ Summary:
             
             static
             
-            AppPolicy
+            <a href="../../../../../../com/microsoft/intune/mam/policy/AppPolicy.html">AppPolicy</a>
+        </td>
+        <td class="jd-linkcol" width="100%">
+        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html#getPolicy()">getPolicy</a></span>()
+        
+        <div class="jd-descrdiv">Deprecated alias for getCurrentThreadPolicy.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">
+            
+            
+            
+            static
+            
+            <a href="../../../../../../com/microsoft/intune/mam/policy/AppPolicy.html">AppPolicy</a>
         </td>
         <td class="jd-linkcol" width="100%">
         <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html#getPolicyForIdentity(java.lang.String)">getPolicyForIdentity</a></span>(String identity)
@@ -508,7 +547,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -526,7 +565,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -544,14 +583,14 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
             
             static
             
-            MAMIdentitySwitchResult
+            <a href="../../../../../../com/microsoft/intune/mam/client/MAMIdentitySwitchResult.html">MAMIdentitySwitchResult</a>
         </td>
         <td class="jd-linkcol" width="100%">
         <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html#setCurrentThreadIdentity(java.lang.String)">setCurrentThreadIdentity</a></span>(String identity)
@@ -562,14 +601,14 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol">
             
             
             
             static
             
-            MAMIdentitySwitchResult
+            <a href="../../../../../../com/microsoft/intune/mam/client/MAMIdentitySwitchResult.html">MAMIdentitySwitchResult</a>
         </td>
         <td class="jd-linkcol" width="100%">
         <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html#setProcessIdentity(java.lang.String)">setProcessIdentity</a></span>(String identity)
@@ -580,24 +619,6 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
-            static
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html#setUIPolicyIdentity(android.content.Context, java.lang.String, com.microsoft.intune.mam.client.identity.MAMSetUIIdentityCallback)">setUIPolicyIdentity</a></span>(Context context, String identity, MAMSetUIIdentityCallback mamSetUIIdentityCallback)
-        
-        <div class="jd-descrdiv">Set the associated identity with the Context.</div>
-  
-  </td></tr>
-
-
-	 
     <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
@@ -608,7 +629,7 @@ Summary:
             void
         </td>
         <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html#setUIPolicyIdentity(android.content.Context, java.lang.String, com.microsoft.intune.mam.client.identity.MAMSetUIIdentityCallback, java.util.EnumSet<com.microsoft.intune.mam.client.app.IdentitySwitchOption>)">setUIPolicyIdentity</a></span>(Context context, String identity, MAMSetUIIdentityCallback mamSetUIIdentityCallback, EnumSet&lt;IdentitySwitchOption&gt; options)
+        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html#setUIPolicyIdentity(android.content.Context, java.lang.String, com.microsoft.intune.mam.client.identity.MAMSetUIIdentityCallback)">setUIPolicyIdentity</a></span>(Context context, String identity, <a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMSetUIIdentityCallback.html">MAMSetUIIdentityCallback</a> mamSetUIIdentityCallback)
         
         <div class="jd-descrdiv">Set the associated identity with the Context.</div>
   
@@ -617,6 +638,24 @@ Summary:
 
 	 
     <tr class=" api apilevel-" >
+        <td class="jd-typecol">
+            
+            
+            
+            static
+            
+            void
+        </td>
+        <td class="jd-linkcol" width="100%">
+        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html#setUIPolicyIdentity(android.content.Context, java.lang.String, com.microsoft.intune.mam.client.identity.MAMSetUIIdentityCallback, java.util.EnumSet<com.microsoft.intune.mam.client.app.IdentitySwitchOption>)">setUIPolicyIdentity</a></span>(Context context, String identity, <a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMSetUIIdentityCallback.html">MAMSetUIIdentityCallback</a> mamSetUIIdentityCallback, EnumSet&lt;<a href="../../../../../../com/microsoft/intune/mam/client/app/IdentitySwitchOption.html">IdentitySwitchOption</a>&gt; options)
+        
+        <div class="jd-descrdiv">Set the associated identity with the Context.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol">
             
             
@@ -1021,6 +1060,43 @@ From class
 </div>
 
 
+<a id="getCurrentThreadPolicy()"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+         
+         
+         
+        <a href="../../../../../../com/microsoft/intune/mam/policy/AppPolicy.html">AppPolicy</a>
+      </span>
+      <span class="sympad">getCurrentThreadPolicy</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Get the current app policy. This does NOT take the UI (Context) identity into account. To take UI identity into account, use
+ the override which takes a Context.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>Policy for the current identity.
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
 <a id="getIsIdentityManaged(java.lang.String)"></a>
 
 <div class="jd-details api apilevel-"> 
@@ -1076,7 +1152,7 @@ From class
          
          
          
-        AppPolicy
+        <a href="../../../../../../com/microsoft/intune/mam/policy/AppPolicy.html">AppPolicy</a>
       </span>
       <span class="sympad">getPolicy</span>
       <span class="normal">(Context context)</span>
@@ -1121,7 +1197,7 @@ From class
          
          
          
-        AppPolicy
+        <a href="../../../../../../com/microsoft/intune/mam/policy/AppPolicy.html">AppPolicy</a>
       </span>
       <span class="sympad">getPolicy</span>
       <span class="normal">()</span>
@@ -1136,11 +1212,10 @@ From class
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Get the current app policy. This does NOT take the UI (Context) identity into account. To take UI identity into account, use
- the override which takes a Context.</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Deprecated alias for getCurrentThreadPolicy.</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>Policy for the current identity.
+      <ul class="nolist"><li>see getCurrentThreadPolicy
 </li></ul>
   </div>
 
@@ -1158,7 +1233,7 @@ From class
          
          
          
-        AppPolicy
+        <a href="../../../../../../com/microsoft/intune/mam/policy/AppPolicy.html">AppPolicy</a>
       </span>
       <span class="sympad">getPolicyForIdentity</span>
       <span class="normal">(String identity)</span>
@@ -1284,7 +1359,7 @@ From class
          
          
          
-        MAMIdentitySwitchResult
+        <a href="../../../../../../com/microsoft/intune/mam/client/MAMIdentitySwitchResult.html">MAMIdentitySwitchResult</a>
       </span>
       <span class="sympad">setCurrentThreadIdentity</span>
       <span class="normal">(String identity)</span>
@@ -1329,7 +1404,7 @@ From class
          
          
          
-        MAMIdentitySwitchResult
+        <a href="../../../../../../com/microsoft/intune/mam/client/MAMIdentitySwitchResult.html">MAMIdentitySwitchResult</a>
       </span>
       <span class="sympad">setProcessIdentity</span>
       <span class="normal">(String identity)</span>
@@ -1377,7 +1452,7 @@ From class
         void
       </span>
       <span class="sympad">setUIPolicyIdentity</span>
-      <span class="normal">(Context context, String identity, MAMSetUIIdentityCallback mamSetUIIdentityCallback)</span>
+      <span class="normal">(Context context, String identity, <a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMSetUIIdentityCallback.html">MAMSetUIIdentityCallback</a> mamSetUIIdentityCallback)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1426,7 +1501,7 @@ From class
         void
       </span>
       <span class="sympad">setUIPolicyIdentity</span>
-      <span class="normal">(Context context, String identity, MAMSetUIIdentityCallback mamSetUIIdentityCallback, EnumSet&lt;IdentitySwitchOption&gt; options)</span>
+      <span class="normal">(Context context, String identity, <a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMSetUIIdentityCallback.html">MAMSetUIIdentityCallback</a> mamSetUIIdentityCallback, EnumSet&lt;<a href="../../../../../../com/microsoft/intune/mam/client/app/IdentitySwitchOption.html">IdentitySwitchOption</a>&gt; options)</span>
     </h4>
       <div class="api-level">
         <div>

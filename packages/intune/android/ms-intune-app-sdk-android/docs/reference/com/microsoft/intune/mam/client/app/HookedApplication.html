@@ -163,14 +163,6 @@
     <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/strict/package-summary.html">com.microsoft.intune.mam.client.strict</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v4/app/package-summary.html">com.microsoft.intune.mam.client.support.v4.app</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v4/content/package-summary.html">com.microsoft.intune.mam.client.support.v4.content</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v4/print/package-summary.html">com.microsoft.intune.mam.client.support.v4.print</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/support/v7/app/package-summary.html">com.microsoft.intune.mam.client.support.v7.app</a></li>
-    <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/log/package-summary.html">com.microsoft.intune.mam.log</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/policy/package-summary.html">com.microsoft.intune.mam.policy</a></li>
@@ -211,7 +203,9 @@
           <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMAlertDialogBuilder.html">MAMAlertDialogBuilder</a></li>
           <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMAliasActivity.html">MAMAliasActivity</a></li>
           <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMApplication.html">MAMApplication</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMCertificatePinningManager.html">MAMCertificatePinningManager</a></li>
           <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMComponents.html">MAMComponents</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMConfigOnly.html">MAMConfigOnly</a></li>
           <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMDialog.html">MAMDialog</a></li>
           <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMDialogFragment.html">MAMDialogFragment</a></li>
           <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMDownloadManagement.html">MAMDownloadManagement</a></li>
@@ -221,7 +215,6 @@
           <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMLauncherActivity.html">MAMLauncherActivity</a></li>
           <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMListActivity.html">MAMListActivity</a></li>
           <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMListFragment.html">MAMListFragment</a></li>
-          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMMultiDexApplication.html">MAMMultiDexApplication</a></li>
           <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMNativeActivity.html">MAMNativeActivity</a></li>
           <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMNotificationManagement.html">MAMNotificationManagement</a></li>
           <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMPendingIntent.html">MAMPendingIntent</a></li>
@@ -366,9 +359,7 @@ Summary:
               >
           
             
-              <a href="../../../../../../com/microsoft/intune/mam/client/app/MAMApplication.html">MAMApplication</a>,
-            
-              <a href="../../../../../../com/microsoft/intune/mam/client/app/MAMMultiDexApplication.html">MAMMultiDexApplication</a>
+              <a href="../../../../../../com/microsoft/intune/mam/client/app/MAMApplication.html">MAMApplication</a>
             
           
       </div>
@@ -379,10 +370,6 @@ Summary:
         <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMApplication.html">MAMApplication</a></td>
               <td class="jd-descrcol" width="100%">Managed version of android.app.Application.&nbsp;</td>
-          </tr>
-        <tr class=" api apilevel-" >
-              <td class="jd-linkcol"><a href="../../../../../../com/microsoft/intune/mam/client/app/MAMMultiDexApplication.html">MAMMultiDexApplication</a></td>
-              <td class="jd-descrcol" width="100%">MAM version of android.support.multidex.MultiDexApplication.&nbsp;</td>
           </tr>
   </table>
       </div>
@@ -462,24 +449,6 @@ Summary:
             
             
             
-            byte[]
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/app/HookedApplication.html#getADALSecretKey()">getADALSecretKey</a></span>()
-        
-        <div class="jd-descrdiv">Retrieves the ADAL secret key for this application.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            abstract
-            
-            
-            
-            
             void
         </td>
         <td class="jd-linkcol" width="100%">
@@ -536,45 +505,6 @@ Summary:
 
 <h2>Public Methods</h2>
 
-
-
-<a id="getADALSecretKey()"></a>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-        abstract 
-         
-        byte[]
-      </span>
-      <span class="sympad">getADALSecretKey</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves the ADAL secret key for this application. The byte array returned must be identical to what is passed into
- AuthenticationSettings.setSecretKey.
-
- This method is no longer required to be overridden.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>A byte array of the ADAL secret key.
-</li></ul>
-  </div>
-
-    </div>
-</div>
 
 
 <a id="onMAMCreate()"></a>

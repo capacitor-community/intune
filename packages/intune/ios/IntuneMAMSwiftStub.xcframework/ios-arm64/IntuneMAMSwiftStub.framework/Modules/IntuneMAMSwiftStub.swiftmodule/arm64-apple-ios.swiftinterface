@@ -24,6 +24,7 @@ extension Dispatch.DispatchGroup {
 }
 extension Dispatch.DispatchWorkItem {
   public func cmarRealDispatchWorkItemNotify(qos: Dispatch.DispatchQoS = .unspecified, flags: Dispatch.DispatchWorkItemFlags = [], queue: Dispatch.DispatchQueue, execute: @escaping @convention(block) () -> Swift.Void)
+  convenience public init(cmarRealQoS: Dispatch.DispatchQoS, cmarRealFlags: Dispatch.DispatchWorkItemFlags, cmarRealBlock: @escaping @convention(block) () -> Swift.Void)
 }
 extension Swift.StringProtocol {
   public func cmarRealStringWrite<T>(toFile path: T, atomically useAuxiliaryFile: Swift.Bool, encoding enc: Swift.String.Encoding) throws where T : Swift.StringProtocol
