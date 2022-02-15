@@ -70,13 +70,6 @@ Finally, open the `build.gradle` file for the `Module: android.app` and add the 
 
 ```groovy
 apply plugin: 'com.microsoft.intune.mam'
-
-intunemam {
-    includeExternalLibraries = [
-            "androidx.*",
-            "com.getcapacitor.*"
-    ]
-}
 ```
 
 ### Setting Android Manifest Configuration
