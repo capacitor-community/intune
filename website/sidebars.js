@@ -12,5 +12,6 @@ module.exports = {
     'brokered-auth',
     'demo-app',
     'troubleshooting',
+    'changelog',
   ],
 };
