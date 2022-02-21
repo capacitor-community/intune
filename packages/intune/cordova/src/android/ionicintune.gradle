@@ -30,7 +30,7 @@ allprojects {
 
 dependencies {
   implementation files("./src/main/libs/Microsoft.Intune.MAM.SDK.aar")
-  implementation 'com.microsoft.identity.client:msal:1.5.5'
+  implementation 'com.microsoft.identity.client:msal:2.2.3'
   // implementation files("./src/main/libs/capacitor-cordova-compat.aar")
 }
 
