@@ -1,8 +1,4 @@
----
-title: Intune Changelog
-sidebar_label: Changelog
----
-
+# @ionic-enterprise/intune
 
 ## 2.3.0
 ### Minor Changes

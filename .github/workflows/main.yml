@@ -68,6 +68,7 @@ jobs:
         xcodebuild clean build -sdk iphonesimulator -workspace App.xcworkspace -scheme App -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
   publish:
+    if: github.ref == 'refs/heads/main'
     needs: [build-ios, build-android]
     runs-on: ubuntu-latest # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
