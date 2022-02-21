@@ -13,6 +13,7 @@ export interface IntuneMAMAcquireToken {
   upn: string;
   accessToken: string;
   accountIdentifier: string;
+  idToken?: string;
 }
 
 export interface IntuneMAMRegisterAndEnrollAccountOptions {

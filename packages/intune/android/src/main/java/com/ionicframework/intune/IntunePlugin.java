@@ -80,7 +80,7 @@ public class IntunePlugin extends Plugin {
 
               try {
                 if (interactive) {
-                  MSALUtil.acquireToken(getActivity(), MSAL_SCOPES, null, new AuthCallback());
+                  MSALUtil.acquireToken(getActivity(), scopes, null, new AuthCallback());
                 } else {
                   MSALUtil.acquireTokenSilent(getActivity(), upn, scopes, new AuthCallback());
                 }
