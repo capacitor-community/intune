@@ -1,4 +1,4 @@
-# Identity Vault Docs
+# Intune Docs
 
 To start the development server:
 
