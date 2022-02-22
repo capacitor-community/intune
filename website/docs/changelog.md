@@ -15,3 +15,5 @@ sidebar_label: Changelog
 ### Minor Changes
 
 - Update Intune Android to 8.3.0 and iOS to 15.3.0
+
+Changes required: On Android, users should remove the `includeExternalLibraries` configuration value from the `intunemam` configuration entry in their app's `build.gradle` file. This configuration entry has been removed from the Intune App SDK for Android.
