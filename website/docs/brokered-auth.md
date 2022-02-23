@@ -13,20 +13,18 @@ To find this page in Azure, navigate to Azure AD -> Security -> Authentication m
 
 ![Enable Brokered](/img/intune/aad-enable-brokered.png)
 
-## MSAL Configuration
 
-Next, brokered auth brokered auth must be enabled locally in your MSAL config. Add this line:
+## Android
+Brokered auth must be enabled locally in your MSAL config (located in `android/res/raw/auth_config.json` created in [this](https://ionic.io/docs/intune/android-installation#creating-configuration-json-file) step). Add this line:
 
 ```json
 "broker_redirect_uri_registered": true
 ```
 
-To the MSAL auth configuration JSON.
+Ensure the correct `<queries>` have been added to the `AndroidManifest.xml` by following the Android Installation [instructions](android-installation).
 
 ## iOS
 
-No further configuration is required.
+No further configuration is required to enable Brokered Auth.
 
-## Android
 
-First, ensure the correct `<queries>` have been added to the `AndroidManifest.xml` by following the Android Installation [instructions](android-installation).
