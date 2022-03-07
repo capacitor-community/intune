@@ -83,3 +83,12 @@ dependencies {
     implementation files("../../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
 }
 ``` 
+
+## java.lang.ClassNotFoundException: Didn't find class "com.ionicframework.intune.IntuneApplication"
+This runtime error can occur if you have forgotten to add the following line to the `dependencies` of the `build.gradle` file for the `Module: android.app`:
+```groovy
+dependencies {
+    ...
+    implementation files("../../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
+}
+``` 
