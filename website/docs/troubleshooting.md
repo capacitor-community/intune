@@ -73,3 +73,13 @@ This error happens on Android 30 when your `AndroidManifest.xml` is missing `<qu
 This is a new Android security feature (as of Android 30) that restrict the app to query for only a defined set of external apps.
 
 To fix this issue, follow the Android install guide for the `AndroidManifest.xml` instructions to ensure the proper `<queries>` definition has been added.
+
+### Direct local .aar file dependencies are not supported when building an AAR.
+
+This compilation error can happen with versions of the plugin 2.4.1 and below. Update to the latest version then open the `build.gradle` file for the `Module: android.app` and ensure it contains the following line in `dependencies`:
+```groovy
+dependencies {
+    ...
+    implementation files("../../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
+}
+``` 
