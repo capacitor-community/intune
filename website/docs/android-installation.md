@@ -72,6 +72,13 @@ Finally, open the `build.gradle` file for the `Module: android.app` and add the 
 apply plugin: 'com.microsoft.intune.mam'
 ```
 
+```groovy
+dependencies {
+    ...
+    implementation files("../../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
+}
+```
+
 ### Setting Android Manifest Configuration
 
 Add to your `<application` declaration this attribute at the end:
