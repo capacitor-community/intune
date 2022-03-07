@@ -1,5 +1,8 @@
 # @ionic-enterprise/intune
+
 ## 2.4.2
+
+### Patch Changes
 
 - Fix for compilation error `Direct local .aar file dependencies are not supported when building an AAR`
 
