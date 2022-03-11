@@ -116,8 +116,6 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                     let viewController = self.bridge!.viewController!
                     let webviewParameters = MSALWebviewParameters(authPresentationViewController: viewController)
                     
-                    
-                    
                     let completionBlock: MSALCompletionBlock = { (result, error) in
                                 
                         guard let authResult = result, error == nil else {
@@ -206,7 +204,68 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
             call.reject("No upn provided")
             return
         }
+
+        guard let intuneSettings = Bundle.main.object(forInfoDictionaryKey: "IntuneMAMSettings") as? [AnyHashable:AnyHashable] else {
+            call.reject("IntuneMAMSettings must be set in Info.plist to use this method. See https://docs.microsoft.com/en-us/mem/intune/developer/app-sdk-ios#configure-msal-settings-for-the-intune-app-sdk")
+            return
+        }
+
+        guard let clientId = intuneSettings["ADALClientId"] as? String else {
+            call.reject("ADALClientId must be specified in IntuneMAMSettings in Info.plist")
+            return
+        }
+
+        let redirectUri = intuneSettings["ADALRedirectUri"] as? String
+        let authorityUriValue = intuneSettings["ADALAuthority"] as? String
+        var authority: MSALAuthority?
+        if let authorityUri = authorityUriValue {
+            if let u = URL(string: authorityUri) {
+                authority = try? MSALAuthority(url: u)
+            }
+        }
+
         IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccount(upn, withWipe: true)
+
+        DispatchQueue.main.async { [weak self] in
+            do {
+
+                var config: MSALPublicClientApplicationConfig?
+
+                if redirectUri != nil {
+                    config = MSALPublicClientApplicationConfig(clientId: clientId, redirectUri: redirectUri, authority: authority)
+                } else {
+                    config = MSALPublicClientApplicationConfig(clientId: clientId)
+                }
+
+                config?.clientApplicationCapabilities = ["ProtApp"]
+                if let application = try? MSALPublicClientApplication(configuration: config!) {
+                    guard let self = self else {
+                        call.reject("No self")
+                        return
+                    }
+
+                    guard let account = try? application.account(forUsername: upn) else {
+                        call.reject("Unable to find account to refresh, must call acquireToken for interactive flow")
+                        return
+                    }
+                    let viewController = self.bridge!.viewController!
+                    let webviewParameters = MSALWebviewParameters(authPresentationViewController: viewController)
+
+                    let signoutParameters = MSALSignoutParameters(webviewParameters: webviewParameters)
+                    signoutParameters.signoutFromBrowser = false
+
+                    application.signout(with: account, signoutParameters: signoutParameters) { (result, error) in
+                        if error == nil {
+                            call.resolve()
+                        } else {
+                            call.reject("Unable to sign out", nil, error)
+                        }
+                    }
+                } else {
+                    call.resolve()
+                }
+            }
+        }
     }
     
     @objc public func appConfig(_ call: CAPPluginCall) {
