@@ -1,5 +1,11 @@
 # @ionic-enterprise/intune
 
+## 2.4.5
+
+### Patch Changes
+
+- Fix release
+
 ## 2.4.4
 
 ### Patch Changes
