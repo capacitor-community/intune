@@ -188,7 +188,7 @@ public class IntunePlugin extends Plugin {
     MAMAppConfig appConfig = configManager.getAppConfig(upn);
 
     JSObject data = new JSObject();
-    data.put("fullData", appConfig.getFullData());
+    data.put("fullData", new JSArray(appConfig.getFullData()));
     call.resolve(data);
   }
 
