@@ -1,5 +1,11 @@
 # @ionic-enterprise/intune
 
+## 2.4.4
+
+### Patch Changes
+
+- Fixed appconfig serialization for Android
+
 ## 2.4.3
 
 ### Patch Changes
