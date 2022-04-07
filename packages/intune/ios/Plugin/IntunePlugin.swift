@@ -146,9 +146,10 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                             "upn": upn
                         ])
                     }
-                    
+
                     if (interactive) {
                         let interactiveParameters = MSALInteractiveTokenParameters(scopes: scopes, webviewParameters: webviewParameters)
+                        interactiveParameters.promptType = .login
                         application.acquireToken(with: interactiveParameters, completionBlock: completionBlock)
                     } else {
                         guard let account = try? application.account(forUsername: upn!) else {
