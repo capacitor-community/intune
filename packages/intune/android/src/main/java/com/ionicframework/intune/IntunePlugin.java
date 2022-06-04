@@ -61,6 +61,8 @@ public class IntunePlugin extends Plugin {
 
     String upn = call.getString("upn");
 
+    boolean forcePrompt = call.getBoolean("forcePrompt", false);
+
     String[] scopesArray = null;
 
     try {
@@ -80,7 +82,7 @@ public class IntunePlugin extends Plugin {
 
               try {
                 if (interactive) {
-                  MSALUtil.acquireToken(getActivity(), scopes, null, new AuthCallback());
+                  MSALUtil.acquireToken(getActivity(), scopes, null, forcePrompt, new AuthCallback());
                 } else {
                   MSALUtil.acquireTokenSilent(getActivity(), upn, scopes, new AuthCallback());
                 }
@@ -118,6 +120,8 @@ public class IntunePlugin extends Plugin {
   public void loginAndEnrollAccount(PluginCall call) {
     mLastEnrollCall = call;
 
+    boolean forcePrompt = call.getBoolean("forcePrompt", false);
+
     // initiate the MSAL authentication on a background thread
     Thread thread = new Thread(
             () -> {
@@ -128,7 +132,7 @@ public class IntunePlugin extends Plugin {
                 if (mUserAccount != null) {
                   loginHint = mUserAccount.getUPN();
                 }
-                MSALUtil.acquireToken(getActivity(), MSAL_SCOPES, loginHint, new AuthCallback());
+                MSALUtil.acquireToken(getActivity(), MSAL_SCOPES, loginHint, forcePrompt, new AuthCallback());
               } catch (MsalException | InterruptedException e) {
                 Logger.error("Authentication exception occurred", e);
                 showMessage("Authentication exception occurred - check logcat for more details.");

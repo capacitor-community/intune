@@ -49,12 +49,15 @@ First, the user must log in using `acquireToken` which presents an interactive a
 // Login page component
 const authInfo = await IntuneMAM.acquireToken({
   scopes: ['scope-1', 'scope-2'],
+  forcePrompt: false
 });
 
 await IntuneMAM.registerAndEnrollAccount({
   upn: authInfo.upn,
 });
 ```
+
+The `forcePrompt` option can be used to force the user to re-enter their login information. The default is `false`.
 
 The response from `acquireToken` and `acquireTokenSilent` will be of the form:
 

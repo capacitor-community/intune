@@ -58,7 +58,7 @@ public final class MSALUtil {
    */
   @WorkerThread
   public static void acquireToken(@NonNull final Activity fromActivity, @NonNull final String[] scopes,
-                                  final String loginHint, @NonNull final AuthenticationCallback callback)
+                                  final String loginHint, final boolean forcePrompt, @NonNull final AuthenticationCallback callback)
     throws MsalException, InterruptedException {
     initializeMsalClientApplication(fromActivity.getApplicationContext());
 
@@ -67,7 +67,7 @@ public final class MSALUtil {
       .withCallback(callback)
       .startAuthorizationFromActivity(fromActivity)
       .withLoginHint(loginHint)
-      .withPrompt(Prompt.LOGIN)
+      .withPrompt(forcePrompt ? Prompt.LOGIN : Prompt.SELECT_ACCOUNT)
       .build();
 
     mMsalClientApplication.acquireToken(params);

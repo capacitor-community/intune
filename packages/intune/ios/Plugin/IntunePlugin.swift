@@ -69,6 +69,8 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
             return
         }
         
+        let forcePrompt = call.getBool("forcePrompt", false)
+        
         guard let scopes = call.getArray("scopes") as? [String] else {
             call.reject("scopes not provided")
             return
@@ -149,7 +151,9 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
 
                     if (interactive) {
                         let interactiveParameters = MSALInteractiveTokenParameters(scopes: scopes, webviewParameters: webviewParameters)
-                        interactiveParameters.promptType = .login
+                        if forcePrompt {
+                            interactiveParameters.promptType = .login
+                        }
                         application.acquireToken(with: interactiveParameters, completionBlock: completionBlock)
                     } else {
                         guard let account = try? application.account(forUsername: upn!) else {

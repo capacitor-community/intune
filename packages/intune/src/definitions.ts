@@ -2,6 +2,12 @@ import { PluginListenerHandle } from '@capacitor/core';
 
 export interface IntuneMAMAcquireTokenOptions {
   scopes: string[];
+  /**
+   * Whether to force the user to enter their password each time they authenticate.
+   * 
+   * Default: false
+   */
+  forcePrompt?: boolean;
 }
 
 export interface IntuneMAMAcquireTokenSilentOptions
