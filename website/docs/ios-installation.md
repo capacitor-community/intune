@@ -12,14 +12,28 @@ Note that version 2.x of `@ionic-enterprise/intune` requires Xcode 13 and is nec
 ## 1. Add Frameworks
 
 The Intune App SDK requires the following Core iOS frameworks be added to your app project:
+- AudioToolbox.framework
+- CoreServices.framework
+- ImageIO.framework
+- libc++.tbd
+- libsqlite3.tbd
+- LocalAuthentication.framework
+- MessageUI.framework
+- QuartzCore.framework
+- Security.framework
+- SystemConfiguration.framework
+- WebKit.framework
 
-![iOS Frameworks](/img/intune/ios-frameworks.png)
+[![iOS Frameworks](/img/intune/ios-frameworks.png)](/img/intune/ios-frameworks.png)
+
 
 ## 2. Configure Keychain
 
 Add the following keychain groups under Signing &amp; Capabilities, making sure to substitute your app's Bundle ID for the first group:
+- `com.microsoft.intune.mam`
+- `com.microsoft.adalcache`
 
-![iOS Keychain](/img/intune/ios-keychain.png)
+[![iOS Keychain](/img/intune/ios-keychain.png)](/img/intune/ios-keychain.png)
 
 ## 3. Enable Application Queries Schemes
 
@@ -28,8 +42,29 @@ Open `Info.plist` and add a new Row with the name `LSApplicationQueriesSchemes` 
 Any custom protocols your app launches must have two entries: the original protocol and a new one with `-intunemam` appended.
 
 Additionally, the following intune-specific protocols must be added :
-
-![iOS Application Queries Schemes](/img/intune/ios-queries-schemes.png)
+```xml
+<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>msauthv2</string>
+    <string>msauthv3</string>
+    <string>mvisionmobile</string>
+    <string>scmx</string>
+    <string>lookoutwork-ase</string>
+    <string>lacoonsecurity</string>
+    <string>zips</string>
+    <string>skycure</string>
+    <string>smart-ns</string>
+    <string>smsec</string>
+    <string>betteractiveshield</string>
+    <string>wandera</string>
+    <string>https-intunemam</string>
+    <string>http-intunemam</string>
+    <string>microsoft-edge-https-intunemam</string>
+    <string>microsoft-edge-http-intunemam</string>
+    <string>ms-outlook-intunemam</string>
+    <string>companyportal</string>
+</array>
+```
 
 ## 4. Set a NSFaceIDUsageDescription
 
@@ -39,15 +74,15 @@ To enable Face ID support, add a description for `NSFaceIDUsageScription` also k
 
 The Intune App SDK only supports iOS 12.2 and above, make sure to set the Deployment target for your app to 12.2 or higher:
 
-![iOS 12.2](/img/intune/ios-12.png)
+[![iOS 12.2](/img/intune/ios-12.png)](/img/intune/ios-12.png)
 
 ## 6. Disable Bitcode
 
 The Intune App SDK does not support Bitcode. In the Build Settings for your app in Xcode, set `Strip Swift Symbols` and `Enable Bitcode` to `NO`:
 
-![Disable bitcode](/img/intune/ios-disable-bitcode.png)
+[![Disable bitcode](/img/intune/ios-disable-bitcode.png)](/img/intune/ios-disable-bitcode.png)
 
-![No strip symbols](/img/intune/ios-no-strip-symbols.png)
+[![No strip symbols](/img/intune/ios-no-strip-symbols.png)](/img/intune/ios-no-strip-symbols.png)
 
 Also add these lines to the `Podfile` in your app's `ios/App` directory. This will make sure bitcode is not enabled on any Pod targets:
 
