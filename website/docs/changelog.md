@@ -4,6 +4,24 @@ sidebar_label: Changelog
 ---
 
 
+## 2.4.5
+
+### Patch Changes
+
+- Fix release
+
+## 2.4.4
+
+### Patch Changes
+
+- Fixed appconfig serialization for Android
+
+## 2.4.3
+
+### Patch Changes
+
+- Log users out from MSAL on deregister
+
 ## 2.4.2
 
 ### Patch Changes
