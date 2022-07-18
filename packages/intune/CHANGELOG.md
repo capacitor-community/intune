@@ -1,5 +1,11 @@
 # @ionic-enterprise/intune
 
+## 2.5.0
+
+### Minor Changes
+
+- Add `promptType` option to allow always forcing login (See this [issue](https://github.com/AzureAD/microsoft-authentication-library-for-objc/issues/1271#issuecomment-797633677)).
+
 ## 2.4.5
 
 ### Patch Changes
