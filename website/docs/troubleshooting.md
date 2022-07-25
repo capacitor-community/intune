@@ -84,11 +84,18 @@ dependencies {
 }
 ``` 
 
-## java.lang.ClassNotFoundException: Didn't find class "com.ionicframework.intune.IntuneApplication"
+### java.lang.ClassNotFoundException: Didn't find class "com.ionicframework.intune.IntuneApplication"
 This runtime error can occur if you have forgotten to add the following line to the `dependencies` of the `build.gradle` file for the `Module: android.app`:
 ```groovy
 dependencies {
     ...
     implementation files("../../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
 }
-``` 
+```
+
+### MAM Enabled: No when uploading to Microsoft Endpoint Manager
+When uploading a release build APK to the Microsoft Endpoint Manager and it reports "MAM Enabled: No" then you can workaround this by editing the `gradle.properties` file and adding the following line:
+```groovy
+android.enableResourceOptimizations=false
+```
+Then create a new release build and upload the APK. It should report "MAM Enabled: Yes". This [issue](https://github.com/msintuneappsdk/ms-intune-app-sdk-android/issues/117) is related to Microsoft Endpoint Manager and is not a problem with your application.
