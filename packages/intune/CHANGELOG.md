@@ -1,5 +1,11 @@
 # @ionic-enterprise/intune
 
+## 2.5.1
+
+### Patch Changes
+
+- ab2f5d8: Make dependencies compatible with Capacitor 4
+
 ## 2.5.0
 
 ### Minor Changes
