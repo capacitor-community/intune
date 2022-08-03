@@ -82,7 +82,7 @@ jobs:
     # Start npm/platform tasks
     - uses: actions/setup-node@v1
       with:
-        node-version: 14
+        node-version: 16.x
 
     - name: Install
       run: npm install
