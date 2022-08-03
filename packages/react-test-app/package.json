@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@capacitor/android": "^4.0.1",
-    "@capacitor/app": "^4.0.1",
-    "@capacitor/core": "^4.0.1",
-    "@capacitor/haptics": "^4.0.1",
-    "@capacitor/ios": "^4.0.1",
-    "@capacitor/keyboard": "^4.0.1",
+    "@capacitor/android": "^4.0.0",
+    "@capacitor/app": "^4.0.0",
+    "@capacitor/core": "^4.0.0",
+    "@capacitor/haptics": "^4.0.0",
+    "@capacitor/ios": "^4.0.0",
+    "@capacitor/keyboard": "^4.0.0",
     "@ionic-enterprise/intune": "file:../intune",
     "@ionic/react": "^5.5.0",
     "@ionic/react-router": "^5.5.0",
@@ -67,7 +67,7 @@
     ]
   },
   "devDependencies": {
-    "@capacitor/cli": "^4.0.1",
+    "@capacitor/cli": "^4.0.0",
     "@ionic/eslint-config": "^0.3.0"
   },
   "description": "An Ionic project"
