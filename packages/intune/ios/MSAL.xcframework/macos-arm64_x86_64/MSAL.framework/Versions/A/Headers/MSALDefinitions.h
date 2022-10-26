@@ -31,6 +31,7 @@
 @class MSALResult;
 @class MSALAccount;
 @class MSALDeviceInformation;
+@class MSALWPJMetaData;
 
 /**
  Levels of logging. Defines the priority of the logged message
@@ -128,6 +129,10 @@ typedef NS_ENUM(NSUInteger, MSALPromptType)
      */
     MSALPromptTypeConsent,
     /**
+     Create a new account rather than authenticate an existing identity.
+     */
+    MSALPromptTypeCreate,
+    /**
      The SSO experience will be determined by the presence of cookies in the webview and account type.
      User won't be prompted unless necessary.
      If multiple users are signed in, select account experience will be presented.
@@ -178,6 +183,11 @@ typedef void (^MSALSignoutCompletionBlock)(BOOL success, NSError * _Nullable err
    The completion block that will be called when MSAL has finished reading device state, or MSAL encountered an error.
 */
 typedef void (^MSALDeviceInformationCompletionBlock)(MSALDeviceInformation * _Nullable deviceInformation, NSError * _Nullable error);
+
+/**
+   The completion block that will be called when MSAL has finished reading device state, or MSAL encountered an error.
+*/
+typedef void (^MSALWPJMetaDataCompletionBlock)(MSALWPJMetaData * _Nullable msalPJMetaDataInformation, NSError * _Nullable error);
 
 /**
  The block that returns a MSAL log message.
