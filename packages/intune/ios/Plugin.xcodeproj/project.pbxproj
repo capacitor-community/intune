@@ -34,6 +34,7 @@
 /* Begin PBXFileReference section */
 		0F80C7C8291D6B2000ED03A4 /* MSAL.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = MSAL.xcframework; sourceTree = "<group>"; };
 		0F80C7C9291D6B2000ED03A4 /* IntuneMAMSwiftStub.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = IntuneMAMSwiftStub.xcframework; sourceTree = "<group>"; };
+		33057AB426F224208995D5F0 /* Pods-Plugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Plugin/Pods-Plugin.debug.xcconfig"; sourceTree = "<group>"; };
 		3B2A61DA5A1F2DD4F959604D /* Pods_Plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5010E65226C606B2005F80FA /* PolicyDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyDelegate.swift; sourceTree = "<group>"; };
 		5010E65326C606B2005F80FA /* EnrollmentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrollmentDelegate.swift; sourceTree = "<group>"; };
@@ -61,8 +62,6 @@
 				0F80C7CC291D6B2000ED03A4 /* IntuneMAMSwiftStub.xcframework in Frameworks */,
 				5010E65726C606BB005F80FA /* IntuneMAMSwift.xcframework in Frameworks */,
 				50ADFFA42020D75100D50D53 /* Capacitor.framework in Frameworks */,
-				0F7713B2291D55C100FB1580 /* MSAL.xcframework in Frameworks */,
-				0F7713AE291D54D500FB1580 /* IntuneMAMSwiftStub.xcframework in Frameworks */,
 				03FC29A292ACC40490383A1F /* Pods_Plugin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,8 +124,8 @@
 			children = (
 				96ED1B6440D6672E406C8D19 /* Pods-PluginTests.debug.xcconfig */,
 				F65BB2953ECE002E1EF3E424 /* Pods-PluginTests.release.xcconfig */,
-				1D7FD60CC3A3D4D3A0656CBE /* Pods-Plugin.debug.xcconfig */,
 				B062FBF79BDBA51460474472 /* Pods-Plugin.release.xcconfig */,
+				33057AB426F224208995D5F0 /* Pods-Plugin.debug.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -472,7 +471,7 @@
 		};
 		50ADFF9D201F53D600D50D53 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D7FD60CC3A3D4D3A0656CBE /* Pods-Plugin.debug.xcconfig */;
+			baseConfigurationReference = 33057AB426F224208995D5F0 /* Pods-Plugin.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";

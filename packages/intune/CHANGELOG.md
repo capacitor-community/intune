@@ -1,5 +1,11 @@
 # @ionic-enterprise/intune
 
+## 3.0.1
+
+### Patch Changes
+
+- fix ios frameworks mixed types
+
 ## 3.0.0
 
 ### Major Changes
