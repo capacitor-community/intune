@@ -2,18 +2,19 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "@changesets/cli": "^2.20.0",
-    "sync-cordova-xml2": "^0.0.3",
-    "turbo": "^1.1.2"
+    "@changesets/cli": "^2.25.2",
+    "nx": "^15.0.13",
+    "sync-cordova-xml2": "^0.0.3"
   },
   "workspaces": [
     "packages/intune"
   ],
   "scripts": {
-    "build": "turbo run build"
+    "build": "nx run-many --target=build"
   },
   "volta": {
     "node": "16.13.2",
-    "npm": "8.3.0"
+    "npm": "8.3.0",
+    "pnpm": "7.13.4"
   }
 }

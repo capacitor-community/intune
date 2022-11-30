@@ -6,108 +6,64 @@
 	<dict>
 		<key>Info.plist</key>
 		<data>
-		VQDvt3i5pDw+WRYHKHFRdaFxO9E=
+		+7FfXsE3u2s71CtSO/O2VcoOuzc=
 		</data>
-		<key>Modules/IntuneMAMSwiftStub.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
+		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		hdq41leIF6jR58qn32MUbIdbTNI=
+		WXor6up/amWG3A0WKofyJbdIEXA=
 		</data>
-		<key>Modules/IntuneMAMSwiftStub.swiftmodule/Project/arm64.swiftsourceinfo</key>
+		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		hdq41leIF6jR58qn32MUbIdbTNI=
+		ZUx0ZlxkS/hQ6y1/7/q89CZ+dRE=
 		</data>
 		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		qK2/pzv7HVBJ3q/m/WoyPmw69n4=
+		g4URhYJaEM3jiENkk1ZOmcZxcCU=
 		</data>
 		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		pvV8rqBFBxOY6Md5oR14ME2/Ooo=
+		ZUx0ZlxkS/hQ6y1/7/q89CZ+dRE=
 		</data>
 		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		WwcPHVS4MQuEUEKs50VWxRCVEak=
-		</data>
-		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64.swiftdoc</key>
-		<data>
-		qK2/pzv7HVBJ3q/m/WoyPmw69n4=
-		</data>
-		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64.swiftinterface</key>
-		<data>
-		pvV8rqBFBxOY6Md5oR14ME2/Ooo=
-		</data>
-		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64.swiftmodule</key>
-		<data>
-		WwcPHVS4MQuEUEKs50VWxRCVEak=
-		</data>
-		<key>Modules/module.modulemap</key>
-		<data>
-		eqTFXhD4LvnMe1bPIMk1HlCKds4=
+		4TCE1llqsORGQf34MTQLsS4873I=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Modules/IntuneMAMSwiftStub.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
+		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2HA98bPUH7rngSs1Sxi9jNhqgw8qX1sWlN/TWqRej5Y=
+			TKPhwBXomMzwwsz7SMWwfjWBA9Ohcs+XeTDGKr6QldM=
 			</data>
 		</dict>
-		<key>Modules/IntuneMAMSwiftStub.swiftmodule/Project/arm64.swiftsourceinfo</key>
+		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2HA98bPUH7rngSs1Sxi9jNhqgw8qX1sWlN/TWqRej5Y=
+			kfwggMLBuoVS65h4rEVNQ5rZIucU6it3MwNMuFI8Ymk=
 			</data>
 		</dict>
 		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			fjZysZVLwzoBGML6jmPm3xC+e7hDCLmecn+VfC73xYg=
+			pVOL6RG2RHQjCgs5Nplr1dNDYIYgz+qrXjyFWfasRYg=
 			</data>
 		</dict>
 		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cLlWtOwgR3lq1tJd4zQZQS6a3U2JRLTOl44l9ZkAvv4=
+			kfwggMLBuoVS65h4rEVNQ5rZIucU6it3MwNMuFI8Ymk=
 			</data>
 		</dict>
 		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+pbzoZwSoG0OZWeO0YKAVRSGrWMNEMuhJUS3pO45Z6g=
-			</data>
-		</dict>
-		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64.swiftdoc</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			fjZysZVLwzoBGML6jmPm3xC+e7hDCLmecn+VfC73xYg=
-			</data>
-		</dict>
-		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64.swiftinterface</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			cLlWtOwgR3lq1tJd4zQZQS6a3U2JRLTOl44l9ZkAvv4=
-			</data>
-		</dict>
-		<key>Modules/IntuneMAMSwiftStub.swiftmodule/arm64.swiftmodule</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			+pbzoZwSoG0OZWeO0YKAVRSGrWMNEMuhJUS3pO45Z6g=
-			</data>
-		</dict>
-		<key>Modules/module.modulemap</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			DetlQgDoYwbiMGL+tWc4SBlIipjvrWeNMS6lCr76zFk=
+			ygE13sZUKMv2YXbhkRJEfD5G/kfWmw3hvBkID9KCLdo=
 			</data>
 		</dict>
 	</dict>

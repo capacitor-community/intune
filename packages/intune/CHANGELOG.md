@@ -1,5 +1,15 @@
 # @ionic-enterprise/intune
 
+## 3.0.0
+
+### Major Changes
+
+- d147341: Update Swift SDK to 17.1.1 and MSAL SDK to 1.2.5
+
+### Patch Changes
+
+- 1dfb1ab: Update MSAL SDK on iOS
+
 ## 2.5.1
 
 ### Patch Changes

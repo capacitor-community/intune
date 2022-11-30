@@ -14,18 +14,42 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
         
     # Start npm/platform tasks
-    - uses: actions/setup-node@v1
+    - name: Setup NodeJS
+      uses: actions/setup-node@v3
       with:
-        node-version: 14
+        node-version: 16
+    
+    - name: Setup PNPM
+      uses: pnpm/action-setup@v2
+      with:
+        version: ^7.13.4
+        run_install: false
+
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      shell: bash
+      run: |
+        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+    - uses: actions/cache@v3
+      name: Setup pnpm cache
+      with:
+        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
+    
+    - name: Install dependencies
+      run: pnpm install
         
     # Build platform package including template and CLI scripts
     - name: Build platform
-      run: cd packages/intune && npm install && npm run build
+      run: cd packages/intune && pnpm run build
 
     - uses: actions/setup-java@v2
       with:
@@ -34,36 +58,59 @@ jobs:
 
     - name: Build test app for Android
       run: |
-        npm install -g npm
         cd packages/react-test-app
-        npm install
-        npm run build
-        npx cap sync android
+        pnpm run build
+        pnpm cap sync android
         cd android
         bash gradlew app:assembleDebug
 
   
   build-ios:
-    # Run on 11 which has Xcode 13
-    runs-on: macos-11
+    runs-on: macos-12
     timeout-minutes: 10
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
     
     - name: Use Xcode 13
-      run: sudo xcode-select --switch /Applications/Xcode_13.0.app
+      run: sudo xcode-select --switch /Applications/Xcode_14.0.1.app
+
+    - name: Setup NodeJS
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    
+    - name: Setup PNPM
+      uses: pnpm/action-setup@v2
+      with:
+        version: ^7.13.4
+        run_install: false
+
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      shell: bash
+      run: |
+        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+    - uses: actions/cache@v3
+      name: Setup pnpm cache
+      with:
+        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
+    
+    - name: Install dependencies
+      run: pnpm install
 
     - name: Build
       run: |
-        npm install -g npm --force
         cd packages/react-test-app
-        npm install
-        npm run build
-        npx cap sync ios
+        pnpm run build
+        pnpm cap sync ios
         cd ios/App
         xcodebuild clean build -sdk iphonesimulator -workspace App.xcworkspace -scheme App -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
@@ -75,17 +122,38 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
         
     # Start npm/platform tasks
-    - uses: actions/setup-node@v1
+    - name: Setup NodeJS
+      uses: actions/setup-node@v3
       with:
-        node-version: 16.x
+        node-version: 16
+    
+    - name: Setup PNPM
+      uses: pnpm/action-setup@v2
+      with:
+        version: ^7.13.4
+        run_install: false
 
-    - name: Install
-      run: npm install
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      shell: bash
+      run: |
+        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+    - uses: actions/cache@v3
+      name: Setup pnpm cache
+      with:
+        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
+    
+    - name: Install dependencies
+      run: pnpm install
 
     - uses: JS-DevTools/npm-publish@v1
       with:

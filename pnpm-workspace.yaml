@@ -1,0 +1,3 @@
+packages:
+  - 'packages/intune'
+  - 'packages/react-test-app'

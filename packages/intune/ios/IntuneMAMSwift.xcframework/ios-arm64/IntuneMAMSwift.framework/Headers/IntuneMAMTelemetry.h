@@ -29,6 +29,12 @@ typedef NS_ENUM(NSUInteger, IntuneMAMTelemetryPriorityLevel)
   IntuneMAMTelemetryPriorityImmediate = 4  /**< Send the event as soon as possible. */
 };
 
+typedef NS_ENUM(NSUInteger, IntuneMAMTelemetryDataRegion)
+{
+    IntuneMAMTelemetryDataRegionGlobal,
+    IntuneMAMTelemetryDataRegionEU
+};
+
 __attribute__((visibility("default")))
 @protocol IntuneMAMTelemetryDelegate <NSObject>
 
@@ -40,6 +46,7 @@ __attribute__((visibility("default")))
  * @param privacyDataTypes Privacy data types of the data that is being sent.
  * @param priorityLevel Priority level of the data that is being sent.
  * @param properties Additional properties related to the event.
+ * @param dataRegion Destination Aria data storage region.
  * @param tenantID Destination Aria tenant ID.
  */
 - (void)logAriaEventWithName:(NSString * _Nonnull)name
@@ -47,6 +54,7 @@ __attribute__((visibility("default")))
     privacyLevel:(IntuneMAMTelemetryPrivacyLevel)privacyLevel
     privacyDataTypes: (IntuneMAMTelemetryPrivacyDataTypes)privacyDataTypes
     priorityLevel:(IntuneMAMTelemetryPriorityLevel)priorityLevel
+    dataRegion:(IntuneMAMTelemetryDataRegion)dataRegion
     tenantID:(NSString * _Nonnull)tenantID;
 
 @end
