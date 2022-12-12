@@ -99,3 +99,15 @@ When uploading a release build APK to the Microsoft Endpoint Manager and it repo
 android.enableResourceOptimizations=false
 ```
 Then create a new release build and upload the APK. It should report "MAM Enabled: Yes". This [issue](https://github.com/msintuneappsdk/ms-intune-app-sdk-android/issues/117) is related to Microsoft Endpoint Manager and is not a problem with your application.
+
+### Incompatible Gradle Version detected
+This error can occur when upgrading from 2.x to 3.x of the plugin. It is usually related to version 7.2.1 of the build tools which you can verify in `android/build.gradle`. 
+
+To fix the problem open this file and change the line:
+
+`classpath 'com.android.tools.build:gradle:7.2.1'` to
+
+`classpath 'com.android.tools.build:gradle:7.2.2'`
+
+The full error is: `incompatible Gradle version detected. Use 7.1.3 or 7.2.2+. For details, see https://issuetracker.google.com/issues/232438924`
+This issue should be resolved in an upcoming version of Android Studio (Android Studio Dolphin 2021.3.1.11, yet to be released as of December 2022).
