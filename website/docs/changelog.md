@@ -4,6 +4,12 @@ sidebar_label: Changelog
 ---
 
 
+## 3.0.2
+
+### Patch Changes
+
+- 8bcfa5c: Fix Promises not rejecting/resolving properly
+
 ## 3.0.2-next.0
 
 ### Patch Changes
