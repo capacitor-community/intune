@@ -3,10 +3,11 @@ import IntuneMAMSwift
 class EnrollmentDelegateClass: NSObject, IntuneMAMEnrollmentDelegate {
     
     var presentingViewController: UIViewController?
+    var didSucceedCallback: ((Bool, String) -> Void)?
     
-    override init() {
+    init(_ didSucceedCallback: ((Bool, String) -> Void)? = nil) {
+        self.didSucceedCallback = didSucceedCallback
         super.init()
-        self.presentingViewController = nil
     }
 
 
@@ -14,14 +15,15 @@ class EnrollmentDelegateClass: NSObject, IntuneMAMEnrollmentDelegate {
         if status.didSucceed {
             //If enrollment was successful, change from the current view (which should have been initialized with the class) to the desired page on the app (in this case ChatPage)
             print("EnrollmentDelegate - enrollmentRequest - did succeed")
-            
-        } else if IntuneMAMEnrollmentStatusCode.loginCanceled != status.statusCode {
-            //In the case of a failure, log failure error status and code
+            if self.didSucceedCallback != nil {
+                self.didSucceedCallback!(true, "")
+            }
+        } else {
             print("Enrollment result for identity \(status.identity) with status code \(status.statusCode)")
             print("Debug message: \(String(describing: status.errorString))")
-            
-            //Present the user with an alert asking them to sign in again.
-            print("EnrollmentDelegate - enrollmentRequest - login cancelled")
+            if self.didSucceedCallback != nil {
+                self.didSucceedCallback!(false, String(describing: status.errorString))
+            }
         }
     }
     

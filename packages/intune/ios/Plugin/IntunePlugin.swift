@@ -5,12 +5,18 @@ import MSAL
 
 @objc(IntuneMAM)
 public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
-    let enrollmentDelegate = EnrollmentDelegateClass()
+    var enrollmentDelegate: EnrollmentDelegateClass?
     let policyDelegate = PolicyDelegateClass()
+    private var loginAndEnrollContinuation: CheckedContinuation<Any, Error>?
+    
+    private func resetDelegate() {
+        enrollmentDelegate = EnrollmentDelegateClass(nil)
+        IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
+    }
     
     override public func load() {
         print("IntuneMAM Loading")
-        IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
+        self.resetDelegate()
         IntuneMAMPolicyManager.instance().delegate = policyDelegate
         //register for the IntuneMAMAppConfigDidChange notification
         IntuneMAMComplianceManager.instance().delegate = self
@@ -185,15 +191,29 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
             return
         }
         
+        enrollmentDelegate = EnrollmentDelegateClass({ (didSucceed: Bool, message: String) -> Void in
+            if didSucceed {
+                call.resolve()
+            } else {
+                call.reject(message)
+            }
+            self.resetDelegate()
+        })
+        IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
         IntuneMAMEnrollmentManager.instance().registerAndEnrollAccount(upn)
-        
-        call.resolve()
     }
     
     @objc public func loginAndEnrollAccount(_ call: CAPPluginCall) {
+        enrollmentDelegate = EnrollmentDelegateClass({ (didSucceed: Bool, message: String) -> Void in
+            if didSucceed {
+                call.resolve()
+            } else {
+                call.reject(message)
+            }
+            self.resetDelegate()
+        })
+        IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
         IntuneMAMEnrollmentManager.instance().loginAndEnrollAccount(nil)
-        
-        call.resolve()
     }
     
     @objc public func enrolledAccount(_ call: CAPPluginCall) {

@@ -17,9 +17,7 @@ const Login: React.FC = () => {
     getVersion();
   });
 
-  const login = useCallback(async () => {
-    await IntuneMAM.loginAndEnrollAccount();
-    /*
+  const afterLogin = async () => {
     const user = await IntuneMAM.enrolledAccount();
 
     if (user.upn) {
@@ -27,10 +25,17 @@ const Login: React.FC = () => {
       setTimeout(() => history.replace('/home'), 500);
     } else {
       console.log('No user, logging in');
-      setTimeout(() => history.replace('/login'), 500);
     }
-    */
-  }, []);
+  }
+
+  const login = async () => {
+    try {
+      await IntuneMAM.loginAndEnrollAccount();
+      await afterLogin();
+    } catch(e: any) {
+      console.error(e.message);
+    }
+  };
 
   const showConsole = useCallback(async () => {
     await IntuneMAM.displayDiagnosticConsole();
