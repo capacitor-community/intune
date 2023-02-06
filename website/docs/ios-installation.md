@@ -100,11 +100,17 @@ end
 
 As a final step, Microsoft has provided a command line utility to finish configuring your app. To use it, [follow step #7](https://docs.microsoft.com/en-us/mem/intune/developer/app-sdk-ios#build-the-sdk-into-your-mobile-app) on the official SDK integration docs from Microsoft.
 
-For example, the command might look like:
+For example, these commands will clone, copy and run `intuneMAMConfigurator`:
 
 ```shell
-/path/to/ms-intune-app-sdk-ios-14.6.0/IntuneMAMConfigurator -i ios/App/App/Info.plist -e ios/App/App/App.entitlements
+git clone https://github.com/msintuneappsdk/ms-intune-app-sdk-ios tmp --depth 1
+cp tmp/IntuneMAMConfigurator .
+rm -rf tmp
+chmod +x IntuneMAMConfigurator
+./IntuneMAMConfigurator -i ios/App/App/Info.plist -e ios/App/App/App.entitlements
 ```
+
+When the command is successful it will report `IntuneMAMConfigurator[99999:999999] Success!!!`. If `IntuneMAMConfigurator` is not executable then you will get an error `permission denied`.
 
 ## 8. Configure MSAL
 
