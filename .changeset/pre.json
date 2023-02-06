@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "@ionic-enterprise/intune": "3.0.2"
+  },
+  "changesets": [
+    "five-meals-enjoy"
+  ]
+}
