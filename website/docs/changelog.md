@@ -4,6 +4,12 @@ sidebar_label: Changelog
 ---
 
 
+## 3.0.3-next.0
+
+### Patch Changes
+
+- Fix registerAndEnrollAccount promise resolutions
+
 ## 3.0.2
 
 ### Patch Changes
