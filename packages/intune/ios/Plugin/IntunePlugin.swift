@@ -200,6 +200,10 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
             self.resetDelegate()
         })
         IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
+        // The delegate is not always called so we call deRegisterAndUnenrollAccount as a workaround
+        // Example is when the user is not licensed for inTune
+        // Maybe caused by this issue https://github.com/msintuneappsdk/ms-intune-app-sdk-ios/issues/178
+        IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccount(upn, withWipe: false)        
         IntuneMAMEnrollmentManager.instance().registerAndEnrollAccount(upn)
     }
     
