@@ -52,12 +52,18 @@ const authInfo = await IntuneMAM.acquireToken({
   forcePrompt: false
 });
 
-await IntuneMAM.registerAndEnrollAccount({
-  upn: authInfo.upn,
-});
+try {
+   await IntuneMAM.registerAndEnrollAccount({
+     upn: authInfo.upn,
+   });
+} catch (error) {
+  // Handle errors
+}
 ```
 
 The `forcePrompt` option can be used to force the user to re-enter their login information. The default is `false`.
+
+On successfully enrolling your application will close on iOS. If your application does not need to be managed by your company you do not need to call `registerAndEnrollAccount`.
 
 The response from `acquireToken` and `acquireTokenSilent` will be of the form:
 
@@ -124,6 +130,8 @@ To sign a user out and un-enroll them:
 ```typescript
 await IntuneMAM.deRegisterAndUnenrollAccount(user);
 ```
+
+Note: On successful un-enrollment the application will close on iOS.
 
 ## Load App Config
 

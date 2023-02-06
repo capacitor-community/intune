@@ -66,7 +66,7 @@ allprojects {
 
 **Capacitor only:**
 
-Finally, open the `build.gradle` file for the `Module: android.app` and add the following lines to make sure the Intune App SDK Gradle plugin properly transforms these external libraries. Add any extra libraries your app uses that also need to be transformed:
+Open the `build.gradle` file for the `Module: android.app` and add the following lines to make sure the Intune App SDK Gradle plugin properly transforms these external libraries. Add any extra libraries your app uses that also need to be transformed:
 
 ```groovy
 apply plugin: 'com.microsoft.intune.mam'
@@ -77,6 +77,11 @@ dependencies {
     ...
     implementation files("../../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
 }
+```
+
+Open the `gradle.properties` file and adding the following line:
+```groovy
+android.enableResourceOptimizations=false
 ```
 
 ### Setting Android Manifest Configuration
