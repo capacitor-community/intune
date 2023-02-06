@@ -72,9 +72,9 @@ To enable Face ID support, add a description for `NSFaceIDUsageScription` also k
 
 ## 5. Update Target iOS Version
 
-The Intune App SDK only supports iOS 12.2 and above, make sure to set the Deployment target for your app to 12.2 or higher:
+The Intune App SDK supports iOS 13 and above, make sure to set the Deployment target for your app to 13 or higher (or 12.2 if you are using version 2.x of the plugin):
 
-[![iOS 12.2](/img/intune/ios-12.png)](/img/intune/ios-12.png)
+[![iOS 13](/img/intune/ios-13.png)](/img/intune/ios-13.png)
 
 ## 6. Disable Bitcode
 
