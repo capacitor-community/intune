@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus --openssl-legacy-provider build ",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider docusaurus build ",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -44,5 +44,8 @@
       "last 1 safari version"
     ]
   },
-  "prettier": "@ionic/prettier-config"
+  "prettier": "@ionic/prettier-config",
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
 }
