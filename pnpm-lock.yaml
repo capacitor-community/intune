@@ -14,10 +14,10 @@ importers:
 
   packages/intune:
     specifiers:
-      '@capacitor/android': '>=3.0.0'
-      '@capacitor/core': '>=3.0.0'
+      '@capacitor/android': '>=4.0.0'
+      '@capacitor/core': '>=4.0.0'
       '@capacitor/docgen': ^0.0.10
-      '@capacitor/ios': '>=3.0.0'
+      '@capacitor/ios': '>=4.0.0'
       '@ionic/eslint-config': ^0.3.0
       '@ionic/prettier-config': ^1.0.1
       '@ionic/swiftlint-config': ^1.1.2
@@ -15002,9 +15002,9 @@ packages:
     resolution: {directory: packages/intune, type: directory}
     id: file:packages/intune
     name: '@ionic-enterprise/intune'
-    version: 2.5.1
+    version: 3.0.2
     peerDependencies:
-      '@capacitor/core': '>=3.0.0'
+      '@capacitor/core': '>=4.0.0'
     dependencies:
       '@capacitor/core': 4.4.0
     dev: false
