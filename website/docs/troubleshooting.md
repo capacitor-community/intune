@@ -122,7 +122,7 @@ This can occur with the following scenarios:
 - The end user must belong to a security group that is targeted by an app protection policy. The same app protection policy must target the specific app being used. App protection policies can be created and deployed in the Intune console ([endpoint.microsoft.com](https://endpoint.microsoft.com/) > `Apps` > `App Protection Policies`).
 - The end user must sign into the app using their AAD account.
 
-## The operation could not be completed because the user is not licensed for MAM
+### The operation could not be completed because the user is not licensed for MAM
 
 This error will occur if the user has logged in with the correct credentials but their user has not been assigned a license for inTune.
 

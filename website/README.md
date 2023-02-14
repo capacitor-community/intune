@@ -2,5 +2,7 @@
 
 To start the development server:
 
-* `npm ci`
-* `npm start`
+- `cd website`
+- `npm install --legacy-peer-deps`
+- `nvm use 16` (To use Node 16 and avoid digital envelope error)
+- `npm start`
