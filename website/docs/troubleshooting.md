@@ -111,3 +111,19 @@ To fix the problem open this file and change the line:
 
 The full error is: `incompatible Gradle version detected. Use 7.1.3 or 7.2.2+. For details, see https://issuetracker.google.com/issues/232438924`
 This issue should be resolved in an upcoming version of Android Studio (Android Studio Dolphin 2021.3.1.11, yet to be released as of December 2022).
+
+## Client Side Errors
+
+### The account is licensed for intune but is not targeted with mam policy
+
+This can occur with the following scenarios:
+- The end user must have an Azure Active Directory (AAD) account. See Add users and give administrative permission to Intune to learn how to create Intune users in Azure Active Directory.
+- The end user must have a license for Microsoft Intune assigned to their Azure Active Directory account. See Manage Intune licenses to learn how to assign Intune licenses to end users.
+- The end user must belong to a security group that is targeted by an app protection policy. The same app protection policy must target the specific app being used. App protection policies can be created and deployed in the Intune console ([endpoint.microsoft.com](https://endpoint.microsoft.com/) > `Apps` > `App Protection Policies`).
+- The end user must sign into the app using their AAD account.
+
+## The operation could not be completed because the user is not licensed for MAM
+
+This error will occur if the user has logged in with the correct credentials but their user has not been assigned a license for inTune.
+
+You can assign a license to a user in [endpoint.microsoft.com](https://endpoint.microsoft.com/) > `Users` > Find the User > `Licenses`.
