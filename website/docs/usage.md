@@ -83,7 +83,8 @@ Then, on subsequent loads, the app should request a token silently using `acquir
 try {
   const tokenInfo = await IntuneMAM.acquireTokenSilent({
     scopes: ['https://graph.microsoft.com/.default'],
-    ...user,
+    upn: this.upn,
+    forceRefresh: false
   });
   setTokenInfo(tokenInfo);
 } catch {
@@ -94,6 +95,8 @@ try {
   setTokenInfo(tokenInfo);
 }
 ```
+
+Note: You can choose to set the `forceRefresh` property to `true` to force a new token to be obtained. The default `false` will return a cached token if the token has not expired.
 
 See the [Demo app](./demo-app) for an example of this flow.
 
