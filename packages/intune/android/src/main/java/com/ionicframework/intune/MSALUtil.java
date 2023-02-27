@@ -84,6 +84,8 @@ public final class MSALUtil {
    *         Scopes for the requested token.
    * @param callback
    *         callback to receive the result of the auth attempt.
+   * @param forceRefresh
+   *         force refreshing the token.   
    *
    * @throws MsalException
    *         MSAL error occurred.
@@ -92,7 +94,7 @@ public final class MSALUtil {
    */
   @WorkerThread
   public static void acquireTokenSilent(@NonNull final Context appContext, @NonNull final String aadId, @NonNull final String[] scopes,
-                                        @NonNull final AuthenticationCallback callback)
+                                        @NonNull final AuthenticationCallback callback,final boolean forceRefresh)
     throws MsalException, InterruptedException {
     initializeMsalClientApplication(appContext.getApplicationContext());
 
@@ -110,6 +112,16 @@ public final class MSALUtil {
       .withScopes(Arrays.asList(scopes))
       .withCallback(callback)
       .build();
+
+    if (forceRefresh) {
+      params = new AcquireTokenSilentParameters.Builder()
+        .forAccount(account)
+        .fromAuthority(account.getAuthority())
+        .withScopes(Arrays.asList(scopes))
+        .withCallback(callback)
+        .forceRefresh()
+        .build();
+    }
 
     mMsalClientApplication.acquireTokenSilentAsync(params);
   }

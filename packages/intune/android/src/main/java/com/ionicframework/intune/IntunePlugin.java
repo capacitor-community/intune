@@ -62,6 +62,7 @@ public class IntunePlugin extends Plugin {
     String upn = call.getString("upn");
 
     boolean forcePrompt = call.getBoolean("forcePrompt", false);
+    boolean forceRefresh = call.getBoolean("forceRefresh", false);
 
     String[] scopesArray = null;
 
@@ -84,7 +85,7 @@ public class IntunePlugin extends Plugin {
                 if (interactive) {
                   MSALUtil.acquireToken(getActivity(), scopes, null, forcePrompt, new AuthCallback());
                 } else {
-                  MSALUtil.acquireTokenSilent(getActivity(), upn, scopes, new AuthCallback());
+                  MSALUtil.acquireTokenSilent(getActivity(), upn, scopes, new AuthCallback(), forceRefresh);
                 }
               } catch (MsalException | InterruptedException e) {
                 Logger.error("Authentication exception occurred", e);
