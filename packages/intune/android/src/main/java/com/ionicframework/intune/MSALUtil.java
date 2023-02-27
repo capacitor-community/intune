@@ -111,17 +111,8 @@ public final class MSALUtil {
       .fromAuthority(account.getAuthority())
       .withScopes(Arrays.asList(scopes))
       .withCallback(callback)
+      .forceRefresh(forceRefresh)
       .build();
-
-    if (forceRefresh) {
-      params = new AcquireTokenSilentParameters.Builder()
-        .forAccount(account)
-        .fromAuthority(account.getAuthority())
-        .withScopes(Arrays.asList(scopes))
-        .withCallback(callback)
-        .forceRefresh()
-        .build();
-    }
 
     mMsalClientApplication.acquireTokenSilentAsync(params);
   }
