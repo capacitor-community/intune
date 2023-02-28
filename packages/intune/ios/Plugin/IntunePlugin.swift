@@ -76,6 +76,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
         }
         
         let forcePrompt = call.getBool("forcePrompt", false)
+        let forceRefresh = call.getBool("forceRefresh", false)
         
         guard let scopes = call.getArray("scopes") as? [String] else {
             call.reject("scopes not provided")
@@ -167,6 +168,9 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                             return
                         }
                         let silentParameters = MSALSilentTokenParameters(scopes: scopes, account: account)
+                        if forceRefresh {
+                            silentParameters.forceRefresh = true
+                        }
                         application.acquireTokenSilent(with: silentParameters, completionBlock: completionBlock)
                     }
                 } else {
