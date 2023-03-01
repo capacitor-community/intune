@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "@ionic-enterprise/intune": "3.0.3"
+  },
+  "changesets": [
+    "healthy-humans-invite"
+  ]
+}

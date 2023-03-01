@@ -1,5 +1,11 @@
 # @ionic-enterprise/intune
 
+## 3.1.0-next.0
+
+### Minor Changes
+
+- Add forceRefresh property to acquireTokenSilent
+
 ## 3.0.3
 
 ### Patch Changes
