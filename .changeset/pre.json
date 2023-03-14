@@ -5,6 +5,8 @@
     "@ionic-enterprise/intune": "3.0.3"
   },
   "changesets": [
+    "angry-rivers-pay",
+    "curly-cars-joke",
     "healthy-humans-invite"
   ]
 }

@@ -161,9 +161,10 @@ public class IntunePlugin extends Plugin {
 
     Thread thread = new Thread(
             () -> {
+              boolean didSignout = false;
               try {
                 MSALUtil.signOutAccount(getContext(), effectiveAccount.getAADID());
-                call.resolve();
+                didSignout = true;
               } catch (MsalException | InterruptedException e) {
                 call.reject("Unable to log user out", e);
                 Logger.error("Failed to sign out user " + effectiveAccount.getAADID(), e);
@@ -175,6 +176,10 @@ public class IntunePlugin extends Plugin {
               AppAccount.clearFromSettings(prefs);
 
               mUserAccount = null;
+
+              if (didSignout) {
+                call.resolve();
+              }
             }
     );
     thread.start();

@@ -1,5 +1,17 @@
 # @ionic-enterprise/intune
 
+## 3.1.0-next.2
+
+### Minor Changes
+
+- c48fdfa: deRegisterAndUnenrollAccount in Android will now await properly
+
+## 3.1.0-next.1
+
+### Minor Changes
+
+- Fix deRegisterAndUnenrollAccount not awaiting
+
 ## 3.1.0-next.0
 
 ### Minor Changes

@@ -33,12 +33,18 @@ class EnrollmentDelegateClass: NSObject, IntuneMAMEnrollmentDelegate {
      Logic for logout/token clearing is initiated here.
      */
     func unenrollRequest(with status: IntuneMAMEnrollmentStatus) {
-        // Go back to login page
-        print("EnrollmentDelegate - unenrollRequest")
-        
-        if status.didSucceed != true {
-            //In the case unenrollment failed, log error
-            print("EnrollmentDelegate - did not succeed")
+        if status.didSucceed {
+            //If unenrollment was successful, change from the current view (which should have been initialized with the class) to the desired page on the app (in this case ChatPage)
+            print("EnrollmentDelegate - unenrollmentRequest - did succeed")
+            if self.didSucceedCallback != nil {
+                self.didSucceedCallback!(true, "")
+            }
+        } else {
+            print("Unenrollment result for identity \(status.identity) with status code \(status.statusCode)")
+            print("Debug message: \(String(describing: status.errorString))")
+            if self.didSucceedCallback != nil {
+                self.didSucceedCallback!(false, String(describing: status.errorString))
+            }
         }
     }
 }

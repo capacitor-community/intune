@@ -207,7 +207,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
         // The delegate is not always called so we call deRegisterAndUnenrollAccount as a workaround
         // Example is when the user is not licensed for inTune
         // Maybe caused by this issue https://github.com/msintuneappsdk/ms-intune-app-sdk-ios/issues/178
-        IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccount(upn, withWipe: false)        
+        // IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccount(upn, withWipe: false)        
         IntuneMAMEnrollmentManager.instance().registerAndEnrollAccount(upn)
     }
     
@@ -257,6 +257,15 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
             }
         }
 
+        enrollmentDelegate = EnrollmentDelegateClass({ (didSucceed: Bool, message: String) -> Void in
+            if didSucceed {
+                call.resolve()
+            } else {
+                call.reject(message)
+            }
+            self.resetDelegate()
+        })
+        IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
         IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccount(upn, withWipe: true)
 
         DispatchQueue.main.async { [weak self] in
@@ -288,14 +297,10 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                     signoutParameters.signoutFromBrowser = false
 
                     application.signout(with: account, signoutParameters: signoutParameters) { (result, error) in
-                        if error == nil {
-                            call.resolve()
-                        } else {
+                        if error != nil {
                             call.reject("Unable to sign out", nil, error)
                         }
                     }
-                } else {
-                    call.resolve()
                 }
             }
         }
