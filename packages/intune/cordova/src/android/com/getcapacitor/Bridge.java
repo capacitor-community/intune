@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
-
 import com.getcapacitor.annotation.CapacitorPlugin;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +23,7 @@ public class Bridge {
     // Store a plugin that started a new activity, in case we need to resume
     // the app and return that data back
     private PluginCall pluginCallForLastActivity;
+
     /**
      * Create the Bridge with a reference to the main {@link Activity} for the
      * app
@@ -33,6 +32,7 @@ public class Bridge {
     public Bridge(Activity context) {
         this.context = context;
     }
+
     /**
      * Get a retained plugin call
      * @param callbackId the callbackId to use to lookup the call with
@@ -51,9 +51,13 @@ public class Bridge {
      * Get the activity for the app
      * @return
      */
-    public Activity getActivity() { return this.context; }
+    public Activity getActivity() {
+        return this.context;
+    }
 
-    public Context getContext() {return this.context.getApplicationContext();}
+    public Context getContext() {
+        return this.context.getApplicationContext();
+    }
 
     /**
      * Release a retained call
@@ -94,11 +98,13 @@ public class Bridge {
         try {
             this.plugins.put(pluginId, new PluginHandle(this, pluginInstance));
         } catch (Exception ex) {
-            Log.e("Bridge", "CapacitorPlugin " + pluginClass.getName() +
-                    " is invalid. Ensure the @CapacitorPlugin annotation exists on the plugin class and" +
-                    " the class extends Plugin");
+            Log.e(
+                "Bridge",
+                "CapacitorPlugin " +
+                pluginClass.getName() +
+                " is invalid. Ensure the @CapacitorPlugin annotation exists on the plugin class and" +
+                " the class extends Plugin"
+            );
         }
     }
-
-
 }

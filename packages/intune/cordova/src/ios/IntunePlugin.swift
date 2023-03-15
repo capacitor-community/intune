@@ -4,14 +4,14 @@ import MSAL
 
 @objc(IntuneMAM)
 public class IntuneMAM: CAPPlugin {
-    let enrollmentDelegate = EnrollmentDelegateClass()
-    let policyDelegate = PolicyDelegateClass()
+    weak var enrollmentDelegate = EnrollmentDelegateClass()
+    weak var policyDelegate = PolicyDelegateClass()
 
     func createCall(_ command: CDVInvokedUrlCommand) -> CAPPluginCall {
         let capcall = CAPPluginCall()
-        capcall.options = command.arguments.count > 0 ? command.arguments[0] as? [AnyHashable : Any] : [:]
+        capcall.options = command.arguments.count > 0 ? command.arguments[0] as? [AnyHashable: Any] : [:]
         if capcall.options == nil {
-            capcall.options = [AnyHashable : Any]()
+            capcall.options = [AnyHashable: Any]()
         }
         let commandDelegate = self.commandDelegate
         let callbackId = command.callbackId
@@ -26,7 +26,7 @@ public class IntuneMAM: CAPPlugin {
                 callbackId: callbackId
             )
         }
-        capcall.successHandler = { (result: CAPPluginCallResult?, call: CAPPluginCall?) in
+        capcall.successHandler = { (result: CAPPluginCallResult?, _: CAPPluginCall?) in
             let pluginResult = CDVPluginResult(
                 status: CDVCommandStatus_OK,
                 messageAs: result?.data
@@ -43,13 +43,13 @@ public class IntuneMAM: CAPPlugin {
         print("IntuneMAM Loading")
         IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
         IntuneMAMPolicyManager.instance().delegate = policyDelegate
-        //register for the IntuneMAMAppConfigDidChange notification
+        // register for the IntuneMAMAppConfigDidChange notification
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(onIntuneMAMAppConfigDidChange),
                                                name: NSNotification.Name.IntuneMAMAppConfigDidChange,
                                                object: IntuneMAMAppConfigManager.instance())
 
-        //register for the IntuneMAMPolicyDidChange notification
+        // register for the IntuneMAMPolicyDidChange notification
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(onIntuneMAMPolicyDidChange),
                                                name: NSNotification.Name.IntuneMAMPolicyDidChange,
@@ -84,7 +84,7 @@ public class IntuneMAM: CAPPlugin {
             return
         }
 
-        guard let intuneSettings = Bundle.main.object(forInfoDictionaryKey: "IntuneMAMSettings") as? [AnyHashable:AnyHashable] else {
+        guard let intuneSettings = Bundle.main.object(forInfoDictionaryKey: "IntuneMAMSettings") as? [AnyHashable: AnyHashable] else {
             call.reject("IntuneMAMSettings must be set in Info.plist to use this method. See https://docs.microsoft.com/en-us/mem/intune/developer/app-sdk-ios#configure-msal-settings-for-the-intune-app-sdk")
             return
         }
@@ -97,14 +97,12 @@ public class IntuneMAM: CAPPlugin {
         let redirectUri = intuneSettings["ADALRedirectUri"] as? String
         let authorityUriValue = intuneSettings["ADALAuthority"] as? String
 
-
         var authority: MSALAuthority?
         if let authorityUri = authorityUriValue {
             if let u = URL(string: authorityUri) {
                 authority = try? MSALAuthority(url: u)
             }
         }
-
 
         DispatchQueue.main.async { [weak self] in
             do {
@@ -123,8 +121,6 @@ public class IntuneMAM: CAPPlugin {
                     }
                     let viewController = self.viewController!
                     let webviewParameters = MSALWebviewParameters(authPresentationViewController: viewController)
-
-
 
                     let completionBlock: MSALCompletionBlock = { (result, error) in
 
@@ -152,7 +148,7 @@ public class IntuneMAM: CAPPlugin {
                         ])
                     }
 
-                    if (interactive) {
+                    if interactive {
                         let interactiveParameters = MSALInteractiveTokenParameters(scopes: scopes, webviewParameters: webviewParameters)
                         if forcePrompt {
                             interactiveParameters.promptType = .login
@@ -172,7 +168,6 @@ public class IntuneMAM: CAPPlugin {
             }
         }
     }
-
 
     @objc public func acquireToken(_ command: CDVInvokedUrlCommand) {
         _acquireToken(createCall(command), interactive: true)
@@ -217,7 +212,7 @@ public class IntuneMAM: CAPPlugin {
             return
         }
 
-        guard let intuneSettings = Bundle.main.object(forInfoDictionaryKey: "IntuneMAMSettings") as? [AnyHashable:AnyHashable] else {
+        guard let intuneSettings = Bundle.main.object(forInfoDictionaryKey: "IntuneMAMSettings") as? [AnyHashable: AnyHashable] else {
             call.reject("IntuneMAMSettings must be set in Info.plist to use this method. See https://docs.microsoft.com/en-us/mem/intune/developer/app-sdk-ios#configure-msal-settings-for-the-intune-app-sdk")
             return
         }
@@ -266,7 +261,7 @@ public class IntuneMAM: CAPPlugin {
                     let signoutParameters = MSALSignoutParameters(webviewParameters: webviewParameters)
                     signoutParameters.signoutFromBrowser = false
 
-                    application.signout(with: account, signoutParameters: signoutParameters) { (result, error) in
+                    application.signout(with: account, signoutParameters: signoutParameters) { (_, error) in
                         if error == nil {
                             call.resolve()
                         } else {
@@ -301,7 +296,7 @@ public class IntuneMAM: CAPPlugin {
         }
 
         call.resolve([
-          "fullData": data.fullData as Any
+            "fullData": data.fullData as Any
         ])
     }
 
@@ -328,7 +323,7 @@ public class IntuneMAM: CAPPlugin {
         }
 
         call.resolve([
-          "value": groupName ?? ""
+            "value": groupName ?? ""
         ])
     }
 

@@ -10,6 +10,7 @@ CAP_PLUGIN(IntuneMAM, "IntuneMAM",
   CAP_PLUGIN_METHOD(registerAndEnrollAccount, CAPPluginReturnPromise);
   CAP_PLUGIN_METHOD(enrolledAccount, CAPPluginReturnPromise);
   CAP_PLUGIN_METHOD(deRegisterAndUnenrollAccount, CAPPluginReturnPromise);
+  CAP_PLUGIN_METHOD(logoutOfAccount, CAPPluginReturnPromise);
   CAP_PLUGIN_METHOD(getPolicy, CAPPluginReturnPromise);
   CAP_PLUGIN_METHOD(groupName, CAPPluginReturnPromise);
   CAP_PLUGIN_METHOD(appConfig, CAPPluginReturnPromise);

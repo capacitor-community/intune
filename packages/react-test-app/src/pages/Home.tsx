@@ -1,7 +1,6 @@
 import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonViewWillEnter } from '@ionic/react';
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import ExploreContainer from '../components/ExploreContainer';
 import IntuneMAM, { IntuneMAMAppConfig, IntuneMAMGroupName, IntuneMAMPolicy, IntuneMAMUser, IntuneMAMVersionInfo } from '../IntuneMAM';
 import './Home.css';
 
@@ -50,7 +49,8 @@ const Home: React.FC = () => {
 
   const logout = useCallback(async () => {
     if (user) {
-      await IntuneMAM.deRegisterAndUnenrollAccount(user);
+      // await IntuneMAM.deRegisterAndUnenrollAccount(user);
+      await IntuneMAM.logoutOfAccount(user);
     }
     history.replace('/');
   }, [user]);

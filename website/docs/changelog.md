@@ -4,6 +4,12 @@ sidebar_label: Changelog
 ---
 
 
+## 3.1.0-next.3
+
+### Minor Changes
+
+- dcb4500: Add logoutOfAccount() for MSAL signout only funcionality
+
 ## 3.1.0-next.2
 
 ### Minor Changes

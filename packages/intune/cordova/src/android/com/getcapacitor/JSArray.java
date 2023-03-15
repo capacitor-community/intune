@@ -1,11 +1,10 @@
 package com.getcapacitor;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class JSArray extends JSONArray {
 

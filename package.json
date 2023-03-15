@@ -10,7 +10,8 @@
     "packages/intune"
   ],
   "scripts": {
-    "build": "nx run-many --target=build"
+    "build": "nx run-many --target=build",
+    "fmt": "nx run-many --target=fmt"
   },
   "volta": {
     "node": "16.13.2",

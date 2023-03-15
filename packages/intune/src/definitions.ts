@@ -1,10 +1,10 @@
-import { PluginListenerHandle } from '@capacitor/core';
+import type { PluginListenerHandle } from '@capacitor/core';
 
 export interface IntuneMAMAcquireTokenOptions {
   scopes: string[];
   /**
    * Whether to force the user to enter their password each time they authenticate.
-   * 
+   *
    * Default: false
    */
   forcePrompt?: boolean;
@@ -16,7 +16,7 @@ export interface IntuneMAMAcquireTokenSilentOptions
 
   /**
    * Whether to force the tokens to be refresh regardless of whether the cached token is expired or not.
-   * 
+   *
    * Default: false
    */
   forceRefresh?: boolean;
@@ -79,6 +79,7 @@ export interface IntuneMAMPlugin {
   getPolicy: (user: IntuneMAMUser) => Promise<IntuneMAMPolicy>;
   sdkVersion: () => Promise<IntuneMAMVersionInfo>;
   displayDiagnosticConsole: () => Promise<void>;
+  logoutOfAccount: (user: IntuneMAMUser) => Promise<void>;
 
   // Events
   addListener(

@@ -37,6 +37,7 @@ interface IntuneMAMPlugin {
   getPolicy: (user: IntuneMAMUser) => Promise<IntuneMAMPolicy>;
   sdkVersion: () => Promise<IntuneMAMVersionInfo>;
   displayDiagnosticConsole: () => Promise<void>;
+  logoutOfAccount: (user: IntuneMAMUser) => Promise<void>;
 
   // Events
   addListener(

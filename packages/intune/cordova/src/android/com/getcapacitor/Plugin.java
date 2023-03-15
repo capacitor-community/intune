@@ -7,26 +7,21 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
-
 import androidx.core.app.ActivityCompat;
-
-import org.json.JSONException;
-import org.json.JSONArray;
-
+import com.getcapacitor.annotation.CapacitorPlugin;
+import com.getcapacitor.annotation.Permission;
+import com.getcapacitor.util.PermissionHelper;
+import com.ionicframework.intune.IntunePlugin;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
-
-import com.getcapacitor.annotation.CapacitorPlugin;
-import com.getcapacitor.annotation.Permission;
-import com.getcapacitor.util.PermissionHelper;
-import com.ionicframework.intune.IntunePlugin;
-
+import org.apache.cordova.CordovaPlugin;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class Plugin extends CordovaPlugin {
 
@@ -65,7 +60,6 @@ public class Plugin extends CordovaPlugin {
         // bridge.registerPlugin(Filesystem.class);
     }
 
-
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         this.handle = bridge.getPlugin(getClass().getSimpleName());
@@ -80,10 +74,7 @@ public class Plugin extends CordovaPlugin {
             Method pluginMethod = this.getClass().getMethod(action, PluginCall.class);
             pluginMethod.invoke(this, call);
             return true;
-        }
-        catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
         return false;
     }
 
@@ -97,13 +88,17 @@ public class Plugin extends CordovaPlugin {
      * Get the main {@link Context} for the current Activity (your app)
      * @return the Context for the current activity
      */
-    public Context getContext() { return bridge.getActivity(); }
+    public Context getContext() {
+        return bridge.getActivity();
+    }
 
     /**
      * Get the main {@link Activity} for the app
      * @return the Activity for the current app
      */
-    public Activity getActivity() { return bridge.getActivity(); }
+    public Activity getActivity() {
+        return bridge.getActivity();
+    }
 
     /**
      * Set the Bridge instance for this plugin
@@ -116,7 +111,9 @@ public class Plugin extends CordovaPlugin {
     /**
      * Get the Bridge instance for this plugin
      */
-    public Bridge getBridge() { return this.bridge; }
+    public Bridge getBridge() {
+        return this.bridge;
+    }
 
     /**
      * Set the wrapper {@link PluginHandle} instance for this plugin that
@@ -135,7 +132,9 @@ public class Plugin extends CordovaPlugin {
      * such as indexed methods for reflection, and {@link CapacitorPlugin} annotation data).
      * @return
      */
-    public PluginHandle getPluginHandle() { return this.handle; }
+    public PluginHandle getPluginHandle() {
+        return this.handle;
+    }
 
     /**
      * Get the root App ID
@@ -172,21 +171,19 @@ public class Plugin extends CordovaPlugin {
         return this.savedLastCall;
     }
 
-
     /**
      * Given a list of permissions, return a new list with the ones not present in AndroidManifest.xml
      * @param neededPermissions
      * @return
      */
     public String[] getUndefinedPermissions(String[] neededPermissions) {
-        ArrayList<String> undefinedPermissions =  new ArrayList<String>();
+        ArrayList<String> undefinedPermissions = new ArrayList<String>();
         String[] requestedPermissions = getManifestPermissions();
-        if (requestedPermissions != null && requestedPermissions.length > 0)
-        {
+        if (requestedPermissions != null && requestedPermissions.length > 0) {
             List<String> requestedPermissionsList = Arrays.asList(requestedPermissions);
             ArrayList<String> requestedPermissionsArrayList = new ArrayList<String>();
             requestedPermissionsArrayList.addAll(requestedPermissionsList);
-            for (String permission: neededPermissions) {
+            for (String permission : neededPermissions) {
                 if (!requestedPermissionsArrayList.contains(permission)) {
                     undefinedPermissions.add(permission);
                 }
@@ -207,8 +204,7 @@ public class Plugin extends CordovaPlugin {
     public boolean hasDefinedPermission(String permission) {
         boolean hasPermission = false;
         String[] requestedPermissions = getManifestPermissions();
-        if (requestedPermissions != null && requestedPermissions.length > 0)
-        {
+        if (requestedPermissions != null && requestedPermissions.length > 0) {
             List<String> requestedPermissionsList = Arrays.asList(requestedPermissions);
             ArrayList<String> requestedPermissionsArrayList = new ArrayList<String>();
             requestedPermissionsArrayList.addAll(requestedPermissionsList);
@@ -223,7 +219,7 @@ public class Plugin extends CordovaPlugin {
      * Get the permissions defined in AndroidManifest.xml
      * @return
      */
-    private String[] getManifestPermissions(){
+    private String[] getManifestPermissions() {
         String[] requestedPermissions = null;
         try {
             PackageManager pm = getContext().getPackageManager();
@@ -232,9 +228,7 @@ public class Plugin extends CordovaPlugin {
             if (packageInfo != null) {
                 requestedPermissions = packageInfo.requestedPermissions;
             }
-        } catch (Exception ex) {
-
-        }
+        } catch (Exception ex) {}
         return requestedPermissions;
     }
 
@@ -244,8 +238,8 @@ public class Plugin extends CordovaPlugin {
      * @return
      */
     public boolean hasDefinedPermissions(String[] permissions) {
-        for (String permission: permissions) {
-            if (!hasDefinedPermission(permission)){
+        for (String permission : permissions) {
+            if (!hasDefinedPermission(permission)) {
                 return false;
             }
         }
@@ -327,7 +321,7 @@ public class Plugin extends CordovaPlugin {
     }
 
     @Override
-    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults){
+    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
         this.handleRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
@@ -381,7 +375,7 @@ public class Plugin extends CordovaPlugin {
             return;
         }
 
-        for(PluginCall call : listeners) {
+        for (PluginCall call : listeners) {
             call.success(data);
         }
     }
@@ -423,13 +417,12 @@ public class Plugin extends CordovaPlugin {
         retainedEventArguments.remove(eventName);
     }
 
-
     /**
      * Exported plugin call for adding a listener to this plugin
      * @param call
      */
     @SuppressWarnings("unused")
-    @PluginMethod(returnType=PluginMethod.RETURN_NONE)
+    @PluginMethod(returnType = PluginMethod.RETURN_NONE)
     public void addListener(PluginCall call) {
         String eventName = call.getString("eventName");
         call.save();
@@ -441,7 +434,7 @@ public class Plugin extends CordovaPlugin {
      * @param call
      */
     @SuppressWarnings("unused")
-    @PluginMethod(returnType=PluginMethod.RETURN_NONE)
+    @PluginMethod(returnType = PluginMethod.RETURN_NONE)
     public void removeListener(PluginCall call) {
         String eventName = call.getString("eventName");
         String callbackId = call.getString("callbackId");
@@ -457,7 +450,7 @@ public class Plugin extends CordovaPlugin {
      * @param call
      */
     @SuppressWarnings("unused")
-    @PluginMethod()
+    @PluginMethod
     public void requestPermissions(PluginCall call) {
         // Should be overridden, does nothing by default
         CapacitorPlugin annotation = this.handle.getPluginAnnotation();
@@ -474,7 +467,6 @@ public class Plugin extends CordovaPlugin {
         }
     }
 
-
     /**
      * Handle request permissions result. A plugin can override this to handle the result
      * themselves, or this method will handle the result for our convenient requestPermissions
@@ -488,7 +480,7 @@ public class Plugin extends CordovaPlugin {
             StringBuilder builder = new StringBuilder();
             builder.append("Missing the following permissions in AndroidManifest.xml:\n");
             String[] missing = getUndefinedPermissions(permissions);
-            for (String perm: missing) {
+            for (String perm : missing) {
                 builder.append(perm + "\n");
             }
             savedLastCall.error(builder.toString());
@@ -529,8 +521,7 @@ public class Plugin extends CordovaPlugin {
      * method will be called to allow the plugin to restore from that.
      * @param state
      */
-    protected void restoreState(Bundle state) {
-    }
+    protected void restoreState(Bundle state) {}
 
     /**
      * Handle activity result, should be overridden by each plugin

@@ -136,6 +136,16 @@ await IntuneMAM.deRegisterAndUnenrollAccount(user);
 
 Note: On successful un-enrollment the application will close on iOS.
 
+## Sign out using MSAL
+
+To sign a user out using MSAL:
+
+```typescript
+await IntuneMAM.logoutOfAccount(user);
+```
+
+Note: Unlike `deRegisterAndUnenrollAccount` this method does not wipe app data nor close the application on iOS.
+
 ## Load App Config
 
 Access the remote app configuration:

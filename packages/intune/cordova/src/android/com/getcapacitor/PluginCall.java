@@ -1,20 +1,19 @@
 package com.getcapacitor;
 
 import android.util.Log;
-
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-import org.apache.cordova.PluginResult;
-import org.apache.cordova.CallbackContext;
 
 /**
  * Wraps a call from the web layer to native
  */
 public class PluginCall {
+
     /**
      * A special callback id that indicates there is no matching callback
      * on the client to associate any PluginCall results back to. This is used
@@ -53,7 +52,6 @@ public class PluginCall {
         this.msgHandler.sendPluginResult(successResult);
     }
 
-
     public void success(JSObject data) {
         PluginResult result = new PluginResult(PluginResult.Status.OK, data);
         this.msgHandler.sendPluginResult(result);
@@ -80,7 +78,7 @@ public class PluginCall {
     public void error(String msg, Exception ex) {
         PluginResult errorResult = new PluginResult(PluginResult.Status.ERROR, msg);
 
-        if(ex != null) {
+        if (ex != null) {
             Log.e("PluginEx", msg, ex);
         }
 
@@ -107,13 +105,17 @@ public class PluginCall {
         error(UNAVAILABLE, null);
     }
 
-    public String getPluginId() { return this.pluginId; }
+    public String getPluginId() {
+        return this.pluginId;
+    }
 
     public String getCallbackId() {
         return this.callbackId;
     }
 
-    public String getMethodName() { return this.methodName; }
+    public String getMethodName() {
+        return this.methodName;
+    }
 
     public JSObject getData() {
         return this.data;
@@ -122,11 +124,14 @@ public class PluginCall {
     public String getString(String name) {
         return this.getString(name, null);
     }
+
     public String getString(String name, String defaultValue) {
         Object value = this.data.opt(name);
-        if(value == null) { return defaultValue; }
+        if (value == null) {
+            return defaultValue;
+        }
 
-        if(value instanceof String) {
+        if (value instanceof String) {
             return (String) value;
         }
         return defaultValue;
@@ -135,11 +140,14 @@ public class PluginCall {
     public Integer getInt(String name) {
         return this.getInt(name, null);
     }
+
     public Integer getInt(String name, Integer defaultValue) {
         Object value = this.data.opt(name);
-        if(value == null) { return defaultValue; }
+        if (value == null) {
+            return defaultValue;
+        }
 
-        if(value instanceof Integer) {
+        if (value instanceof Integer) {
             return (Integer) value;
         }
         return defaultValue;
@@ -148,11 +156,14 @@ public class PluginCall {
     public Float getFloat(String name) {
         return this.getFloat(name, null);
     }
+
     public Float getFloat(String name, Float defaultValue) {
         Object value = this.data.opt(name);
-        if(value == null) { return defaultValue; }
+        if (value == null) {
+            return defaultValue;
+        }
 
-        if(value instanceof Float) {
+        if (value instanceof Float) {
             return (Float) value;
         }
         return defaultValue;
@@ -161,11 +172,14 @@ public class PluginCall {
     public Double getDouble(String name) {
         return this.getDouble(name, null);
     }
+
     public Double getDouble(String name, Double defaultValue) {
         Object value = this.data.opt(name);
-        if(value == null) { return defaultValue; }
+        if (value == null) {
+            return defaultValue;
+        }
 
-        if(value instanceof Double) {
+        if (value instanceof Double) {
             return (Double) value;
         }
         return defaultValue;
@@ -174,11 +188,14 @@ public class PluginCall {
     public Boolean getBoolean(String name) {
         return this.getBoolean(name, null);
     }
+
     public Boolean getBoolean(String name, Boolean defaultValue) {
         Object value = this.data.opt(name);
-        if(value == null) { return defaultValue; }
+        if (value == null) {
+            return defaultValue;
+        }
 
-        if(value instanceof Boolean) {
+        if (value instanceof Boolean) {
             return (Boolean) value;
         }
         return defaultValue;
@@ -190,9 +207,11 @@ public class PluginCall {
 
     public JSObject getObject(String name, JSObject defaultValue) {
         Object value = this.data.opt(name);
-        if(value == null) { return defaultValue; }
+        if (value == null) {
+            return defaultValue;
+        }
 
-        if(value instanceof JSONObject) {
+        if (value instanceof JSONObject) {
             try {
                 return JSObject.fromJSONObject((JSONObject) value);
             } catch (JSONException ex) {
@@ -214,9 +233,11 @@ public class PluginCall {
      */
     public JSArray getArray(String name, JSArray defaultValue) {
         Object value = this.data.opt(name);
-        if(value == null) { return defaultValue; }
+        if (value == null) {
+            return defaultValue;
+        }
 
-        if(value instanceof JSONArray) {
+        if (value instanceof JSONArray) {
             try {
                 JSONArray valueArray = (JSONArray) value;
                 List<Object> items = new ArrayList<>();
@@ -224,7 +245,7 @@ public class PluginCall {
                     items.add(valueArray.get(i));
                 }
                 return new JSArray(items.toArray());
-            } catch(JSONException ex) {
+            } catch (JSONException ex) {
                 return defaultValue;
             }
         }
@@ -259,6 +280,9 @@ public class PluginCall {
     }
 
     class PluginCallDataTypeException extends Exception {
-        PluginCallDataTypeException(String m) { super(m); }
+
+        PluginCallDataTypeException(String m) {
+            super(m);
+        }
     }
 }

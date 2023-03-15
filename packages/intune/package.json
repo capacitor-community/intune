@@ -1,6 +1,6 @@
 {
   "name": "@ionic-enterprise/intune",
-  "version": "3.1.0-next.2",
+  "version": "3.1.0-next.3",
   "description": "Support for Microsoft Intune",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -71,7 +71,6 @@
   "peerDependencies": {
     "@capacitor/core": ">=4.0.0"
   },
-  "prettier": "@ionic/prettier-config",
   "swiftlint": "@ionic/swiftlint-config",
   "eslintConfig": {
     "extends": "@ionic/eslint-config/recommended"

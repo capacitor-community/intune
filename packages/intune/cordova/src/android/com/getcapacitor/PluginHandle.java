@@ -1,7 +1,6 @@
 package com.getcapacitor;
 
 import com.getcapacitor.annotation.CapacitorPlugin;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -13,6 +12,7 @@ import java.util.Map;
  * and indexed. Think of it as a Plugin instance with extra metadata goodies
  */
 public class PluginHandle {
+
     private final Bridge bridge;
     private final Class<? extends Plugin> pluginClass;
 
@@ -59,7 +59,11 @@ public class PluginHandle {
     public String getId() {
         return this.pluginId;
     }
-    public CapacitorPlugin getPluginAnnotation() { return this.pluginAnnotation; }
+
+    public CapacitorPlugin getPluginAnnotation() {
+        return this.pluginAnnotation;
+    }
+
     public Plugin getInstance() {
         return this.instance;
     }
@@ -69,7 +73,7 @@ public class PluginHandle {
     }
 
     public Plugin load() throws Exception {
-        if(this.instance != null) {
+        if (this.instance != null) {
             return this.instance;
         }
 
@@ -84,19 +88,19 @@ public class PluginHandle {
      * @throws Exception if no method was found on that plugin
      */
     public void invoke(String methodName, PluginCall call) throws Exception {
-        if(this.instance == null) {
+        if (this.instance == null) {
             // Can throw PluginLoadException
             this.load();
         }
 
         PluginMethodHandle methodMeta = pluginMethods.get(methodName);
-        if(methodMeta == null) {
+        if (methodMeta == null) {
             throw new Exception("No method " + methodName + " found for plugin " + pluginClass.getName());
         }
 
         try {
             methodMeta.getMethod().invoke(this.instance, call);
-        } catch(InvocationTargetException | IllegalAccessException ex) {
+        } catch (InvocationTargetException | IllegalAccessException ex) {
             throw new Exception("Unable to invoke method " + methodName + " on plugin " + pluginClass.getName(), ex);
         }
     }
@@ -109,10 +113,10 @@ public class PluginHandle {
         //Method[] methods = pluginClass.getDeclaredMethods();
         Method[] methods = pluginClass.getMethods();
 
-        for(Method methodReflect: methods) {
+        for (Method methodReflect : methods) {
             PluginMethod method = methodReflect.getAnnotation(PluginMethod.class);
 
-            if(method == null) {
+            if (method == null) {
                 continue;
             }
 
