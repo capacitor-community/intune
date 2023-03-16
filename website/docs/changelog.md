@@ -4,6 +4,12 @@ sidebar_label: Changelog
 ---
 
 
+## 3.1.0-next.4
+
+### Patch Changes
+
+- fix signout closing app on android
+
 ## 3.1.0-next.3
 
 ### Minor Changes
