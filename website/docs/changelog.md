@@ -4,11 +4,14 @@ sidebar_label: Changelog
 ---
 
 
-## 3.1.0-next.4
+## 3.1.0
 
-### Patch Changes
+### Minor Changes
 
-- fix signout closing app on android
+- 86f138f: Fix deRegisterAndUnenrollAccount not awaiting
+- 86f138f: deRegisterAndUnenrollAccount in Android will now await properly
+- 9cbaf1b: Add forceRefresh property to acquireTokenSilent
+- abff059: Add logoutOfAccount() for MSAL signout only funcionality
 
 ## 3.1.0-next.3
 
