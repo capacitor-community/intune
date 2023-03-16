@@ -1,5 +1,14 @@
 # @ionic-enterprise/intune
 
+## 3.1.0
+
+### Minor Changes
+
+- 86f138f: Fix deRegisterAndUnenrollAccount not awaiting
+- 86f138f: deRegisterAndUnenrollAccount in Android will now await properly
+- 9cbaf1b: Add forceRefresh property to acquireTokenSilent
+- abff059: Add logoutOfAccount() for MSAL signout only funcionality
+
 ## 3.1.0-next.3
 
 ### Minor Changes
