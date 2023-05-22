@@ -14,5 +14,6 @@ module.exports = {
     'troubleshooting',
     'sdk-versions',
     'changelog',
+    'support-policy'
   ],
 };
