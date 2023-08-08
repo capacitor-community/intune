@@ -4,6 +4,12 @@ sidebar_label: Changelog
 ---
 
 
+## 3.1.1
+
+### Patch Changes
+
+- a862edc: change dependency scope so library classes can be referenced from app projects
+
 ## 3.1.0
 
 ### Minor Changes
