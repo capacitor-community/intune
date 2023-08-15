@@ -53,8 +53,8 @@ jobs:
 
     - uses: actions/setup-java@v2
       with:
-        distribution: 'zulu' # See 'Supported distributions' for available options
-        java-version: '11'
+        distribution: 'temurin' # See 'Supported distributions' for available options
+        java-version: '17'
 
     - name: Build test app for Android
       run: |

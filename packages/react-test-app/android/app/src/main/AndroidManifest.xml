@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.ionic.starter">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <queries>
         <package android:name="com.azure.authenticator" />
@@ -20,7 +19,6 @@
         </intent>
     </queries>
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,15 +27,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name="com.ionicframework.intune.IntuneApplication"
-      >
+    >
 
         <activity
-            android:exported="true"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
-            android:name="io.ionic.starter.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBarLaunch"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,7 +44,6 @@
 
         </activity>
 
-        <!-- Must be specified to allow users to login via MSAL -->
         <activity
             android:exported="true"
  android:name="com.microsoft.identity.client.BrowserTabActivity">
@@ -68,11 +65,11 @@
                 -->
                 <data
                     android:host="io.ionic.starter"
-                    android:path="/uHU+Ui09K1zPjWX4mZFggrgz+rk="
+                    android:path="/CcmgE4vQbAkTDuBbVgtwBSspSLk="
                     android:scheme="msauth" />
             </intent-filter>
         </activity>
-          <!--
+        <!--
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

@@ -7,6 +7,10 @@ public class IntuneMAM: CAPPlugin {
     weak var enrollmentDelegate = EnrollmentDelegateClass()
     weak var policyDelegate = PolicyDelegateClass()
 
+    private func resetDelegate() {
+        IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass()
+    }
+
     func createCall(_ command: CDVInvokedUrlCommand) -> CAPPluginCall {
         let capcall = CAPPluginCall()
         capcall.options = command.arguments.count > 0 ? command.arguments[0] as? [AnyHashable: Any] : [:]
@@ -77,7 +81,7 @@ public class IntuneMAM: CAPPlugin {
             return
         }
 
-        let forcePrompt = call.getBool("forcePrompt", false)
+        let forcePrompt = call.getBool("forcePrompt", false) as! Bool
 
         guard let scopes = call.getArray("scopes", String.self) else {
             call.reject("scopes not provided")
@@ -184,6 +188,18 @@ public class IntuneMAM: CAPPlugin {
             return
         }
 
+        IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass() { (didSucceed: Bool, message: String) in
+            if didSucceed {
+                call.resolve()
+            } else {
+                call.reject(message)
+            }
+            self.resetDelegate()
+        }
+        // The delegate is not always called so we call deRegisterAndUnenrollAccount as a workaround
+        // Example is when the user is not licensed for inTune
+        // Maybe caused by this issue https://github.com/msintuneappsdk/ms-intune-app-sdk-ios/issues/178
+        // IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccount(upn, withWipe: true)
         IntuneMAMEnrollmentManager.instance().registerAndEnrollAccount(upn)
 
         call.resolve()
@@ -191,9 +207,15 @@ public class IntuneMAM: CAPPlugin {
 
     @objc public func loginAndEnrollAccount(_ command: CDVInvokedUrlCommand) {
         let call = createCall(command)
+        IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass() { (didSucceed: Bool, message: String) in
+            if didSucceed {
+                call.resolve()
+            } else {
+                call.reject(message)
+            }
+            self.resetDelegate()
+        }
         IntuneMAMEnrollmentManager.instance().loginAndEnrollAccount(nil)
-
-        call.resolve()
     }
 
     @objc public func enrolledAccount(_ command: CDVInvokedUrlCommand) {
@@ -231,7 +253,83 @@ public class IntuneMAM: CAPPlugin {
             }
         }
 
+        IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass() { (didSucceed: Bool, message: String) in
+            if didSucceed {
+                call.resolve()
+            } else {
+                call.reject(message)
+            }
+            self.resetDelegate()
+        }
         IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccount(upn, withWipe: true)
+
+        DispatchQueue.main.async { [weak self] in
+            do {
+
+                var config: MSALPublicClientApplicationConfig?
+
+                if redirectUri != nil {
+                    config = MSALPublicClientApplicationConfig(clientId: clientId, redirectUri: redirectUri, authority: authority)
+                } else {
+                    config = MSALPublicClientApplicationConfig(clientId: clientId)
+                }
+
+                config?.clientApplicationCapabilities = ["ProtApp"]
+                if let application = try? MSALPublicClientApplication(configuration: config!) {
+                    guard let self = self else {
+                        call.reject("No self")
+                        return
+                    }
+
+                    guard let account = try? application.account(forUsername: upn) else {
+                        call.reject("Unable to find account to refresh, must call acquireToken for interactive flow")
+                        return
+                    }
+                    let viewController = self.viewController!
+                    let webviewParameters = MSALWebviewParameters(authPresentationViewController: viewController)
+
+                    let signoutParameters = MSALSignoutParameters(webviewParameters: webviewParameters)
+                    signoutParameters.signoutFromBrowser = false
+
+                    application.signout(with: account, signoutParameters: signoutParameters) { (_, error) in
+                        if error == nil {
+                            call.resolve()
+                        } else {
+                            call.reject("Unable to sign out", nil, ["error": error!])
+                        }
+                    }
+                } else {
+                    call.resolve()
+                }
+            }
+        }
+    }
+
+    @objc public func logoutOfAccount(_ command: CDVInvokedUrlCommand) {
+        let call = createCall(command)
+        guard let upn = call.getString("upn") else {
+            call.reject("No upn provided")
+            return
+        }
+
+        guard let intuneSettings = Bundle.main.object(forInfoDictionaryKey: "IntuneMAMSettings") as? [AnyHashable: AnyHashable] else {
+            call.reject("IntuneMAMSettings must be set in Info.plist to use this method. See https://docs.microsoft.com/en-us/mem/intune/developer/app-sdk-ios#configure-msal-settings-for-the-intune-app-sdk")
+            return
+        }
+
+        guard let clientId = intuneSettings["ADALClientId"] as? String else {
+            call.reject("ADALClientId must be specified in IntuneMAMSettings in Info.plist")
+            return
+        }
+
+        let redirectUri = intuneSettings["ADALRedirectUri"] as? String
+        let authorityUriValue = intuneSettings["ADALAuthority"] as? String
+        var authority: MSALAuthority?
+        if let authorityUri = authorityUriValue {
+            if let u = URL(string: authorityUri) {
+                authority = try? MSALAuthority(url: u)
+            }
+        }
 
         DispatchQueue.main.async { [weak self] in
             do {

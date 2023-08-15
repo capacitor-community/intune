@@ -2,7 +2,7 @@ import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from 
 import { useCallback, useEffect, useState } from 'react';
 import './Home.css';
 
-import IntuneMAM from '../IntuneMAM';
+import { IntuneMAM } from '@ionic-enterprise/intune';
 import { useHistory } from 'react-router';
 
 const Login: React.FC = () => {
@@ -17,25 +17,27 @@ const Login: React.FC = () => {
     getVersion();
   });
 
-  const afterLogin = async () => {
-    const user = await IntuneMAM.enrolledAccount();
+  const login = useCallback(async () => {
+    const authInfo = await IntuneMAM.acquireToken({
+      scopes: ['https://graph.microsoft.com/.default'],
+    });
 
+    console.log('Got auth info', authInfo);
+
+    await IntuneMAM.registerAndEnrollAccount({
+      upn: authInfo.upn,
+    });
+
+    const user = await IntuneMAM.enrolledAccount();
+    console.log('user', user);
     if (user.upn) {
       console.log('Got user, going home');
-      setTimeout(() => history.replace('/home'), 500);
+      history.replace("/home");
     } else {
-      console.log('No user, logging in');
+      console.log("No user, logging in");
+      history.replace("/login");
     }
-  }
-
-  const login = async () => {
-    try {
-      await IntuneMAM.loginAndEnrollAccount();
-      await afterLogin();
-    } catch(e: any) {
-      console.error(e.message);
-    }
-  };
+  }, []);
 
   const showConsole = useCallback(async () => {
     await IntuneMAM.displayDiagnosticConsole();

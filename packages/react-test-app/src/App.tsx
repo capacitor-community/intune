@@ -24,7 +24,6 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import Login from './pages/Login';
 import { useEffect } from 'react';
-import IntuneMAM from './IntuneMAM';
 import Splash from './pages/Splash';
 
 const App: React.FC = () => {

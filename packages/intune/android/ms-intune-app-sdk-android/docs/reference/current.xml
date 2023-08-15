@@ -3205,6 +3205,23 @@
 >
 </method>
 </class>
+<class name="MAMCertTrustWebViewClient"
+ extends="android.webkit.WebViewClient"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="MAMCertTrustWebViewClient"
+ type="com.microsoft.intune.mam.client.app.MAMCertTrustWebViewClient"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+</class>
 <class name="MAMCertificatePinningManager"
  extends="java.lang.Object"
  abstract="false"
@@ -8330,6 +8347,80 @@
 </parameter>
 </method>
 </class>
+<class name="MAMTrustedRootCertsManager"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="createSSLContext"
+ return="javax.net.ssl.SSLContext"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="identity" type="java.lang.String">
+</parameter>
+<parameter name="protocol" type="java.lang.String">
+</parameter>
+<exception name="GeneralSecurityException" type="java.security.GeneralSecurityException">
+</exception>
+<exception name="KeyManagementException" type="java.security.KeyManagementException">
+</exception>
+<exception name="KeyStoreException" type="java.security.KeyStoreException">
+</exception>
+<exception name="NoSuchAlgorithmException" type="java.security.NoSuchAlgorithmException">
+</exception>
+</method>
+<method name="createSSLSocketFactory"
+ return="javax.net.ssl.SSLSocketFactory"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="identity" type="java.lang.String">
+</parameter>
+<parameter name="protocol" type="java.lang.String">
+</parameter>
+<exception name="GeneralSecurityException" type="java.security.GeneralSecurityException">
+</exception>
+<exception name="KeyManagementException" type="java.security.KeyManagementException">
+</exception>
+<exception name="KeyStoreException" type="java.security.KeyStoreException">
+</exception>
+<exception name="NoSuchAlgorithmException" type="java.security.NoSuchAlgorithmException">
+</exception>
+</method>
+<method name="createX509TrustManagers"
+ return="javax.net.ssl.TrustManager[]"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="identity" type="java.lang.String">
+</parameter>
+<exception name="GeneralSecurityException" type="java.security.GeneralSecurityException">
+</exception>
+<exception name="KeyStoreException" type="java.security.KeyStoreException">
+</exception>
+<exception name="NoSuchAlgorithmException" type="java.security.NoSuchAlgorithmException">
+</exception>
+</method>
+</class>
 </package>
 <package name="com.microsoft.intune.mam.client.app.backup"
 >
@@ -9008,7 +9099,7 @@
  abstract="false"
  static="false"
  final="true"
- deprecated="not deprecated"
+ deprecated="deprecated"
  visibility="public"
 >
 <implements name="android.os.Parcelable">
@@ -14308,10 +14399,25 @@
  synchronized="false"
  static="false"
  final="false"
+ deprecated="deprecated"
+ visibility="public"
+>
+<parameter name="upn" type="java.lang.String">
+</parameter>
+</method>
+<method name="getRegisteredAccountStatus"
+ return="com.microsoft.intune.mam.policy.MAMEnrollmentManager.Result"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
  deprecated="not deprecated"
  visibility="public"
 >
 <parameter name="upn" type="java.lang.String">
+</parameter>
+<parameter name="aadId" type="java.lang.String">
 </parameter>
 </method>
 <method name="registerADALConnectionDetails"
@@ -14385,10 +14491,25 @@
  synchronized="false"
  static="false"
  final="false"
+ deprecated="deprecated"
+ visibility="public"
+>
+<parameter name="upn" type="java.lang.String">
+</parameter>
+</method>
+<method name="unregisterAccountForMAM"
+ return="void"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
  deprecated="not deprecated"
  visibility="public"
 >
 <parameter name="upn" type="java.lang.String">
+</parameter>
+<parameter name="aadId" type="java.lang.String">
 </parameter>
 </method>
 <method name="updateToken"
@@ -15124,6 +15245,17 @@
 <implements name="com.microsoft.intune.mam.policy.notification.MAMNotification">
 </implements>
 <method name="getUserIdentity"
+ return="java.lang.String"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getUserOid"
  return="java.lang.String"
  abstract="true"
  native="false"

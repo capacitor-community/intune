@@ -1,3 +1,66 @@
+Version 9.7.0
+-------------
+* Remove no-longer-necessary ProGuard rules targeting the legacy Android
+  Support Libraries. SDK support for these was removed in `8.0.0`.
+* Fix configuration cache and incremental build issues with new build plugin.
+  The new plugin is now fully supported for AGP 8.
+
+Version 9.6.1
+-------------
+* Fix handling of int, float, and short in `MAMAppConfig` when
+  returning config from Android Enterprise (rather than the MAM
+  channel)
+
+Version 9.6.0
+-------------
+* Deprecate ADALConnectionDetails and remove obsolete meta-data authentication configurations.
+* Preview build plugin is now part of the main artifact.
+  Apply `com.microsoft.intune.mam-preview` to use the new behavior with
+  Android Gradle Plugin 7.4. The preview plugin is applied automatically
+  for AGP 8.
+* Add missing hooks for onActivityDestroyed in ActivityLifecycleCallbacks.
+
+Version 9.5.0
+-------------
+* Add MAMTrustedRootCertsManager and MAMCertTrustWebViewClient APIs for trusted root certificates support.
+* Fix SecurityException in isolated processes on devices with API 27 or under.
+
+Version 9.4.0
+-------------
+* Add new preview build plugin to support Android Gradle Plugin 8.0.
+  This plugin can be applied by adding `-preview` to the sdk version
+  and ensuring the `-preview` library is included on the buildscript
+  classpath.
+* Add a method to MAMUserNotification to get the OID of the user
+  contained in the notification.
+* Add an overload to MAMEnrollmentManager.unregisterAccountForMAM()
+  that takes the account's OID in addition to its UPN to more precisely
+  identify the account.
+* Internal identity management is changed to favor the OID over the
+  UPN of the identity as the key for storing identities and metadata.
+* MAMServiceAuthenticationCallbackExtended interface is added to provide
+  an overload of the acquireToken method that accepts additional parameters
+  for the AAD Tenant Id and the AAD Authority. Apps that need one or more
+  of these additional parameters to correctly acquire tokens should
+  implement this interface, but other apps don't need to.
+
+Version 9.3.0
+-------------
+* Fix build plugin issue applying certain rewrites to super calls in
+  an invalid way. This could result in invalid bytecode (and then
+  runtime crashes) in apps which subclasses system services wrapped by
+  MAM, notably `LayoutInflater`.
+* The build plugin will now modify subclasses of `LayoutInflater` such
+  that they inherit from `MAMLayoutInflater`.
+
+Version 9.2.0
+-------------
+* Add MAM Strict Mode check: 'UNREGISTER_ACCOUNT_WITHIN_ACQUIRE_TOKEN' to
+  check for calls to the MAMEnrollmentManager's unregisterAccountForMAM()
+  method from within the app-provided MAMServiceAuthenticationCallback's
+  acquireToken() method. This can cause compliance remediation to fail,
+  and will not unregister the account.
+
 Version 9.1.0
 -------------
 * The build plugin will now replace inheritance of `FileBackupHelper` with

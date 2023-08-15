@@ -1,6 +1,5 @@
 {
 	"appId": "io.ionic.starter",
 	"appName": "ionic-intune-demo",
-	"webDir": "build",
-	"bundledWebRuntime": false
+	"webDir": "build"
 }

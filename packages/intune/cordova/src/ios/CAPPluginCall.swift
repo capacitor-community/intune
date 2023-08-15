@@ -18,7 +18,7 @@ public typealias PluginEventListener = CAPPluginCall
     }
 
     @nonobjc func getBool(_ key: String, _ defaultValue: Bool? = nil) -> Bool? {
-        return self.options[key] as? Bool ?? defaultValue
+      return self.options[key] as? Bool ?? defaultValue
     }
 
     @nonobjc func getInt(_ key: String, _ defaultValue: Int? = nil) -> Int? {

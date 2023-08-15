@@ -4,6 +4,50 @@ sidebar_label: Changelog
 ---
 
 
+## 4.0.0-next.8
+
+### Patch Changes
+
+- 7c9835a: cordova-ios 6
+
+## 4.0.0-next.7
+
+### Patch Changes
+
+- chore: fix call reject
+
+## 4.0.0-next.6
+
+### Patch Changes
+
+- fix bridge ref
+
+## 4.0.0-next.5
+
+### Patch Changes
+
+- 89707b8: chore: fix ios bug in objc
+
+## 4.0.0-next.4
+
+### Patch Changes
+
+- add "add-swift-support" corova dep
+
+## 4.0.0-next.3
+
+### Patch Changes
+
+- update cordova files
+
+## 4.0.0-next.2
+
+### Patch Changes
+
+- chore: cordova fixes
+
+## 4.0.0-next.1
+
 ## 3.1.1
 
 ### Patch Changes

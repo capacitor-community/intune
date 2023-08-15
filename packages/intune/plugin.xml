@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="@ionic-enterprise/intune" version="1.2.2">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="@ionic-enterprise/intune" version="4.0.0">
     <name>@ionic-enterprise/intune</name>
     <description>Ionic Intune Plugin</description>
     <license>SEE LICENSE</license>
@@ -100,6 +100,8 @@
             <feature name="IntuneMAM">
                 <param name="ios-package" value="IntuneMAM" onload="true"/>
             </feature>
+            <preference name="deployment-target" value="13.0.0" />
+            <preference name="UseSwiftLanguageVersion" value="5"/>
         </config-file>
         <config-file target="*-Info.plist" parent="NSFaceIDUsageDescription">
             <string>Use Face ID to authenticate yourself and login</string>
@@ -192,6 +194,7 @@
         <header-file src="cordova/src/ios/CAPPluginCall.h" type="BridgingHeader" />
         <source-file src="cordova/src/ios/CAPPluginCall.m"/>
         <source-file src="cordova/src/ios/CAPPluginCall.swift"/>
+        <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
     </platform>
     <author email="hi@ionic.io" href="https://ionicframework.com">Ionic Team</author>
 </plugin>

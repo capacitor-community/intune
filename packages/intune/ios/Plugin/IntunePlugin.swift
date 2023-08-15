@@ -10,8 +10,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
     private var loginAndEnrollContinuation: CheckedContinuation<Any, Error>?
 
     private func resetDelegate() {
-        enrollmentDelegate = EnrollmentDelegateClass(nil)
-        IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
+        IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass()
     }
 
     override public func load() {
@@ -190,33 +189,31 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
             call.reject("upn must be provided. Call acquireToken first")
             return
         }
-
-        enrollmentDelegate = EnrollmentDelegateClass({ (didSucceed: Bool, message: String) -> Void in
+        
+        IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass() { (didSucceed: Bool, message: String) in
             if didSucceed {
                 call.resolve()
             } else {
                 call.reject(message)
             }
             self.resetDelegate()
-        })
-        IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
+        }
         // The delegate is not always called so we call deRegisterAndUnenrollAccount as a workaround
         // Example is when the user is not licensed for inTune
         // Maybe caused by this issue https://github.com/msintuneappsdk/ms-intune-app-sdk-ios/issues/178
-        // IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccount(upn, withWipe: false)
+        // IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccount(upn, withWipe: true)
         IntuneMAMEnrollmentManager.instance().registerAndEnrollAccount(upn)
     }
 
     @objc public func loginAndEnrollAccount(_ call: CAPPluginCall) {
-        enrollmentDelegate = EnrollmentDelegateClass({ (didSucceed: Bool, message: String) -> Void in
+        IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass() { (didSucceed: Bool, message: String) in
             if didSucceed {
                 call.resolve()
             } else {
                 call.reject(message)
             }
             self.resetDelegate()
-        })
-        IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
+        }
         IntuneMAMEnrollmentManager.instance().loginAndEnrollAccount(nil)
     }
 
@@ -253,15 +250,14 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
             }
         }
 
-        enrollmentDelegate = EnrollmentDelegateClass({ (didSucceed: Bool, message: String) -> Void in
+        IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass() { (didSucceed: Bool, message: String) in
             if didSucceed {
                 call.resolve()
             } else {
                 call.reject(message)
             }
             self.resetDelegate()
-        })
-        IntuneMAMEnrollmentManager.instance().delegate = enrollmentDelegate
+        }
         IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccount(upn, withWipe: true)
 
         DispatchQueue.main.async { [weak self] in

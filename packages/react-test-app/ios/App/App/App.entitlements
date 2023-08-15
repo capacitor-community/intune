@@ -4,10 +4,9 @@
 <dict>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)io.ionic.intuneDemo</string>
+		<string>$(AppIdentifierPrefix)io.ionic.starter</string>
 		<string>$(AppIdentifierPrefix)com.microsoft.intune.mam</string>
 		<string>$(AppIdentifierPrefix)com.microsoft.adalcache</string>
-		<string>$(AppIdentifierPrefix)io.ionic.intuneDemo.intunemam</string>
 	</array>
 </dict>
 </plist>

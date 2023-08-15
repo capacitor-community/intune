@@ -2,11 +2,11 @@ buildscript {
     
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
-        classpath 'com.google.gms:google-services:4.3.5'
+        classpath 'com.android.tools.build:gradle:8.0.0'
+        classpath 'com.google.gms:google-services:4.3.15'
 
         // ADD THIS:
         classpath "org.javassist:javassist:3.27.0-GA"
@@ -19,18 +19,18 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
         maven {
             // ADD THESE TWO LINES:
             url 'https://pkgs.dev.azure.com/MicrosoftDeviceSDK/DuoSDK-Public/_packaging/Duo-SDK-Feed/maven/v1'
             name 'Duo-SDK-Feed'
         }
+        mavenCentral()
     }
 }
 
 dependencies {
   implementation files("./src/main/libs/Microsoft.Intune.MAM.SDK.aar")
-  implementation 'com.microsoft.identity.client:msal:2.2.3'
+  implementation 'com.microsoft.identity.client:msal:4.6.3'
   // implementation files("./src/main/libs/capacitor-cordova-compat.aar")
 }
 
