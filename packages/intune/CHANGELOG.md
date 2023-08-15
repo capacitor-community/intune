@@ -1,5 +1,17 @@
 # @ionic-enterprise/intune
 
+## 4.0.0
+
+### Patch Changes
+
+- 0fcc68e: fix ios bug in objc
+- 0fcc68e: cordova-ios 6
+- 0fcc68e: cordova fixes
+- 0fcc68e: fix bridge ref
+- 0fcc68e: add "add-swift-support" corova dep
+- 0fcc68e: update cordova files
+- 0fcc68e: fix call reject
+
 ## 4.0.0-next.8
 
 ### Patch Changes
