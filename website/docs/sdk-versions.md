@@ -7,10 +7,12 @@ This plugin uses these SDKs:
 - Microsoft intune iOS SDK ([changelog](https://github.com/msintuneappsdk/ms-intune-app-sdk-ios/releases))
 - Microsoft intune Android SDK ([changelog](https://github.com/msintuneappsdk/ms-intune-app-sdk-android/releases))
 - MSAL iOS SDK: ([changelog](https://github.com/AzureAD/microsoft-authentication-library-for-objc/releases))
+- MSAL Android SKD: ([changelog](https://github.com/AzureAD/microsoft-authentication-library-for-android/releases))
 
 The following table shows SDK versions vs plugin version.
 
-|Plugin Version|iOS SDK Version|Android SDK Version|MSAL Version|
-|--------------|---------------|-------------------|------------|
-|3.x           |17.1.1         |9.1.1              |1.2.5       |
-|2.x           |15.3.0         |8.3.0              |1.2.0       |
+|Plugin Version|iOS SDK Version|Android SDK Version|iOS MSAL Version|Android MSAL Version|
+|--------------|---------------|-------------------|----------------|--------------------|
+|4.x           |17.6.3         |9.7.0              |1.2.13          |4.6.3               |
+|3.x           |17.1.1         |9.1.1              |1.2.5           |1.2.5               |
+|2.x           |15.3.0         |8.3.0              |1.2.0           |1.2.5               |

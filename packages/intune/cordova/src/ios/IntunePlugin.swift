@@ -82,6 +82,7 @@ public class IntuneMAM: CAPPlugin {
         }
 
         let forcePrompt = call.getBool("forcePrompt", false) as! Bool
+        let forceRefresh = call.getBool("forceRefresh", false) as! Bool
 
         guard let scopes = call.getArray("scopes", String.self) else {
             call.reject("scopes not provided")
@@ -118,6 +119,8 @@ public class IntuneMAM: CAPPlugin {
                     config = MSALPublicClientApplicationConfig(clientId: clientId)
                 }
 
+                config?.clientApplicationCapabilities = ["ProtApp"]
+
                 if let application = try? MSALPublicClientApplication(configuration: config!) {
                     guard let self = self else {
                         call.reject("No self")
@@ -129,6 +132,11 @@ public class IntuneMAM: CAPPlugin {
                     let completionBlock: MSALCompletionBlock = { (result, error) in
 
                         guard let authResult = result, error == nil else {
+                            if let error = error as NSError? {
+                                if error.code == MSALError.serverProtectionPoliciesRequired.rawValue {
+                                    IntuneMAMComplianceManager.instance().remediateCompliance(forIdentity: error.userInfo[MSALDisplayableUserIdKey] as! String, silent: false)
+                                }
+                            }
                             print(error!.localizedDescription)
                             call.reject("Unable to login: \(error!.localizedDescription)")
                             return
@@ -164,6 +172,9 @@ public class IntuneMAM: CAPPlugin {
                             return
                         }
                         let silentParameters = MSALSilentTokenParameters(scopes: scopes, account: account)
+                        if forceRefresh {
+                            silentParameters.forceRefresh = true
+                        }
                         application.acquireTokenSilent(with: silentParameters, completionBlock: completionBlock)
                     }
                 } else {
@@ -201,8 +212,6 @@ public class IntuneMAM: CAPPlugin {
         // Maybe caused by this issue https://github.com/msintuneappsdk/ms-intune-app-sdk-ios/issues/178
         // IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccount(upn, withWipe: true)
         IntuneMAMEnrollmentManager.instance().registerAndEnrollAccount(upn)
-
-        call.resolve()
     }
 
     @objc public func loginAndEnrollAccount(_ command: CDVInvokedUrlCommand) {

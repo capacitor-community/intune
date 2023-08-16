@@ -289,7 +289,9 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                     signoutParameters.signoutFromBrowser = false
 
                     application.signout(with: account, signoutParameters: signoutParameters) { (_, error) in
-                        if error != nil {
+                        if error == nil {
+                            call.resolve()
+                        } else {
                             call.reject("Unable to sign out", nil, error)
                         }
                     }
