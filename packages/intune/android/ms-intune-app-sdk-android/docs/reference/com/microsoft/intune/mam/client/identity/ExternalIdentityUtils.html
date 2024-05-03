@@ -57,7 +57,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="../../../../../../favicon.ico" />
 <title>
 
-  MAMBroadcastReceiver
+  ExternalIdentityUtils
 
 
 </title>
@@ -150,9 +150,9 @@
   <a href="../../../../../../com/microsoft/intune/mam/client/app/startup/package-summary.html">com.microsoft.intune.mam.client.app.startup</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/app/ui/package-summary.html">com.microsoft.intune.mam.client.app.ui</a></li>
-    <li class="selected api apilevel-">
-  <a href="../../../../../../com/microsoft/intune/mam/client/content/package-summary.html">com.microsoft.intune.mam.client.content</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../com/microsoft/intune/mam/client/content/package-summary.html">com.microsoft.intune.mam.client.content</a></li>
+    <li class="selected api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/identity/package-summary.html">com.microsoft.intune.mam.client.identity</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../com/microsoft/intune/mam/client/notification/package-summary.html">com.microsoft.intune.mam.client.notification</a></li>
@@ -176,21 +176,35 @@
           <div id="classes-nav">
             <ul>
               
+    <li><h2>Interfaces</h2>
+      <ul>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMDataProtectionInfo.html">MAMDataProtectionInfo</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMFileProtectionInfo.html">MAMFileProtectionInfo</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMProtectionInfo.html">MAMProtectionInfo</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMSetUIIdentityCallback.html">MAMSetUIIdentityCallback</a></li>
+      </ul>
+    </li>
               
     <li><h2>Classes</h2>
       <ul>
-          <li class="selected api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/content/MAMBroadcastReceiver.html">MAMBroadcastReceiver</a></li>
-          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/content/MAMClipboard.html">MAMClipboard</a></li>
-          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/content/MAMCloudMediaProvider.html">MAMCloudMediaProvider</a></li>
-          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/content/MAMContentProvider.html">MAMContentProvider</a></li>
-          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/content/MAMContentProviderClientManagement.html">MAMContentProviderClientManagement</a></li>
-          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/content/MAMContentResolverManagement.html">MAMContentResolverManagement</a></li>
-          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/content/MAMDocumentsProvider.html">MAMDocumentsProvider</a></li>
+          <li class="selected api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/ExternalIdentityUtils.html">ExternalIdentityUtils</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMAsyncTask.html">MAMAsyncTask</a>&lt;Params,&nbsp;Progress,&nbsp;Result&gt;</li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMDataProtectionManager.html">MAMDataProtectionManager</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMFileProtectionManager.html">MAMFileProtectionManager</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMIdentityExecutors.html">MAMIdentityExecutors</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMIdentityOIDRunnable.html">MAMIdentityOIDRunnable</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMIdentityRunnable.html">MAMIdentityRunnable</a></li>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMPolicyManager.html">MAMPolicyManager</a></li>
       </ul>
     </li>
               
               
               
+    <li><h2>Exceptions</h2>
+      <ul>
+          <li class="api apilevel-"><a href="../../../../../../com/microsoft/intune/mam/client/identity/MAMKeyNotAvailableException.html">MAMKeyNotAvailableException</a></li>
+      </ul>
+    </li>
               
             </ul><br/>
           </div><!-- end classes -->
@@ -236,20 +250,6 @@
   
   
 
-  
-   
-  
-  
-  
-  
-
-  
-   
-  
-  
-  
-  
-
 
 <div class="sum-details-links">
 
@@ -264,12 +264,9 @@ Summary:
 
 
 
-  <a href="#pubctors">Ctors</a>
-  
 
 
-
-  &#124; <a href="#pubmethods">Methods</a>
+  <a href="#pubmethods">Methods</a>
   
 
 
@@ -295,29 +292,20 @@ Summary:
 <div id="jd-header">
     public
      
-     
-    abstract
+    final 
+    
     class
-<h1>MAMBroadcastReceiver</h1>
+<h1>ExternalIdentityUtils</h1>
 
 
 
   
-  
-  
-
-  
-    extends BroadcastReceiver<br/>
+    extends Object<br/>
   
   
   
 
   
-  
-      implements 
-      
-        HookedBroadcastReceiver 
-      
   
   
 
@@ -332,7 +320,7 @@ Summary:
 
     <tr>
          	
-        <td colspan="3" class="jd-inheritance-class-cell">java.lang.Object</td>
+        <td colspan="2" class="jd-inheritance-class-cell">java.lang.Object</td>
     </tr>
     
 
@@ -340,17 +328,7 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
          	
-        <td colspan="2" class="jd-inheritance-class-cell">android.content.BroadcastReceiver</td>
-    </tr>
-    
-
-    <tr>
-        
-            <td class="jd-inheritance-space">&nbsp;</td>
-        
-            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
-         	
-        <td colspan="1" class="jd-inheritance-class-cell">com.microsoft.intune.mam.client.content.MAMBroadcastReceiver</td>
+        <td colspan="1" class="jd-inheritance-class-cell">com.microsoft.intune.mam.client.identity.ExternalIdentityUtils</td>
     </tr>
     
 
@@ -366,7 +344,8 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p>MAM version of BroadcastReceiver.
+<p>Utility functions for converting String parameters to MAMIdentities, for
+ use in External code.
 </p>
 
 
@@ -417,31 +396,6 @@ Summary:
 
 
 
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<table id="pubctors" class="jd-sumtable"><tr><th colspan="12">Public Constructors</th></tr>
-
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
-            
-            
-            
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/content/MAMBroadcastReceiver.html#MAMBroadcastReceiver()">MAMBroadcastReceiver</a></span>()
-        
-  </td></tr>
-
-
-
-</table>
-
-
 
 
 
@@ -456,14 +410,35 @@ Summary:
         <td class="jd-typecol">
             
             
-            final
             
+            static
             
-            void
+            MAMIdentity
         </td>
         <td class="jd-linkcol" width="100%">
-        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/content/MAMBroadcastReceiver.html#onReceive(android.content.Context, android.content.Intent)">onReceive</a></span>(Context context, Intent intent)
+        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/ExternalIdentityUtils.html#fromUpnAndOid(java.lang.String, java.lang.String)">fromUpnAndOid</a></span>(String upn, String oid)
         
+        <div class="jd-descrdiv">This is used to convert UPN and OID parameters from API calls that take
+ both into the corresponding MAMIdentity.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">
+            
+            
+            
+            static
+            
+            MAMIdentity
+        </td>
+        <td class="jd-linkcol" width="100%">
+        <span class="sympad"><a href="../../../../../../com/microsoft/intune/mam/client/identity/ExternalIdentityUtils.html#identityFromOID(java.lang.String)">identityFromOID</a></span>(String oid)
+        
+        <div class="jd-descrdiv">Convert an OID parameter into a MAMIdentity.</div>
+  
   </td></tr>
 
 
@@ -480,352 +455,6 @@ Summary:
 <table id="inhmethods" class="jd-sumtable"><tr><th>
   <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
   <div style="clear:left;">Inherited Methods</div></th></tr>
-
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-android.content.BroadcastReceiver" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-android.content.BroadcastReceiver-trigger"
-          src="../../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From class
-
-  android.content.BroadcastReceiver
-
-<div id="inherited-methods-android.content.BroadcastReceiver">
-  <div id="inherited-methods-android.content.BroadcastReceiver-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-android.content.BroadcastReceiver-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">abortBroadcast</span>()
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">clearAbortBroadcast</span>()
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            boolean
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">getAbortBroadcast</span>()
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            boolean
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">getDebugUnregister</span>()
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            int
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">getResultCode</span>()
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            String
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">getResultData</span>()
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            Bundle
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">getResultExtras</span>(boolean arg0)
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
-            
-            
-            String
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">getSentFromPackage</span>()
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
-            
-            
-            int
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">getSentFromUid</span>()
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            BroadcastReceiver.PendingResult
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">goAsync</span>()
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            boolean
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">isInitialStickyBroadcast</span>()
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            boolean
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">isOrderedBroadcast</span>()
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            abstract
-            
-            
-            
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">onReceive</span>(Context arg0, Intent arg1)
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            
-            
-            
-            IBinder
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">peekService</span>(Context arg0, Intent arg1)
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">setDebugUnregister</span>(boolean arg0)
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">setOrderedHint</span>(boolean arg0)
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">setResult</span>(int arg0, String arg1, Bundle arg2)
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">setResultCode</span>(int arg0)
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">setResultData</span>(String arg0)
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            
-            
-            final
-            
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">setResultExtras</span>(Bundle arg0)
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
 
 
 <tr class="api apilevel-" >
@@ -1029,64 +658,6 @@ From class
 </td></tr>
 
 
-
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-com.microsoft.intune.mam.client.content.HookedBroadcastReceiver" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-com.microsoft.intune.mam.client.content.HookedBroadcastReceiver-trigger"
-          src="../../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  com.microsoft.intune.mam.client.content.HookedBroadcastReceiver
-
-<div id="inherited-methods-com.microsoft.intune.mam.client.content.HookedBroadcastReceiver">
-  <div id="inherited-methods-com.microsoft.intune.mam.client.content.HookedBroadcastReceiver-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-com.microsoft.intune.mam.client.content.HookedBroadcastReceiver-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol">
-            abstract
-            
-            
-            
-            
-            BroadcastReceiver
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">asBroadcastReceiver</span>()
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol">
-            abstract
-            
-            
-            
-            
-            void
-        </td>
-        <td class="jd-linkcol" width="100%">
-        <span class="sympad">onMAMReceive</span>(Context arg0, Intent arg1)
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
-
 </table>
 
 
@@ -1116,44 +687,6 @@ From interface
 <!-- Public ctors -->
 
 
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<h2>Public Constructors</h2>
-
-
-
-<a id="MAMBroadcastReceiver()"></a>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        
-      </span>
-      <span class="sympad">MAMBroadcastReceiver</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
-
-
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <!-- Protected ctors -->
@@ -1167,20 +700,20 @@ From interface
 
 
 
-<a id="onReceive(android.content.Context, android.content.Intent)"></a>
+<a id="fromUpnAndOid(java.lang.String, java.lang.String)"></a>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
       <span class="normal">
         public 
+        static 
          
-        final 
          
          
-        void
+        MAMIdentity
       </span>
-      <span class="sympad">onReceive</span>
-      <span class="normal">(Context context, Intent intent)</span>
+      <span class="sympad">fromUpnAndOid</span>
+      <span class="normal">(String upn, String oid)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1192,7 +725,73 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>This is used to convert UPN and OID parameters from API calls that take
+ both into the corresponding MAMIdentity.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>upn</th>
+          <td>the provided UPN.</td>
+        </tr>
+        <tr>
+          <th>oid</th>
+          <td>the provided OID.</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>MAMIdentity based on the parameters, MAMIdentity.EMPTY if they are
+ both empty, and null if they are both null.
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+<a id="identityFromOID(java.lang.String)"></a>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+         
+         
+         
+        MAMIdentity
+      </span>
+      <span class="sympad">identityFromOID</span>
+      <span class="normal">(String oid)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Convert an OID parameter into a MAMIdentity.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>oid</th>
+          <td>An OID representing an identity.</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>MAMIdentity found or created from the given OID, MAMIdentity.EMPTY
+ if the OID is empty, or null if the OID is null.
+</li></ul>
+  </div>
 
     </div>
 </div>
