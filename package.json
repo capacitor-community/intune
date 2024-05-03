@@ -2,8 +2,8 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "@changesets/cli": "^2.25.2",
-    "nx": "^15.0.13",
+    "@changesets/cli": "^2.27.1",
+    "nx": "^15.9.7",
     "sync-cordova-xml2": "^0.0.3"
   },
   "workspaces": [
