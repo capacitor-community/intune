@@ -59,6 +59,7 @@ Additionally, the following intune-specific protocols must be added :
     <string>wandera</string>
     <string>https-intunemam</string>
     <string>http-intunemam</string>
+    <string>intunemam-mtd</string>
     <string>microsoft-edge-https-intunemam</string>
     <string>microsoft-edge-http-intunemam</string>
     <string>ms-outlook-intunemam</string>

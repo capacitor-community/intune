@@ -127,3 +127,12 @@ This can occur with the following scenarios:
 This error will occur if the user has logged in with the correct credentials but their user has not been assigned a license for inTune.
 
 You can assign a license to a user in [endpoint.microsoft.com](https://endpoint.microsoft.com/) > `Users` > Find the User > `Licenses`.
+
+### Email: Plan for Change: Intune App SDK
+An update required from Microsoft states:
+"Starting July 1, 2024, iOS apps with Intune App SDK need to update to include a new protocol (intunemam-mtd://) for MAM efficiency. Update your app's `Info.plist` file before this date. Details in the Intune SDK integration guide.".
+
+To meet this requirement, you must add the following line to the `Info.plist` file under the `LSApplicationQueriesSchemes` key:
+```xml
+    <string>intunemam-mtd</string>
+```
