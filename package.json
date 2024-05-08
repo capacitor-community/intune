@@ -12,10 +12,5 @@
   "scripts": {
     "build": "nx run-many --target=build",
     "fmt": "nx run-many --target=fmt"
-  },
-  "volta": {
-    "node": "16.13.2",
-    "npm": "8.3.0",
-    "pnpm": "7.13.4"
   }
 }

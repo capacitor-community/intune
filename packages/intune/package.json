@@ -1,6 +1,6 @@
 {
   "name": "@ionic-enterprise/intune",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Support for Microsoft Intune",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

@@ -4,6 +4,20 @@ sidebar_label: Changelog
 ---
 
 
+## 5.0.0
+
+### Major Changes
+
+- 50d92af: Update MSAL Android to 5.3.0 and iOS to 1.3.2.
+- 50d92af: Update Intune Android to 10.2.1 and iOS to 19.3.1.
+
+## 4.1.0-next.0
+
+### Minor Changes
+
+- Update Intune Android to 10.2.1 and iOS to 19.3.1.
+- Update MSAL Android to 5.3.0 and iOS to 1.3.2.
+
 ## 4.0.0
 
 ### Patch Changes
