@@ -14,8 +14,8 @@ This policy is for Intune as maintained by Ionic. Capacitor Core, Capacitor Plug
 |   V3    |   Not Supported   | November 30, 2022  |    Feb 11, 2025     |      Feb 11, 2025      |
 |   V4    |   Not Supported   | April 8, 2020      |    July 28, 2021    |      Feb 11, 2025      |
 |   V5    | Long-Term Support | July 28, 2021      |     Feb 11, 2025    |    December 31, 2026   |
-|   V6    |      Active       | Feb 11, 2025       |  December 31, 2026  |          TBD           |
-|   V7    |      Active       | Feb 11, 2025       |         TBD         |          TBD        
+|   V6    |      Active       | Mar 3, 2025        |  December 31, 2026  |          TBD           |
+|   V7    |      Active       | Mar 3, 2025        |          TBD        |          TBD        
    |
 ### Support Policy
 

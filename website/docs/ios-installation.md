@@ -7,7 +7,7 @@ The following steps attempt to distill the [official Intune App SDK iOS integrat
 
 ## 0. Before starting
 
-Note that version 6.x of `@ionic-enterprise/intune` requires a deployment target of iOS 14 or higher and requires Xcode 15+.
+Note that version 7.x of `@ionic-enterprise/intune` requires a deployment target of iOS 14 or higher and requires Xcode 15+.
 
 ## 1. Add Frameworks
 

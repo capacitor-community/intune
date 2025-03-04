@@ -13,9 +13,9 @@ Intune is a configuration-heavy service, and it is not feasible to create a Cord
 
 ## Install the Plugin
 
-Version 6.x of the plugin requires:
+Version 7.x of the plugin requires:
 - Cordova 13+ for Android
-- Cordova iOS 6+
+- Cordova iOS 7+
 - iOS deployment target of 14+
 - Xcode 15+
 

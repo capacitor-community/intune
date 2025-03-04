@@ -33,11 +33,11 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
-        classpath 'com.google.gms:google-services:4.3.5'
+        classpath 'com.android.tools.build:gradle:8.1.1'
+        classpath 'com.google.gms:google-services:4.3.15'
 
         // ADD THIS:
-        classpath "org.javassist:javassist:3.27.0-GA"
+        classpath "org.javassist:javassist:3.29.2-GA"
         // Capacitor users: add reference to the gradle plugin
         classpath files("../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/GradlePlugin/com.microsoft.intune.mam.build.jar")
         // Cordova users: add this line instead

@@ -7,7 +7,7 @@ Ionic's Intune integration supports [Capacitor](https://capacitorjs.com/) (stron
 
 ## Capacitor
 
-To install the Intune plugin, your app must be using Capacitor 6.0.0 or above. You must also have [an active Ionic Enterprise install key](https://ionic.io/docs/supported-plugins/setup) with access to Intune.
+To install the Intune plugin, your app must be using Capacitor 7.0.0 or above. You must also have [an active Ionic Enterprise install key](https://ionic.io/docs/supported-plugins/setup) with access to Intune.
 
 Once you have a key and your key has been associated with your app, install the main plugin package:
 
