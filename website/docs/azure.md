@@ -44,3 +44,20 @@ In the `API Permissions` section of the app registration in `Azure Active Direct
 Users and Groups need to have access to the registered in in `Azure Active Directory` -> `Enterprise applications` -> `Your app` -> `Users and Groups` to make sure the correct users and groups are allowed access to the enterprise app.
 
 ![Azure Enterprise App](/img/intune/aad-users-groups.png)
+
+## Creating App Protection Policies
+
+To enforce Intune app protection policies for your application:
+
+1. Navigate to the Microsoft Endpoint Manager admin center at [endpoint.microsoft.com](https://endpoint.microsoft.com)
+2. Go to **Apps** → **App protection policies**
+3. Click **Create policy** and select the appropriate platform (iOS/iPadOS or Android)
+4. Complete the policy creation wizard:
+   - On **Step 1**, provide a name and description for your policy
+   - On **Step 2 (Apps)**, click **Add apps** and select **Custom app**
+   - Enter your app's bundle ID (for iOS) or package name (for Android)
+   - On subsequent steps, configure the desired protection settings, data protection, access requirements, and conditional launch settings
+   - On **Step 6 (Assignments)**, assign the policy to the appropriate user groups that will use your application
+5. Review your settings and click **Create** to finalize the policy
+
+These policies will be applied to your app when users with assigned policies sign in to your Intune-enabled application.

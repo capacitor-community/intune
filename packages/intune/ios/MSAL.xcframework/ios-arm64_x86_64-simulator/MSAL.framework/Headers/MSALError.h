@@ -57,10 +57,21 @@ extern NSString *MSALOAuthErrorKey;
 extern NSString *MSALOAuthSubErrorKey;
 
 /**
+    The suberror description returned by the service.
+ */
+extern NSString *MSALOAuthSubErrorDescriptionKey;
+
+/**
     The extended error description. Note that this string can change and should
     not be relied upon for any error handling logic.
  */
 extern NSString *MSALErrorDescriptionKey;
+
+/**
+    A list of STS-specific error codes returned by the service that can help in diagnostics. Note that error codes can change and should
+    not be relied upon for any error handling logic.
+ */
+extern NSString *MSALSTSErrorCodesKey;
 
 /**
  Internal error code returned together with MSALErrorInternal error.
@@ -126,6 +137,11 @@ extern NSString *MSALHomeAccountIdKey;
 extern NSString *MSALErrorDomain;
 
 /**
+Flag indicate the error returned from client-side throttling.
+ */
+extern NSString *MSALThrottlingCacheHitKey;
+
+/**
  MSALError enum contains all errors that should be considered for handling in runtime.
  */
 typedef NS_ENUM(NSInteger, MSALError)
@@ -177,6 +193,11 @@ typedef NS_ENUM(NSInteger, MSALError)
     The server error happens when server returns server_error
      */
     MSALErrorServerError                         = -50006,
+
+    /**
+     Workplacejoin migrate device registration is required to proceed.
+     */
+    MSALErrorInsufficientDeviceStrength          = -50007,
 };
 
 /**
@@ -240,6 +261,11 @@ typedef NS_ENUM(NSInteger, MSALInternalError)
      An unexpected error occured within the MSAL client.
      */
     MSALInternalErrorUnexpected                         = -42008,
+    
+    /**
+     Un expected http response with status code 403 or 404
+     */
+    MSALInternalErrorUnexpectedHttpResponse             = -42009,
     
     /**
      The passed in authority URL does not pass validation.
@@ -473,7 +499,7 @@ typedef NS_ENUM(NSInteger, MSALInternalError)
     /**
      JIT - Troubleshooting - Acquire token error
      */
-    MSALErrorJITTroubleshootingAcquireToken          = -42732,
+    MSALErrorJITTroubleshootingAcquireToken             = -42732,
     
     /**
      JIT - Link - Timeout while waiting for server confirmation.
@@ -488,7 +514,7 @@ typedef NS_ENUM(NSInteger, MSALInternalError)
     /**
      JIT - Troubleshooting - Result unknown
      */
-    MSALErrorJITTroubleshootingResultUnknown         = -42735,
+    MSALErrorJITTroubleshootingResultUnknown            = -42735,
     
     /**
      Device is not PSSO registered
@@ -499,4 +525,40 @@ typedef NS_ENUM(NSInteger, MSALInternalError)
      // In PSSO, KeyId stored in passkey provider storage does not match NGC key, needs to configure and retry
      */
     MSALErrorPSSOKeyIdMismatch                         = -42737,
+    
+    /**
+     JIT - Error Handling config invalid or not found
+     */
+    MSALErrorJITErrorHandlingConfigNotFound             = -42738,
+    
+    /**
+     PSSO passkey - Biometric policy flag doesnt match with the loginConfig settings
+     */
+    MSALErrorPSSOBiometricPolicyMismatch                = -42739,
+    
+    /**
+     PSSO passkey - Invalid Passkey extension trying to access passkey
+     */
+    MSALErrorPSSOInvalidPasskeyExtension                = -42740,
+    
+    /**
+     PSSO save login config failure
+     */
+    
+    MSALErrorPSSOSaveLoginConfigFailure                = -42741,
+    
+    /**
+        Error thrown when uses tries to acces passkey without biometric when biometric policy configured
+     */
+    MSALErrorPSSOPasskeyLAError                        = -42742,
+    
+    /**
+     Error is thrown when PSSO user registration attempted with no biometrics available and sekey biometric policy is configured
+     */
+    MSALErrorPSSOBiometricsNotAvailable                = -42743,
+    
+    /**
+     Error is thrown when PSSO user registration attempted with no biometrics configured and sekey biometric policy is configured
+     */
+    MSALErrorPSSOBiometricsNotEnrolled                 = -42744,
 };

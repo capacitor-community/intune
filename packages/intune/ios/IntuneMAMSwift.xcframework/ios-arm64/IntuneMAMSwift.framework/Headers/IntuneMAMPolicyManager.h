@@ -69,69 +69,54 @@ __attribute__((visibility("default")))
 //
 // The empty string may be passed in as the identity to represent 'no user' or an unknown personal account.
 // If nil is passed in, the UI identity will fallback to the process identity.
-- (void) setUIPolicyIdentity:(NSString*_Nullable)identity completionHandler:(void (^_Nullable)(IntuneMAMSwitchIdentityResult))completionHandler;
-- (void) setUIPolicyIdentity:(NSString*_Nullable)identity forWindow:(UIWindow*_Nullable)window completionHandler:(void (^_Nullable)(IntuneMAMSwitchIdentityResult))completionHandler;
 - (void) setUIPolicyAccountId:(NSString*_Nullable)accountId completionHandler:(void (^_Nullable)(IntuneMAMSwitchIdentityResult))completionHandler;
 - (void) setUIPolicyAccountId:(NSString*_Nullable)accountId forWindow:(UIWindow*_Nullable)window completionHandler:(void (^_Nullable)(IntuneMAMSwitchIdentityResult))completionHandler;
 
-// Returns the UI identity for the current key window.
-- (NSString*_Nullable) getUIPolicyIdentity;
+// setUIPolicyAccountIds is similar to the setUIPolicyAccountId method except it accepts an array of account ids instead of a single account.
+// This API is intended to be called by applications having merged views displaying data from more than one account. The array can include any
+// number of managed and unmanaged accounts. If the array contains managed accounts, conditional launch will be run for each of these
+// accounts. After the conditional launch is completed for all accounts, the completion handler will be called and UI control will be
+// returned to the application. If conditional launch blocks an account or if a user cancels out of the conditional launch flow, the
+// blockAccountId:reason:forWindow:completionHandler: delegate will get called to notify the application it should hide an account from its
+// UI. If the application doesn't implement the blockAccountId:reason:completionHandler: delegate method, the
+// identitySwitchRequiredForAccountId:reason:completionHandler: will be called requesting the application switch to an unmanaged
+// account. If either of these delegates call the completion handler with a failure result, an alert will be displayed and the application will
+// be forced to exit. This method should only be called by applications supporting multiple managed accounts (MultiManagedIdentities set to YES in
+// IntuneMAMSettings). A nil or empty accountIds array will be treated as an array populated with 'no user' or an unknown personal account.
+- (void) setUIPolicyAccountIds:(NSArray<NSString*>*_Nullable)accountIds completionHandler:(void (^_Nullable)(IntuneMAMSwitchIdentityResult))completionHandler;
+- (void) setUIPolicyAccountIds:(NSArray<NSString*>*_Nullable)accountIds forWindow:(UIWindow*_Nullable)window completionHandler:(void (^_Nullable)(IntuneMAMSwitchIdentityResult))completionHandler;
 
-// Returns the UI AccountId (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822) for the current key window.
+// Returns the UI Entra object ID (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822) for the current key window.
 - (NSString*_Nullable) getUIPolicyAccountId;
 
-// Returns the UI identity for the specified window.
-- (NSString*_Nullable) getUIPolicyIdentityForWindow:(UIWindow*_Nullable)window;
-
-// Returns the UI AccountId (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822) for the specified window.
+// Returns the UI Entra object ID (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822) for the specified window.
+// window represents a merged view set with setUIPolicyAccountIds:forWindow:completionHandler:, this
+// method will return nil. For those windows, call getUIPolicyAccountIdsForWindow:
 - (NSString*_Nullable) getUIPolicyAccountIdForWindow:(UIWindow*_Nullable)window;
 
-// setCurrentThreadIdentity sets the identity of the current thread which is used to determine what
-// policy should be applied on the current thread. Unlike setting setUIPolicyIdentity, this method
-// will not run the conditional launch policy checks for the user.
-//
-// The current thread identity overrides the process identity if set.
-//
-// The empty string may be passed in as the identity to represent 'no user' or an unknown personal account.
-// If nil is passed in, the thread identity will fallback to the process identity.
-- (void) setCurrentThreadIdentity:(NSString*_Nullable)identity  NS_SWIFT_UNAVAILABLE("Use the IntuneMAMSwiftContextManager.setIdentity(_ :forScope:) APIs instead.") __deprecated_msg("Use setCurrentThreadIdentity:forScope: instead.");
+// Returns an array of UI AccountIds for the specified window. Can also be called for windows that have
+// been set with a single account through setUIPolicyAccountId:forWindow:completionHandler:
+- (NSArray<NSString*>*_Nullable) getUIPolicyAccountIdsForWindow:(UIWindow*_Nullable)window;
 
-// setCurrentThreadAccountId sets the AccountId (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822) of the current thread which is used to determine what
-// policy should be applied on the current thread. Unlike setting setUIPolicyAccountId, this method
-// will not run the conditional launch policy checks for the user.
-//
-// The current thread AccountId overrides the process AccountId if set.
-//
-// The empty string may be passed in as the accountId to represent 'no user' or an unknown personal account.
-// If nil is passed in, the thread AccountId will fallback to the process AccountId.
-- (void) setCurrentThreadAccountId:(NSString*_Nullable)accountId  NS_SWIFT_UNAVAILABLE("Use the IntuneMAMSwiftContextManager.setAccountId(_ :forScope:) APIs instead.") __deprecated_msg("Use setCurrentThreadAccountId:forScope: instead.");
+// Returns an array of blocked accounts (AAD object ids). These accounts should be hidden by the application.
+// The blockAccountId:reason:forWindow:completionHandler: will be called for each account id in this array. 
+- (NSArray<NSString*>* _Nonnull) blockedAccountIds;
 
-// Similar to the setCurrentThreadIdentity:, setCurrentThreadIdentity:forScope: will set the current thread identity but only for the scope of the passed block
-// It is preferable to use scoped thread identities to ensure that they are only set for a specified scope and will have a guaranteed removal.
-- (void) setCurrentThreadIdentity:(NSString*_Nullable)identity forScope:(void(^_Nullable)(void))scope  NS_SWIFT_UNAVAILABLE("Use the IntuneMAMSwiftContextManager.setIdentity(_ :forScope:) APIs instead.");
+// Returns the reason why the specified account is blocked, or IntuneMAMBlockAccountNotBlocked if the account is not currently blocked.
+- (IntuneMAMBlockAccountReason) blockedReasonForAccountId:(NSString*_Nonnull)accountId;
 
-// setCurrentThreadAccountId:forScope: will set the current thread AccountId (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822) but only for the scope of the passed block
+// setCurrentThreadAccountId:forScope: will set the current thread Entra object ID (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822) but only for the scope of the passed block
 // It is preferable to use scoped thread identities to ensure that they are only set for a specified scope and will have a guaranteed removal.
 - (void) setCurrentThreadAccountId:(NSString*_Nullable)accountId forScope:(void(^_Nullable)(void))scope  NS_SWIFT_UNAVAILABLE("Use the IntuneMAMSwiftContextManager.setAccountId(_ :forScope:) APIs instead.");
 
-- (NSString*_Nullable) getCurrentThreadIdentity;
-
-// Return current thread AccountId (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822).
+// Return current thread Entra object ID (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822).
 - (NSString*_Nullable) getCurrentThreadAccountId;
 
-// setProcessIdentity sets the process wide identity.
-- (void) setProcessIdentity:(NSString*_Nullable)identity;
-- (NSString*_Nullable) getProcessIdentity;
-
-// setProcessIdentity sets the process wide AccountId (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822).
+// setProcessIdentity sets the process wide Entra object ID (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822).
 - (void) setProcessAccountId:(NSString*_Nullable)accountId;
 - (NSString*_Nullable) getProcessAccountId;
 
-// Returns the identity of the user which initiated the current activity.
-// This method can be called within the openURL handler to retrieve the sender's identity.
-- (NSString*_Nullable) getIdentityForCurrentActivity;
-
-// Returns the AccountId (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822) of the user which initiated the current activity.
+// Returns the Entra object ID (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822) of the user which initiated the current activity.
 // This method can be called within the openURL handler to retrieve the sender's AccountId.
 - (NSString*_Nullable) getAccountIdForCurrentActivity;
 
@@ -139,10 +124,7 @@ __attribute__((visibility("default")))
 // Returns FALSE if no Intune management policy is applied and policy is not required.
 - (BOOL) isManagementEnabled;
 
-// Returns TRUE if the specified identity is managed.
-- (BOOL) isIdentityManaged:(NSString*_Nullable)identity;
-
-// Returns TRUE if the specified accountId (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822) is managed.
+// Returns TRUE if the specified Entra object ID (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822) is managed.
 - (BOOL) isAccountIdManaged:(NSString*_Nullable)accountId;
 
 // Returns TRUE if the two identities are equal. This method performs a case insensitive compare
@@ -153,13 +135,13 @@ __attribute__((visibility("default")))
 // Returns an object that can be used to retrieve the MAM policy for the current thread identity.
 - (_Nullable id  <IntuneMAMPolicy>) policy;
 
-// Returns an object that can be used to retrieve the MAM policy for the specified identity.
-- (_Nullable id<IntuneMAMPolicy>) policyForIdentity:(NSString*_Nullable)identity;
-
-// Returns an object that can be used to retrieve the MAM policy for the specified AccountId (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822).
+// Returns an object that can be used to retrieve the MAM policy for the specified Entra object ID (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822).
 - (_Nullable id<IntuneMAMPolicy>) policyForAccountId:(NSString*_Nullable)accountId;
 
-// Returns an object that can be used to retrieve the MAM policy for the specified window.
+// Returns an object that can be used to retrieve the MAM policy for the specified list of AccountIds. If multiple accounts are provided and at least one account is managed the returned IntuneMAMPolicy will be a standard lock down policy and will not reflect policies of individual AccountIds.
+- (_Nullable id<IntuneMAMPolicy>) policyForAccountIds:(NSArray<NSString*>*_Nullable)accountIds;
+
+// Returns an object that can be used to retrieve the MAM policy for the specified window. If the window has multiple identities and at least one is managed the IntuneMAMPolicy will be a standard lock down policy and will not reflect policies of individual identities.
 - (_Nullable id<IntuneMAMPolicy>) policyForWindow:(UIWindow*_Nullable)window;
 
 // Sets an IntuneMAMWebViewPolicyDelegate for the passed in WKWebView or SFSafariViewController.
@@ -174,11 +156,7 @@ __attribute__((visibility("default")))
 // overwrite the TreatAllWebViewsAsUnmanaged flag for the passed in webViewer and its children.
 - (void) setWebViewPolicy:(IntuneMAMWebViewPolicy)webViewPolicy forWebViewer:(id _Nonnull)webViewer;
 
-// Returns the account name of the primary user in upn format (e.g. user@contoso.com).
-// Should be called only by applications which don't support multiple managed accounts.
-@property (readonly) NSString* _Nullable primaryUser;
-
-// Returns the account name of the primary user in AccountId format (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822).
+// Returns the account name of the primary user in Entra object ID format (e.g. 3ec2c00f-b125-4519-acf0-302ac3761822).
 // Should be called only by applications which don't support multiple managed accounts.
 @property (readonly) NSString* _Nullable primaryAccountId;
 

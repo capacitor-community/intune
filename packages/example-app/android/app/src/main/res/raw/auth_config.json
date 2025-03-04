@@ -1,0 +1,14 @@
+{
+  "client_id" : "ed413796-017c-47da-8292-2deb4a104450",
+  "authorization_user_agent" : "DEFAULT",
+  "redirect_uri" : "msauth://com.outsystems.intunedemo/Pcn5o2NwnM5%2B4VERBj1k9y9VKfo%3D",
+  "authorities" : [
+    {
+      "type": "AAD",
+      "audience": {
+        "type": "AzureADMyOrg",
+        "tenant_id": "2786c71e-825b-40fd-83bc-e28e4df06029"
+      }
+    }
+  ]
+}

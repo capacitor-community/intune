@@ -5,13 +5,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.0.0'
+        classpath 'com.android.tools.build:gradle:8.2.1'
         classpath 'com.google.gms:google-services:4.3.15'
 
-        // ADD THIS:
-        classpath "org.javassist:javassist:3.27.0-GA"
-        // ADD THE REFERENCE TO THE GRADLE PLUGIN:
-        // classpath(name: "com.microsoft.intune.mam.build", ext:"jar")
+        // Updated Javassist version as per Intune SDK 11.0.0 requirements
+        classpath "org.javassist:javassist:3.29.2-GA"
         classpath files("./app/src/main/libs/com.microsoft.intune.mam.build.jar")
     }
 }
@@ -30,7 +28,7 @@ allprojects {
 
 dependencies {
   implementation files("./src/main/libs/Microsoft.Intune.MAM.SDK.aar")
-  implementation 'com.microsoft.identity.client:msal:4.6.3'
+  implementation 'com.microsoft.identity.client:msal:5.10.0'
   // implementation files("./src/main/libs/capacitor-cordova-compat.aar")
 }
 

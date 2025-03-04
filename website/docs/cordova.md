@@ -13,9 +13,11 @@ Intune is a configuration-heavy service, and it is not feasible to create a Cord
 
 ## Install the Plugin
 
-This plugin requires Cordova 10. Once you are running the latest version of Cordova, install the plugin:
-
-Cordova support is available starting in 1.3.0 and 2.2.0. Version 1.3.0 should be used for teams targeting iOS < 15. 2.2.0 requires Xcode 13 and enables teams to target iOS 15.
+Version 6.x of the plugin requires:
+- Cordova 13+ for Android
+- Cordova iOS 6+
+- iOS deployment target of 14+
+- Xcode 15+
 
 ```shell
 ionic cordova plugin add @ionic-enterprise/intune
@@ -27,14 +29,14 @@ ionic cordova plugin add @ionic-enterprise/intune
 
 ## iOS
 
-No additional configuration necessary.
+No additional configuration necessary. The plugin will set the iOS deployment target to 14.0.0.
 
 ## Android
 
-Ionic's Intune integration requires `cordova-android@10`:
+Ionic's Intune integration requires `cordova-android@13` or higher:
 
 ```shell
-cordova platform add android@10
+cordova platform add android@13
 ```
 
 Then, follow the [Creating Configuration JSON File](https://ionic.io/docs/intune/android-installation#creating-configuration-json-file) instructions to create `auth_config.json` in a `raw` Android resources folder to finish installation.

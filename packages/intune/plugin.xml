@@ -100,7 +100,7 @@
             <feature name="IntuneMAM">
                 <param name="ios-package" value="IntuneMAM" onload="true"/>
             </feature>
-            <preference name="deployment-target" value="13.0.0" />
+            <preference name="deployment-target" value="14.0.0" />
             <preference name="UseSwiftLanguageVersion" value="5"/>
         </config-file>
         <config-file target="*-Info.plist" parent="NSFaceIDUsageDescription">

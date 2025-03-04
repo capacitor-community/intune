@@ -37,7 +37,7 @@ import org.json.JSONObject;
 @CapacitorPlugin(name = "IntuneMAM")
 public class IntunePlugin extends Plugin {
 
-    private static final String SETTINGS_PATH = "io.ionic.starter";
+    private static final String SETTINGS_PATH = "com.outsystems.intunedemo";
 
     public static final String[] MSAL_SCOPES = { "https://graph.microsoft.com/User.Read" };
 
@@ -59,7 +59,7 @@ public class IntunePlugin extends Plugin {
     private void _acquireToken(PluginCall call, boolean interactive) {
         mLastEnrollCall = call;
 
-        String upn = call.getString("upn");
+        String accountId = call.getString("accountId");
 
         boolean forcePrompt = call.getBoolean("forcePrompt", false);
         boolean forceRefresh = call.getBoolean("forceRefresh", false);
@@ -85,7 +85,7 @@ public class IntunePlugin extends Plugin {
                     if (interactive) {
                         MSALUtil.acquireToken(getActivity(), scopes, null, forcePrompt, new AuthCallback());
                     } else {
-                        MSALUtil.acquireTokenSilent(getActivity(), upn, scopes, new AuthCallback(), forceRefresh);
+                        MSALUtil.acquireTokenSilent(getActivity(), accountId, scopes, new AuthCallback(), forceRefresh);
                     }
                 } catch (MsalException | InterruptedException e) {
                     Logger.error("Authentication exception occurred", e);
@@ -110,7 +110,7 @@ public class IntunePlugin extends Plugin {
     public void registerAndEnrollAccount(PluginCall call) {
         if (mUserAccount != null) {
             mEnrollmentManager.registerAccountForMAM(
-                mUserAccount.getUPN(),
+                mUserAccount.getAccountId(),
                 mUserAccount.getAADID(),
                 mUserAccount.getTenantID(),
                 mUserAccount.getAuthority()
@@ -136,7 +136,7 @@ public class IntunePlugin extends Plugin {
                 try {
                     String loginHint = null;
                     if (mUserAccount != null) {
-                        loginHint = mUserAccount.getUPN();
+                        loginHint = mUserAccount.getAccountId();
                     }
                     MSALUtil.acquireToken(getActivity(), MSAL_SCOPES, loginHint, forcePrompt, new AuthCallback());
                 } catch (MsalException | InterruptedException e) {
@@ -152,9 +152,9 @@ public class IntunePlugin extends Plugin {
     public void enrolledAccount(PluginCall call) {
         JSObject data = new JSObject();
         if (mUserAccount != null) {
-            data.put("upn", mUserAccount.getUPN());
+            data.put("accountId", mUserAccount.getAccountId());
         } else {
-            data.put("upn", "");
+            data.put("accountId", "");
         }
         call.resolve(data);
     }
@@ -175,7 +175,7 @@ public class IntunePlugin extends Plugin {
                     Logger.error("Failed to sign out user " + effectiveAccount.getAADID(), e);
                 }
 
-                mEnrollmentManager.unregisterAccountForMAM(effectiveAccount.getUPN());
+                mEnrollmentManager.unregisterAccountForMAM(effectiveAccount.getAccountId());
 
                 final SharedPreferences prefs = getContext().getSharedPreferences(SETTINGS_PATH, Context.MODE_PRIVATE);
                 AppAccount.clearFromSettings(prefs);
@@ -204,7 +204,7 @@ public class IntunePlugin extends Plugin {
                         call.reject("Unable to log user out", e);
                         Logger.error("Failed to sign out user " + effectiveAccount.getAADID(), e);
                     }
-                    mEnrollmentManager.unregisterAccountForMAM(effectiveAccount.getUPN());
+                    mEnrollmentManager.unregisterAccountForMAM(effectiveAccount.getAccountId());
                     mUserAccount = null;
                 }
             );
@@ -216,15 +216,15 @@ public class IntunePlugin extends Plugin {
 
     @PluginMethod
     public void appConfig(PluginCall call) {
-        String upn = call.getString("upn");
+        String accountId = call.getString("accountId");
 
-        if (upn == null) {
-            call.reject("No upn provided");
+        if (accountId == null) {
+            call.reject("No accountId provided");
             return;
         }
 
         MAMAppConfigManager configManager = MAMComponents.get(MAMAppConfigManager.class);
-        MAMAppConfig appConfig = configManager.getAppConfig(upn);
+        MAMAppConfig appConfig = configManager.getAppConfig(accountId);
 
         JSObject data = new JSObject();
         data.put("fullData", new JSArray(appConfig.getFullData()));
@@ -233,15 +233,15 @@ public class IntunePlugin extends Plugin {
 
     @PluginMethod
     public void groupName(PluginCall call) {
-        String upn = call.getString("upn");
+        String accountId = call.getString("accountId");
 
-        if (upn == null) {
-            call.reject("No upn provided");
+        if (accountId == null) {
+            call.reject("No accountId provided");
             return;
         }
 
         MAMAppConfigManager configManager = MAMComponents.get(MAMAppConfigManager.class);
-        MAMAppConfig data = configManager.getAppConfig(upn);
+        MAMAppConfig data = configManager.getAppConfig(accountId);
 
         String groupNameKey = "GroupName";
 
@@ -316,20 +316,20 @@ public class IntunePlugin extends Plugin {
 
                 // Note: An app that has enabled APP CA with Policy Assurance would need to pass these values to `remediateCompliance`.
                 // For more information, see https://docs.microsoft.com/en-us/mem/intune/developer/app-sdk-android#app-ca-with-policy-assurance
-                final String upn = appException.getAccountUpn();
+                final String accountId = appException.getAccountUpn();
                 final String aadid = appException.getAccountUserId();
                 final String tenantId = appException.getTenantId();
                 final String authorityURL = appException.getAuthorityUrl();
 
                 // The user cannot be considered "signed in" at this point, so don't save it to the settings.
-                mUserAccount = new AppAccount(upn, aadid, tenantId, authorityURL);
+                mUserAccount = new AppAccount(accountId, aadid, tenantId, authorityURL);
 
                 final String message = "Intune App Protection Policy required.";
                 showMessage(message);
 
                 Logger.info("MsalIntuneAppProtectionPolicyRequiredException received.");
                 Logger.info(
-                    String.format("Data from broker: UPN: %s; AAD ID: %s; Tenant ID: %s; Authority: %s", upn, aadid, tenantId, authorityURL)
+                    String.format("Data from broker: Account ID: %s; AAD ID: %s; Tenant ID: %s; Authority: %s", accountId, aadid, tenantId, authorityURL)
                 );
             } else if (exc instanceof MsalUserCancelException) {
                 showMessage("User cancelled sign-in request");
@@ -342,29 +342,28 @@ public class IntunePlugin extends Plugin {
         public void onSuccess(final IAuthenticationResult result) {
             IAccount account = result.getAccount();
 
-            final String upn = account.getUsername();
+            final String accountId = account.getId();
             final String aadId = account.getId();
             final String tenantId = account.getTenantId();
             final String authorityURL = account.getAuthority();
             final String token = result.getAccessToken();
-            final String idToken = result.getAccount().getIdToken();
-            final String accountId = account.getId();
+            final String idToken = account.getIdToken();
 
-            String message = "Authentication succeeded for user " + upn;
+            String message = "Authentication succeeded for user " + accountId;
             Logger.info(message);
 
             // Save the user account in the settings, since the user is now "signed in".
-            mUserAccount = new AppAccount(upn, aadId, tenantId, authorityURL);
+            mUserAccount = new AppAccount(accountId, aadId, tenantId, authorityURL);
 
             final SharedPreferences prefs = getContext().getSharedPreferences(SETTINGS_PATH, Context.MODE_PRIVATE);
             mUserAccount.saveToSettings(prefs);
 
             // Register the account for MAM.
-            mEnrollmentManager.registerAccountForMAM(upn, aadId, tenantId, authorityURL);
+            mEnrollmentManager.registerAccountForMAM(accountId, aadId, tenantId, authorityURL);
 
             if (mLastEnrollCall != null) {
                 JSObject data = new JSObject();
-                data.put("upn", upn);
+                data.put("accountId", accountId);
                 data.put("accessToken", token);
                 data.put("idToken", idToken);
                 data.put("accountIdentifier", accountId);

@@ -10,9 +10,13 @@ This policy is for Intune as maintained by Ionic. Capacitor Core, Capacitor Plug
 | Version |      Status       |      Released      | Active Support Ends | Long-Term Support Ends |
 | :-----: | :---------------: | :----------------: | :-----------------: | :--------------------: |
 |   V1    |   Not Supported   | September 14, 2021 | September 24, 2021  |   September 24, 2022   |
-|   V2    | Long Term Support | September 24, 2021 |  November 30, 2022  |   November 30, 2023    |
-|   V3    |  Active Support   | November 30, 2022  |         TBD         |          TBD           |
-
+|   V2    |   Not Supported   | September 24, 2021 |  November 30, 2022  |   November 30, 2023    |
+|   V3    |   Not Supported   | November 30, 2022  |    Feb 11, 2025     |      Feb 11, 2025      |
+|   V4    |   Not Supported   | April 8, 2020      |    July 28, 2021    |      Feb 11, 2025      |
+|   V5    | Long-Term Support | July 28, 2021      |     Feb 11, 2025    |    December 31, 2026   |
+|   V6    |      Active       | Feb 11, 2025       |  December 31, 2026  |          TBD           |
+|   V7    |      Active       | Feb 11, 2025       |         TBD         |          TBD        
+   |
 ### Support Policy
 
 Ionic enterprise products are covered by a 3-stage support plan to ensure that all customers have the best experience with Ionic products and are able to receive our excellent standard of care. These steps are outlined as follows:

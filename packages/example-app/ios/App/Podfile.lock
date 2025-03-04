@@ -1,0 +1,61 @@
+PODS:
+  - Capacitor (6.2.0):
+    - CapacitorCordova
+  - CapacitorApp (6.0.2):
+    - Capacitor
+  - CapacitorCordova (6.2.0)
+  - CapacitorHaptics (6.0.2):
+    - Capacitor
+  - CapacitorKeyboard (6.0.3):
+    - Capacitor
+  - CapacitorStatusBar (6.0.2):
+    - Capacitor
+  - IonicEnterpriseIntune (6.0.0-dev-4):
+    - Capacitor
+    - MSAL (~> 1.7.0)
+  - MSAL (1.7.0):
+    - MSAL/app-lib (= 1.7.0)
+  - MSAL/app-lib (1.7.0)
+
+DEPENDENCIES:
+  - "Capacitor (from `../../../../node_modules/@capacitor/ios`)"
+  - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
+  - "CapacitorCordova (from `../../../../node_modules/@capacitor/ios`)"
+  - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
+  - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
+  - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
+  - IonicEnterpriseIntune (from `../../../intune`)
+
+SPEC REPOS:
+  trunk:
+    - MSAL
+
+EXTERNAL SOURCES:
+  Capacitor:
+    :path: "../../../../node_modules/@capacitor/ios"
+  CapacitorApp:
+    :path: "../../node_modules/@capacitor/app"
+  CapacitorCordova:
+    :path: "../../../../node_modules/@capacitor/ios"
+  CapacitorHaptics:
+    :path: "../../node_modules/@capacitor/haptics"
+  CapacitorKeyboard:
+    :path: "../../node_modules/@capacitor/keyboard"
+  CapacitorStatusBar:
+    :path: "../../node_modules/@capacitor/status-bar"
+  IonicEnterpriseIntune:
+    :path: "../../../intune"
+
+SPEC CHECKSUMS:
+  Capacitor: 05d35014f4425b0740fc8776481f6a369ad071bf
+  CapacitorApp: e1e6b7d05e444d593ca16fd6d76f2b7c48b5aea7
+  CapacitorCordova: b33e7f4aa4ed105dd43283acdd940964374a87d9
+  CapacitorHaptics: 4fc15afe22b123d093e6ace24d95e8e3b1f261b9
+  CapacitorKeyboard: e89189ad398b815b6ff7e52271f0fb4f911a0a0a
+  CapacitorStatusBar: b16799a26320ffa52f6c8b01737d5a95bbb8f3eb
+  IonicEnterpriseIntune: b89dc0b0f3a014d117584c3a5176c8363067a5c7
+  MSAL: 088bc688c1ce1a62f0d9c13905ddb31f8f1ac700
+
+PODFILE CHECKSUM: 0bf20ccd05facd05f6b5f78377bb07ea94a00c15
+
+COCOAPODS: 1.16.2

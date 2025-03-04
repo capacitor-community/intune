@@ -18,7 +18,7 @@ class EnrollmentDelegateClass: NSObject, IntuneMAMEnrollmentDelegate {
                 self.didSucceedCallback!(true, "")
             }
         } else {
-            print("Enrollment result for identity \(status.identity) with status code \(status.statusCode)")
+            print("Enrollment result for accountId \(status.accountId) with status code \(status.statusCode)")
             print("Debug message: \(String(describing: status.errorString))")
             if self.didSucceedCallback != nil {
                 self.didSucceedCallback!(false, String(describing: status.errorString))
@@ -39,7 +39,7 @@ class EnrollmentDelegateClass: NSObject, IntuneMAMEnrollmentDelegate {
                 self.didSucceedCallback!(true, "")
             }
         } else {
-            print("Unenrollment result for identity \(status.identity) with status code \(status.statusCode)")
+            print("Unenrollment result for accountId \(status.accountId) with status code \(status.statusCode)")
             print("Debug message: \(String(describing: status.errorString))")
             if self.didSucceedCallback != nil {
                 self.didSucceedCallback!(false, String(describing: status.errorString))

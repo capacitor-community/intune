@@ -12,7 +12,7 @@ export interface IntuneMAMAcquireTokenOptions {
 
 export interface IntuneMAMAcquireTokenSilentOptions
   extends IntuneMAMAcquireTokenOptions {
-  upn: string;
+  accountId: string;
 
   /**
    * Whether to force the tokens to be refresh regardless of whether the cached token is expired or not.
@@ -23,18 +23,18 @@ export interface IntuneMAMAcquireTokenSilentOptions
 }
 
 export interface IntuneMAMAcquireToken {
-  upn: string;
+  accountId: string;
   accessToken: string;
   accountIdentifier: string;
   idToken?: string;
 }
 
 export interface IntuneMAMRegisterAndEnrollAccountOptions {
-  upn: string;
+  accountId: string;
 }
 
 export interface IntuneMAMUser {
-  upn: string;
+  accountId: string;
 }
 
 export interface IntuneMAMVersionInfo {

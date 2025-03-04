@@ -14,7 +14,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.0.0'
+        classpath 'com.android.tools.build:gradle:8.2.1'
     }
 }
 
@@ -22,7 +22,7 @@ apply plugin: 'com.android.library'
 
 android {
     namespace "com.ionicframework.intune"
-    compileSdkVersion project.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 34
+    compileSdk project.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 34
     defaultConfig {
         minSdkVersion project.hasProperty('minSdkVersion') ? rootProject.ext.minSdkVersion : 22
         targetSdkVersion project.hasProperty('targetSdkVersion') ? rootProject.ext.targetSdkVersion : 34
@@ -63,6 +63,6 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
 
-    compileOnly files("./ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
-    implementation 'com.microsoft.identity.client:msal:5.3.0'
+    implementation files("./ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
+    implementation 'com.microsoft.identity.client:msal:5.10.0'
 }

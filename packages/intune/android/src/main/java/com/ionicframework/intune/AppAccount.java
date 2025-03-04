@@ -13,35 +13,35 @@ import androidx.annotation.NonNull;
  */
 public class AppAccount {
 
-    private final String mUPN;
+    private final String mAccountId;
     private final String mAADID;
     private final String mTenantID;
     private final String mAuthority;
 
-    private static final String UPN_KEY = "mamsampleappaccount.upn";
+    private static final String ACCOUNT_ID_KEY = "mamsampleappaccount.accountid";
     private static final String AADID_KEY = "mamsampleappaccount.aadid";
     private static final String TENANTID_KEY = "mamsampleappaccount.tenantid";
     private static final String AUTHORITY_KEY = "mamsampleappaccount.authority";
 
     public AppAccount(
-        @NonNull final String upn,
+        @NonNull final String accountId,
         @NonNull final String aadid,
         @NonNull final String tenantid,
         @NonNull final String authority
     ) {
-        this.mUPN = upn;
+        this.mAccountId = accountId;
         this.mAADID = aadid;
         this.mTenantID = tenantid;
         this.mAuthority = authority;
     }
 
     /**
-     * Get the UPN.
+     * Get the account ID (ObjectID).
      *
-     * @return the UPN.
+     * @return the account ID.
      */
-    public String getUPN() {
-        return mUPN;
+    public String getAccountId() {
+        return mAccountId;
     }
 
     /**
@@ -79,7 +79,7 @@ public class AppAccount {
      */
     public void saveToSettings(SharedPreferences sharedPref) {
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(UPN_KEY, mUPN);
+        editor.putString(ACCOUNT_ID_KEY, mAccountId);
         editor.putString(AADID_KEY, mAADID);
         editor.putString(TENANTID_KEY, mTenantID);
         editor.putString(AUTHORITY_KEY, mAuthority);
@@ -97,8 +97,8 @@ public class AppAccount {
      * found in the settings.
      */
     public static AppAccount readFromSettings(final SharedPreferences sharedPref) {
-        final String upn = sharedPref.getString(UPN_KEY, null);
-        if (upn == null) return null;
+        final String accountId = sharedPref.getString(ACCOUNT_ID_KEY, null);
+        if (accountId == null) return null;
 
         final String aadid = sharedPref.getString(AADID_KEY, null);
         if (aadid == null) return null;
@@ -109,7 +109,7 @@ public class AppAccount {
         final String authority = sharedPref.getString(AUTHORITY_KEY, null);
         if (authority == null) return null;
 
-        return new AppAccount(upn, aadid, tenantid, authority);
+        return new AppAccount(accountId, aadid, tenantid, authority);
     }
 
     /**
@@ -120,7 +120,7 @@ public class AppAccount {
      */
     public static void clearFromSettings(final SharedPreferences sharedPref) {
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.remove(UPN_KEY);
+        editor.remove(ACCOUNT_ID_KEY);
         editor.remove(AADID_KEY);
         editor.remove(TENANTID_KEY);
         editor.remove(AUTHORITY_KEY);

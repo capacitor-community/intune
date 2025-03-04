@@ -54,7 +54,7 @@ const authInfo = await IntuneMAM.acquireToken({
 
 try {
    await IntuneMAM.registerAndEnrollAccount({
-     upn: authInfo.upn,
+     accountId: authInfo.accountId,
    });
 } catch (error) {
   // Handle errors
@@ -69,21 +69,21 @@ The response from `acquireToken` and `acquireTokenSilent` will be of the form:
 
 ```typescript
 export interface IntuneMAMAcquireToken {
-  upn: string;
+  accountId: string;
   accessToken: string;
   accountIdentifier: string;
   idToken?: string;
 }
 ```
 
-Then, on subsequent loads, the app should request a token silently using `acquireTokenSilent` and passing in the `upn` for the user. If that fails, then the app must present the interactive authentication flow again, for example:
+Then, on subsequent loads, the app should request a token silently using `acquireTokenSilent` and passing in the `accountId` for the user. If that fails, then the app must present the interactive authentication flow again, for example:
 
 ```typescript
 // Home/App component
 try {
   const tokenInfo = await IntuneMAM.acquireTokenSilent({
     scopes: ['https://graph.microsoft.com/.default'],
-    upn: this.upn,
+    accountId: this.accountId,
     forceRefresh: false
   });
   setTokenInfo(tokenInfo);
@@ -117,13 +117,13 @@ await IntuneMAM.loginAndEnrollAccount();
 
 ## Get Enrolled Account
 
-Once a user is logged in and enrolled, the upn can be accessed with:
+Once a user is logged in and enrolled, the accountId can be accessed with:
 
 ```typescript
 const user = await IntuneMAM.enrolledAccount();
 
-// User UPN can be accessed using the upn field:
-// user.upn
+// User's ObjectID can be accessed using the accountId field:
+// user.accountId
 ```
 
 ## Sign out and Deregister Account

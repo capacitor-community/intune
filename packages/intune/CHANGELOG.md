@@ -1,5 +1,15 @@
 # @ionic-enterprise/intune
 
+## 6.0.0
+
+### Major Changes
+
+- Update Intune Android SDK to 11.0.0 and iOS SDK to 20.3.0
+- Update MSAL Android to 5.10.0 and iOS to 1.7.0
+- Now requires iOS 14+ and Xcode 15+
+- Now requires Cordova 13+ for Android and Cordova iOS 6+
+- **BREAKING CHANGE**: All methods now require using Object ID (OID) instead of User Principal Name (UPN) for account identification
+
 ## 5.0.0
 
 ### Major Changes

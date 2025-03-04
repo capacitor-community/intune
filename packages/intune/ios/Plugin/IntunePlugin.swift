@@ -33,7 +33,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
 
     }
 
-    public func identity(_ identity: String, hasComplianceStatus status: IntuneMAMComplianceStatus, withErrorMessage errMsg: String, andErrorTitle errTitle: String) {
+    public func accountId(_ accountId: String, hasComplianceStatus status: IntuneMAMComplianceStatus, withErrorMessage errMsg: String, andErrorTitle errTitle: String) {
         switch status {
         case .compliant:
             // Handle successful compliance
@@ -47,7 +47,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                 self.bridge?.viewController?.present(alert, animated: true, completion: nil)
             }
         case .interactionRequired:
-            IntuneMAMComplianceManager.instance().remediateCompliance(forIdentity: identity, silent: false)
+            IntuneMAMComplianceManager.instance().remediateCompliance(forAccountId: accountId, silent: false)
         default:
             print("Unknown compliance status value")
         }
@@ -65,11 +65,10 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
     }
 
     func _acquireToken(_ call: CAPPluginCall, interactive: Bool) {
-
         // Used for refreshing a token
-        let upn = call.getString("upn")
-        if !interactive && upn == nil {
-            call.reject("upn must be provided to refresh token")
+        let accountId = call.getString("accountId")
+        if !interactive && accountId == nil {
+            call.reject("accountId must be provided to refresh token")
             return
         }
 
@@ -126,7 +125,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                         guard let authResult = result, error == nil else {
                             if let error = error as NSError? {
                                 if error.code == MSALError.serverProtectionPoliciesRequired.rawValue {
-                                    IntuneMAMComplianceManager.instance().remediateCompliance(forIdentity: error.userInfo[MSALDisplayableUserIdKey] as! String, silent: false)
+                                    IntuneMAMComplianceManager.instance().remediateCompliance(forAccountId: error.userInfo[MSALDisplayableUserIdKey] as! String, silent: false)
                                 }
                             }
                             print(error!.localizedDescription)
@@ -137,8 +136,8 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                         // Get access token from result
                         let accessToken = authResult.accessToken
                         let idToken = authResult.idToken
-                        guard let upn = authResult.account.username else {
-                            call.reject("No username provided for account, unable to register")
+                        guard let accountId = authResult.account.identifier else {
+                            call.reject("No accountId provided for account, unable to register")
                             return
                         }
                         // You'll want to get the account identifier to retrieve and reuse the account for later acquireToken calls
@@ -148,7 +147,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                             "accessToken": accessToken,
                             "idToken": idToken,
                             "accountIdentifier": accountIdentifier,
-                            "upn": upn
+                            "accountId": authResult.tenantProfile.identifier
                         ])
                     }
 
@@ -159,7 +158,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                         }
                         application.acquireToken(with: interactiveParameters, completionBlock: completionBlock)
                     } else {
-                        guard let account = try? application.account(forUsername: upn!) else {
+                        guard let account = try? application.account(forIdentifier: accountId!) else {
                             call.reject("Unable to find account to refresh, must call acquireToken for interactive flow")
                             return
                         }
@@ -185,8 +184,8 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
     }
 
     @objc public func registerAndEnrollAccount(_ call: CAPPluginCall) {
-        guard let upn = call.getString("upn") else {
-            call.reject("upn must be provided. Call acquireToken first")
+        guard let accountId = call.getString("accountId") else {
+            call.reject("accountId must be provided. Call acquireToken first")
             return
         }
         
@@ -201,8 +200,8 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
         // The delegate is not always called so we call deRegisterAndUnenrollAccount as a workaround
         // Example is when the user is not licensed for inTune
         // Maybe caused by this issue https://github.com/msintuneappsdk/ms-intune-app-sdk-ios/issues/178
-        // IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccount(upn, withWipe: true)
-        IntuneMAMEnrollmentManager.instance().registerAndEnrollAccount(upn)
+        IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccountId(accountId, withWipe: true)
+        IntuneMAMEnrollmentManager.instance().registerAndEnrollAccountId(accountId)
     }
 
     @objc public func loginAndEnrollAccount(_ call: CAPPluginCall) {
@@ -218,16 +217,16 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
     }
 
     @objc public func enrolledAccount(_ call: CAPPluginCall) {
-        let user = IntuneMAMEnrollmentManager.instance().enrolledAccount()
+        let accountId = IntuneMAMEnrollmentManager.instance().enrolledAccountId()
 
         call.resolve([
-            "upn": user ?? ""
+            "accountId": accountId ?? ""
         ])
     }
 
     @objc public func deRegisterAndUnenrollAccount(_ call: CAPPluginCall) {
-        guard let upn = call.getString("upn") else {
-            call.reject("No upn provided")
+        guard let accountId = call.getString("accountId") else {
+            call.reject("No accountId provided")
             return
         }
 
@@ -258,7 +257,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
             }
             self.resetDelegate()
         }
-        IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccount(upn, withWipe: true)
+        IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccountId(accountId, withWipe: true)
 
         DispatchQueue.main.async { [weak self] in
             do {
@@ -278,7 +277,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                         return
                     }
 
-                    guard let account = try? application.account(forUsername: upn) else {
+                    guard let account = try? application.account(forIdentifier: accountId) else {
                         call.reject("Unable to find account to refresh, must call acquireToken for interactive flow")
                         return
                     }
@@ -301,8 +300,8 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
     }
 
     @objc public func logoutOfAccount(_ call: CAPPluginCall) {
-        guard let upn = call.getString("upn") else {
-            call.reject("No upn provided")
+        guard let accountId = call.getString("accountId") else {
+            call.reject("No accountId provided")
             return
         }
 
@@ -343,7 +342,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                         return
                     }
 
-                    guard let account = try? application.account(forUsername: upn) else {
+                    guard let account = try? application.account(forIdentifier: accountId) else {
                         call.reject("Unable to find account to refresh, must call acquireToken for interactive flow")
                         return
                     }
@@ -368,11 +367,11 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
     }
 
     @objc public func appConfig(_ call: CAPPluginCall) {
-        guard let upn = call.getString("upn") else {
-            call.reject("No upn provided")
+        guard let accountId = call.getString("accountId") else {
+            call.reject("No accountId provided")
             return
         }
-        let data = IntuneMAMAppConfigManager.instance().appConfig(forIdentity: upn)
+        let data = IntuneMAMAppConfigManager.instance().appConfig(forAccountId: accountId)
 
         let groupNameKey = "GroupName"
 
@@ -381,7 +380,6 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                 print("Got group name here: \(groupName)")
             }
         } else {
-            // Resolve the conflict by taking the max value
             let gn = data.stringValue(forKey: groupNameKey, queryType: IntuneMAMStringQueryType.max)!
             print("Got group name: \(gn)")
         }
@@ -392,11 +390,11 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
     }
 
     @objc public func groupName(_ call: CAPPluginCall) {
-        guard let upn = call.getString("upn") else {
-            call.reject("No upn provided")
+        guard let accountId = call.getString("accountId") else {
+            call.reject("No accountId provided")
             return
         }
-        let data = IntuneMAMAppConfigManager.instance().appConfig(forIdentity: upn)
+        let data = IntuneMAMAppConfigManager.instance().appConfig(forAccountId: accountId)
 
         let groupNameKey = "GroupName"
         var groupName: String?
@@ -418,22 +416,22 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
     }
 
     @objc public func getPolicy(_ call: CAPPluginCall) {
-        guard let upn = call.getString("upn") else {
-            call.reject("No upn provided")
+        guard let accountId = call.getString("accountId") else {
+            call.reject("No accountId provided")
             return
         }
 
-        guard let policy = IntuneMAMPolicyManager.instance().policy(forIdentity: upn) else {
+        guard let policy = IntuneMAMPolicyManager.instance().policy(forAccountId: accountId) else {
             call.reject("No policy for user")
             return
         }
 
         // Convert their dictionary mapping of number : number to an array for json serialization
-        let openFromLocations = policy.getOpenFromLocations(forAccount: upn).map { key, value in
+        let openFromLocations = policy.getOpenFromLocations(forAccountId: accountId).map { key, value in
             return [key, value]
         }
 
-        let saveToLocations = policy.getSaveToLocations(forAccount: upn).map { key, value in
+        let saveToLocations = policy.getSaveToLocations(forAccountId: accountId).map { key, value in
             return [key, value]
         }
 
