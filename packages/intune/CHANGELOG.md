@@ -1,5 +1,11 @@
 # @ionic-enterprise/intune
 
+## 7.0.1
+
+### Patch Changes
+
+- Fix declaration of Android intune aar in build.gradle
+
 ## 7.0.0
 
 ### Major Changes
