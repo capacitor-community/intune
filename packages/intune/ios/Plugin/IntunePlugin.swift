@@ -12,6 +12,21 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
     private func resetDelegate() {
         IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass()
     }
+    
+    private func getAccount(from application: MSALPublicClientApplication, accountId: String) -> MSALAccount? {
+        // First try with the full account identifier
+        if let account = try? application.account(forIdentifier: accountId) {
+            return account
+        }
+        
+        // If that fails, try using it as a tenant profile identifier
+        let enumerationParams = MSALAccountEnumerationParameters(tenantProfileIdentifier: accountId)
+        if let accounts = try? application.accounts(for: enumerationParams), let account = accounts.first {
+            return account
+        }
+        
+        return nil
+    }
 
     override public func load() {
         print("IntuneMAM Loading")
@@ -158,7 +173,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                         }
                         application.acquireToken(with: interactiveParameters, completionBlock: completionBlock)
                     } else {
-                        guard let account = try? application.account(forIdentifier: accountId!) else {
+                        guard let account = self.getAccount(from: application, accountId: accountId!) else {
                             call.reject("Unable to find account to refresh, must call acquireToken for interactive flow")
                             return
                         }
@@ -277,7 +292,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                         return
                     }
 
-                    guard let account = try? application.account(forIdentifier: accountId) else {
+                    guard let account = self.getAccount(from: application, accountId: accountId) else {
                         call.reject("Unable to find account to refresh, must call acquireToken for interactive flow")
                         return
                     }
@@ -342,7 +357,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                         return
                     }
 
-                    guard let account = try? application.account(forIdentifier: accountId) else {
+                    guard let account = self.getAccount(from: application, accountId: accountId) else {
                         call.reject("Unable to find account to refresh, must call acquireToken for interactive flow")
                         return
                     }
