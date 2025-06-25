@@ -1,5 +1,11 @@
 # @ionic-enterprise/intune
 
+## 7.0.2
+
+### Patch Changes
+
+- iOS: No longer fail to return account when refreshing tokens
+
 ## 7.0.1
 
 ### Patch Changes
