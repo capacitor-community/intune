@@ -92,6 +92,12 @@ Add to your `<application` declaration this attribute at the end:
 android:name="com.ionicframework.intune.IntuneApplication"
 ```
 
+**For Android 16+ compatibility:** Also add the following attribute to opt out of predictive back animations (required because the MS Intune SDK has not yet implemented the new back navigation APIs):
+
+```xml
+android:enableOnBackInvokedCallback="false"
+```
+
 So your `<application>` declaration will look similar to:
 
 ```xml
@@ -102,7 +108,8 @@ So your `<application>` declaration will look similar to:
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
-    android:name="com.ionicframework.intune.IntuneApplication">
+    android:name="com.ionicframework.intune.IntuneApplication"
+    android:enableOnBackInvokedCallback="false">
 ```
 
 To use brokered auth with Microsoft Authenticator or the Intune Company Portal app, add these `<queries>` to the top level of your `AndroidManifest.xml` file (directly inside the top-level `<manifest>` declaration). Note: this is required as of Android 12 API Level 30, apps targeting older versions may function fine without it.
