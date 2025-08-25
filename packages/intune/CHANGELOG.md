@@ -1,5 +1,11 @@
 # @ionic-enterprise/intune
 
+## 7.0.3
+
+### Patch Changes
+
+- Android: Opt-out of predictive back support for Android 16+
+
 ## 7.0.2
 
 ### Patch Changes
