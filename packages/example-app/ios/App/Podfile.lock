@@ -10,12 +10,12 @@ PODS:
     - Capacitor
   - CapacitorStatusBar (7.0.0):
     - Capacitor
-  - IonicEnterpriseIntune (7.0.1):
+  - IonicEnterpriseIntune (7.0.3):
     - Capacitor
-    - MSAL (~> 1.7.0)
-  - MSAL (1.7.0):
-    - MSAL/app-lib (= 1.7.0)
-  - MSAL/app-lib (1.7.0)
+    - MSAL (~> 1.9.0)
+  - MSAL (1.9.0):
+    - MSAL/app-lib (= 1.9.0)
+  - MSAL/app-lib (1.9.0)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
@@ -53,9 +53,9 @@ SPEC CHECKSUMS:
   CapacitorHaptics: 7be406a91e4eb87287f321c6c68e1709d6837b3a
   CapacitorKeyboard: 4db71e694e7afb5d7c0be09b05495c19f7d6c914
   CapacitorStatusBar: a8c4c83ed2e973bdafb979e80e4b00d027832cb7
-  IonicEnterpriseIntune: 8cd2d3f0a07e1488e44157e60f9f94e0b814f13d
-  MSAL: 088bc688c1ce1a62f0d9c13905ddb31f8f1ac700
+  IonicEnterpriseIntune: e4d64f35896cd5b6ca7cf8d80ab32bfc51f42009
+  MSAL: 1a32a1070ccf55d9641d31edd8869ea2b5a78beb
 
-PODFILE CHECKSUM: 320594d51bfd7388de11ad31fd39a004e78337e9
+PODFILE CHECKSUM: 18c8f4d042146b26de5cbc44b32aa3acee31f649
 
 COCOAPODS: 1.16.2

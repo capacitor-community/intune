@@ -3,10 +3,12 @@ dist
 node_modules
 
 # iOS files
+Package.resolved
 Pods
 Podfile.lock
 Build
 xcuserdata
+.build
 
 # macOS files
 .DS_Store

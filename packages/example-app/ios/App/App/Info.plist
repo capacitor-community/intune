@@ -27,8 +27,8 @@
 				<string>msauth.$(PRODUCT_BUNDLE_IDENTIFIER)-intunemam</string>
 				<string>msauth.com.microsoft.intunemam</string>
 				<string>msauth.com.microsoft.intunemam-intunemam</string>
-				<string>msauth.com.outsystems.intunedemo</string>
-				<string>msauth.com.outsystems.intunedemo-intunemam</string>
+				<string>msauth.com.pedrob.test.intunedemo</string>
+				<string>msauth.com.pedrob.test.intunedemo-intunemam</string>
 			</array>
 		</dict>
 	</array>
@@ -37,11 +37,11 @@
 	<key>IntuneMAMSettings</key>
 	<dict>
 		<key>ADALAuthority</key>
-		<string>https://login.microsoftonline.com/2786c71e-825b-40fd-83bc-e28e4df06029</string>
+		<string>https://login.microsoftonline.com/organizations</string>
 		<key>ADALClientId</key>
-		<string>ed413796-017c-47da-8292-2deb4a104450</string>
+		<string>0bad61d5-5c43-4a4b-b462-ce4b92c614df</string>
 		<key>ADALRedirectUri</key>
-		<string>msauth.com.outsystems.intunedemo://auth</string>
+		<string>msauth.com.pedrob.test.intunedemo://auth</string>
 	</dict>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
