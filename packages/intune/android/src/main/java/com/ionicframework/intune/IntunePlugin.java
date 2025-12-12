@@ -79,11 +79,15 @@ public class IntunePlugin extends Plugin {
         // initiate the MSAL authentication on a background thread
         Thread thread = new Thread(
             () -> {
-                Logger.info("Starting interactive auth");
+                Logger.info("Starting " + (interactive ? "interactive" : "silent") + " auth");
 
                 try {
                     if (interactive) {
-                        MSALUtil.acquireToken(getActivity(), scopes, null, forcePrompt, new AuthCallback());
+                        String loginHint = null;
+                        if (mUserAccount != null && !forcePrompt) {
+                            loginHint = mUserAccount.getAccountId();
+                        }
+                        MSALUtil.acquireToken(getActivity(), scopes, loginHint, forcePrompt, new AuthCallback());
                     } else {
                         MSALUtil.acquireTokenSilent(getActivity(), accountId, scopes, new AuthCallback(), forceRefresh);
                     }

@@ -10,7 +10,7 @@ PODS:
     - Capacitor
   - CapacitorStatusBar (7.0.0):
     - Capacitor
-  - IonicEnterpriseIntune (7.0.3):
+  - IonicEnterpriseIntune (8.0.0-dev.3):
     - Capacitor
     - MSAL (~> 1.9.0)
   - MSAL (1.9.0):
@@ -53,7 +53,7 @@ SPEC CHECKSUMS:
   CapacitorHaptics: 7be406a91e4eb87287f321c6c68e1709d6837b3a
   CapacitorKeyboard: 4db71e694e7afb5d7c0be09b05495c19f7d6c914
   CapacitorStatusBar: a8c4c83ed2e973bdafb979e80e4b00d027832cb7
-  IonicEnterpriseIntune: e4d64f35896cd5b6ca7cf8d80ab32bfc51f42009
+  IonicEnterpriseIntune: f55a6824de0aa17acaa20b4c48e6d561f0b2db84
   MSAL: 1a32a1070ccf55d9641d31edd8869ea2b5a78beb
 
 PODFILE CHECKSUM: 18c8f4d042146b26de5cbc44b32aa3acee31f649

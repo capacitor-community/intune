@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.microsoft.intune.mam'
 
 android {
-    namespace = "com.outsystems.intunedemo"
-    compileSdk = rootProject.ext.compileSdkVersion
+    namespace "com.pedrob.test.intunedemo"
+    compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.outsystems.intunedemo"
+        applicationId "com.pedrob.test.intunedemo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

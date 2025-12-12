@@ -13,6 +13,21 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
         IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass()
     }
 
+    private func getAccount(from application: MSALPublicClientApplication, accountId: String) -> MSALAccount? {
+        // First try with the full account identifier
+        if let account = try? application.account(forIdentifier: accountId) {
+            return account
+        }
+        
+        // If that fails, try using it as a tenant profile identifier
+        let enumerationParams = MSALAccountEnumerationParameters(tenantProfileIdentifier: accountId)
+        if let accounts = try? application.accounts(for: enumerationParams), let account = accounts.first {
+            return account
+        }
+        
+        return nil
+    }
+
     override public func load() {
         print("IntuneMAM Loading")
         self.resetDelegate()
@@ -125,7 +140,11 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                         guard let authResult = result, error == nil else {
                             if let error = error as NSError? {
                                 if error.code == MSALError.serverProtectionPoliciesRequired.rawValue {
-                                    IntuneMAMComplianceManager.instance().remediateCompliance(forAccountId: error.userInfo[MSALDisplayableUserIdKey] as! String, silent: false)
+                                    if let homeAccountId = error.userInfo[MSALHomeAccountIdKey] as? String {
+                                        let oid = homeAccountId.components(separatedBy: ".").first ?? homeAccountId
+                                        print("Remediating compliance for account OID: \(oid)")
+                                        IntuneMAMComplianceManager.instance().remediateCompliance(forAccountId: oid, silent: false)
+                                    }
                                 }
                             }
                             print(error!.localizedDescription)
@@ -158,7 +177,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                         }
                         application.acquireToken(with: interactiveParameters, completionBlock: completionBlock)
                     } else {
-                        guard let account = try? application.account(forIdentifier: accountId!) else {
+                       guard let account = self.getAccount(from: application, accountId: accountId!) else {
                             call.reject("Unable to find account to refresh, must call acquireToken for interactive flow")
                             return
                         }
@@ -197,10 +216,12 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
             }
             self.resetDelegate()
         }
-        // The delegate is not always called so we call deRegisterAndUnenrollAccount as a workaround
-        // Example is when the user is not licensed for inTune
-        // Maybe caused by this issue https://github.com/msintuneappsdk/ms-intune-app-sdk-ios/issues/178
-        IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccountId(accountId, withWipe: true)
+        // Check if there's already an enrolled account and unenroll it first (without wipe)
+        // to prevent conflicts during re-enrollment
+        if let currentAccount = IntuneMAMEnrollmentManager.instance().enrolledAccountId(), !currentAccount.isEmpty {
+            // Only unenroll without wipe to avoid data loss during re-enrollment
+            IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccountId(currentAccount, withWipe: false)
+        }
         IntuneMAMEnrollmentManager.instance().registerAndEnrollAccountId(accountId)
     }
 
@@ -277,7 +298,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                         return
                     }
 
-                    guard let account = try? application.account(forIdentifier: accountId) else {
+                    guard let account = self.getAccount(from: application, accountId: accountId) else {
                         call.reject("Unable to find account to refresh, must call acquireToken for interactive flow")
                         return
                     }
@@ -342,7 +363,7 @@ public class IntuneMAM: CAPPlugin, IntuneMAMComplianceDelegate {
                         return
                     }
 
-                    guard let account = try? application.account(forIdentifier: accountId) else {
+                    guard let account = self.getAccount(from: application, accountId: accountId) else {
                         call.reject("Unable to find account to refresh, must call acquireToken for interactive flow")
                         return
                     }

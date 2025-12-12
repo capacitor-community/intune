@@ -63,15 +63,24 @@ public final class MSALUtil {
     ) throws MsalException, InterruptedException {
         initializeMsalClientApplication(fromActivity.getApplicationContext());
 
-        AcquireTokenParameters params = new AcquireTokenParameters.Builder()
+        AcquireTokenParameters.Builder paramsBuilder = new AcquireTokenParameters.Builder()
             .withScopes(Arrays.asList(scopes))
             .withCallback(callback)
-            .startAuthorizationFromActivity(fromActivity)
-            .withLoginHint(loginHint)
-            .withPrompt(forcePrompt ? Prompt.LOGIN : Prompt.SELECT_ACCOUNT)
-            .build();
+            .startAuthorizationFromActivity(fromActivity);
 
-        mMsalClientApplication.acquireToken(params);
+        if (loginHint != null && !loginHint.isEmpty()) {
+            paramsBuilder.withLoginHint(loginHint);
+        }
+
+        if (forcePrompt) {
+            paramsBuilder.withPrompt(Prompt.LOGIN);
+        } else if (loginHint != null && !loginHint.isEmpty()) {
+            paramsBuilder.withPrompt(Prompt.WHEN_REQUIRED);
+        } else {
+            paramsBuilder.withPrompt(Prompt.SELECT_ACCOUNT);
+        }
+
+        mMsalClientApplication.acquireToken(paramsBuilder.build());
     }
 
     /**

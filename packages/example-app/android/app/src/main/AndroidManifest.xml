@@ -34,8 +34,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="com.outsystems.intunedemo"
-                    android:path="/Pcn5o2NwnM5+4VERBj1k9y9VKfo="
+                    android:host="com.pedrob.test.intunedemo"
+                    android:path="/tJLlBwnutT33lNPQF//j7hGAQyQ="
                     android:scheme="msauth" />
             </intent-filter>
         </activity>
