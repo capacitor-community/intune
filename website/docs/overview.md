@@ -12,6 +12,11 @@ Ionic's Intune support makes it easy to add Intune MAM and Microsoft authenticat
 
 Intune support is built and supported by the Ionic's native mobile experts and includes ongoing updates and maintenance, including new API features, patches, updates, and compatibility upgrades for new iOS & Android releases.
 
+Starting **January 19, 2026**, Microsoft is making updates to improve the Intune mobile application management (MAM) service. To stay secure and run smoothly, the update requires apps built with XCode 26 to use [v21.1.0 - Release 21.1.0 - microsoftconnect/ms-intune-app-sdk-ios | GitHub](https://github.com/microsoftconnect/ms-intune-app-sdk-ios/releases/tag/21.1.0)
+If you don't update to the latest versions, Microsoft noted that users will be blocked from launching your app.
+
+Source: [Microsoft – What's New](https://learn.microsoft.com/en-us/intune/intune-service/fundamentals/whats-new#update-to-the-latest-intune-company-portal-for-android-intune-app-sdk-for-ios-and-intune-app-wrapper-for-ios)  
+
 ## Why use Ionic's Intune support?
 
 Microsoft Intune is a complex product, and integrating the native Intune App SDKs for iOS and Android along with authentication is very challenging and time consuming. With Ionic's Intune support, developers can get up and running with Intune integration in their app with considerably less work and native development experience required.
