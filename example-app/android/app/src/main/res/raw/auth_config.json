@@ -1,7 +1,7 @@
 {
-  "client_id": "0bad61d5-5c43-4a4b-b462-ce4b92c614df",
+  "client_id": "REPLACE_WITH_CLIENT_ID",
   "authorization_user_agent": "DEFAULT",
-  "redirect_uri": "msauth://com.pedrob.test.intunedemo/tJLlBwnutT33lNPQF%2F%2Fj7hGAQyQ%3D",
+  "redirect_uri": "REPLACE_WITH_REDIRECT_URI",
   "authorities": [
     {
       "type": "AAD",
