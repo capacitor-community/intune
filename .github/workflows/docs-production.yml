@@ -3,7 +3,7 @@ name: Deploy docs to production
 on:
   push:
     branches:
-      - main
+      - ext-support
     paths:
       - .github/workflows/docs-production.yml
       - website/**
