@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "IonicEnterpriseIntune",
+    name: "CapacitorCommunityIntune",
     platforms: [.iOS(.v17)],
     products: [
         .library(

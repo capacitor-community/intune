@@ -1,5 +1,5 @@
 {
-  "name": "@ionic-enterprise/intune",
+  "name": "@capacitor-community/intune",
   "version": "8.0.0",
   "description": "Support for Microsoft Intune",
   "main": "dist/plugin.cjs.js",
@@ -7,7 +7,7 @@
   "types": "dist/esm/index.d.ts",
   "unpkg": "dist/plugin.js",
   "cordova": {
-    "id": "@ionic-enterprise/intune",
+    "id": "@capacitor-community/intune",
     "platforms": [
       "android",
       "ios"
@@ -25,10 +25,10 @@
     "ios/Tests",
     "Package.swift",
     "plugin.xml",
-    "IonicEnterpriseIntune.podspec"
+    "CapacitorCommunityIntune.podspec"
   ],
-  "author": "",
-  "license": "UNLICENSED",
+  "author": "Capacitor Community",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/capacitor-community/intune.git"
@@ -55,7 +55,7 @@
     "build": "npm run clean && tsc && rollup -c rollup.config.mjs",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
-    "prepublishOnly": "node scripts/update-docs-changelog.js && npm run build"
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@capacitor/android": "^8.0.0",
@@ -71,7 +71,7 @@
     "rimraf": "^6.0.1",
     "rollup": "^4.30.1",
     "swiftlint": "^2.0.0",
-    "typescript": "~4.2.4"
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "@capacitor/core": ">=8.0.0"
