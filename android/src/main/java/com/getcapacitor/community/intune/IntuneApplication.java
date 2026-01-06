@@ -1,4 +1,4 @@
-package com.ionicframework.intune;
+package com.getcapacitor.community.intune;
 
 import android.app.Application;
 import android.util.Log;

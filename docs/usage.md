@@ -7,10 +7,10 @@ sidebar_label: Usage
 
 ## Capacitor: Importing
 
-Import from `@ionic-enterprise/intune`, for example:
+Import from `@capacitor-community/intune`, for example:
 
 ```typescript
-import { IntuneMAM } from '@ionic-enterprise/intune';
+import { IntuneMAM } from '@capacitor-community/intune';
 ```
 
 ## Cordova: Importing, TypeScript, and Usage
@@ -28,7 +28,7 @@ import type {
   IntuneMAMPolicy,
   IntuneMAMUser,
   IntuneMAMVersionInfo,
-} from '@ionic-enterprise/intune/cordova/definitions';
+} from '@capacitor-community/intune/cordova/definitions';
 ```
 
 Then, when accessing `IntuneMAM`, it can be typed like this:

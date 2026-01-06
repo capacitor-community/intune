@@ -2,7 +2,7 @@ import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from 
 import { useCallback, useEffect, useState } from 'react';
 import './Home.css';
 
-import { IntuneMAM } from '@ionic-enterprise/intune';
+import { IntuneMAM } from '@capacitor-community/intune';
 import { useHistory } from 'react-router';
 
 const Login: React.FC = () => {

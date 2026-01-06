@@ -6,7 +6,7 @@ let package = Package(
     platforms: [.iOS(.v17)],
     products: [
         .library(
-            name: "IonicEnterpriseIntune",
+            name: "CapacitorCommunityIntune",
             targets: ["IntunePlugin"]
         )
     ],

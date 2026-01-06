@@ -11,7 +11,7 @@ import androidx.core.app.ActivityCompat;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.annotation.Permission;
 import com.getcapacitor.util.PermissionHelper;
-import com.ionicframework.intune.IntunePlugin;
+import com.getcapacitor.community.intune.IntunePlugin;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;

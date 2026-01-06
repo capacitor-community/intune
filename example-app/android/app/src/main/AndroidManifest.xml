@@ -8,7 +8,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="com.ionicframework.intune.IntuneApplication"
+        android:name="com.getcapacitor.community.intune.IntuneApplication"
         android:enableOnBackInvokedCallback="false">
 
         <activity
@@ -33,9 +33,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <!-- GET THIS FROM AZURE AD-->
                 <data
-                    android:host="com.pedrob.test.intunedemo"
-                    android:path="/tJLlBwnutT33lNPQF//j7hGAQyQ="
+                    android:host="REPLACE_WITH_PACKAGE_NAME"
+                    android:path="/REPLACE_WITH_SIGNATURE_HASH"
                     android:scheme="msauth" />
             </intent-filter>
         </activity>
@@ -57,7 +58,7 @@
 
     <queries>
         <package android:name="com.azure.authenticator" />
-        <package android:name="YOUR_PACKAGE" />
+        <package android:name="REPLACE_WITH_PACKAGE_NAME" />
         <package android:name="com.microsoft.windowsintune.companyportal" />
         <!-- Required for API Level 30 to make sure the app detect browsers
             (that don't support custom tabs) -->

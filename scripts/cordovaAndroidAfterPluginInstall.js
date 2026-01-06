@@ -20,7 +20,7 @@ module.exports = async function (ctx) {
 
   if (index < 0) {
     console.error(
-      'Unable to find place to insert required Intune gradle plugin into build.gradle. Please contact Ionic support',
+      'Unable to find place to insert required Intune gradle plugin into build.gradle.',
     );
     return;
   }

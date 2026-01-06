@@ -1,4 +1,4 @@
-package com.ionicframework.intune;
+package com.getcapacitor.community.intune;
 
 import android.content.Context;
 import android.content.SharedPreferences;

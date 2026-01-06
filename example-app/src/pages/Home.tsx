@@ -17,7 +17,7 @@ import {
   IntuneMAMPolicy,
   IntuneMAMUser,
   IntuneMAMVersionInfo,
-} from "@ionic-enterprise/intune";
+} from "@capacitor-community/intune";
 
 import "./Home.css";
 

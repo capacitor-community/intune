@@ -3,7 +3,7 @@
  * Licensed under the MIT License.
  */
 
-package com.ionicframework.intune;
+package com.getcapacitor.community.intune;
 
 import android.content.Context;
 import androidx.annotation.NonNull;

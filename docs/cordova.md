@@ -20,7 +20,7 @@ Version 7.x of the plugin requires:
 - Xcode 15+
 
 ```shell
-ionic cordova plugin add @ionic-enterprise/intune
+ionic cordova plugin add @capacitor-community/intune
   --variable INTUNE_CLIENT_ID=AZURE_CLIENT_ID
   --variable INTUNE_ADAL_AUTHORITY=AZURE_ADAL_AUTHORITY
   --variable INTUNE_REDIRECT_URI_IOS=AZURE_AD_IOS_REDIRECT_URI
@@ -29,7 +29,7 @@ ionic cordova plugin add @ionic-enterprise/intune
 
 ## iOS
 
-No additional configuration necessary. The plugin will set the iOS deployment target to 14.0.0.
+No additional configuration necessary. The plugin will set the iOS deployment target to 17.0.
 
 ## Android
 

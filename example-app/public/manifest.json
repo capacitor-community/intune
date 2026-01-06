@@ -1,6 +1,6 @@
 {
-  "short_name": "Ionic App",
-  "name": "My Ionic App",
+  "short_name": "Capacitor Intune Example App",
+  "name": "Capacitor Intune Example App",
   "icons": [
     {
       "src": "assets/icon/favicon.png",

@@ -1,4 +1,4 @@
-package com.pedrob.test.intunedemo;
+package com.getcapacitor.community.intunedemo;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -16,7 +16,7 @@ public class MainActivity extends BridgeActivity {
     protected void onCreate(Bundle savedInstanceState) {
         PackageInfo info;
         try {
-            info = getPackageManager().getPackageInfo("com.pedrob.test.intunedemo", PackageManager.GET_SIGNATURES);
+            info = getPackageManager().getPackageInfo("com.getcapacitor.community.intunedemo", PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md;
                 md = MessageDigest.getInstance("SHA");

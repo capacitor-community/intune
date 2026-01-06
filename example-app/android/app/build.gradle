@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.microsoft.intune.mam'
 
 android {
-    namespace "com.pedrob.test.intunedemo"
+    namespace "com.getcapacitor.community.intunedemo"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.pedrob.test.intunedemo"
+        applicationId "com.getcapacitor.community.intunedemo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -41,7 +41,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
-    implementation files("../../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
+    implementation files("../../node_modules/@capacitor-community/intune/android/ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
 }
 
 apply from: 'capacitor.build.gradle'

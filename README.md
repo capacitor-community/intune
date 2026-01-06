@@ -17,6 +17,16 @@
 | -----------| -------| -------|
 | Capacitor Community | [capacitor-community](https://github.com/capacitor-community) | |
 
+## Documentation
+
+- [Installation](docs/installation.md)
+- [Android Configuration](docs/android-installation.md)
+- [iOS Configuration](docs/ios-installation.md)
+- [Usage Guide](docs/usage.md)
+- [Cordova Support](docs/cordova.md)
+- [Troubleshooting](docs/troubleshooting.md)
+- [SDK Version Matrix](docs/sdk-versions.md)
+
 ## Installation
 
 ```bash
@@ -24,15 +34,14 @@ npm install @capacitor-community/intune
 npx cap sync
 ```
 
+See the [Installation Guide](docs/installation.md) for full details.
+
 ## Configuration
 
-### Android
+Standard Intune configuration is required for both platforms.
 
-This plugin requires no special configuration in `AndroidManifest.xml` beyond standard Capacitor setup. However, standard Intune configuration via `res/raw/auth_config.json` is required.
-
-### iOS
-
-Your `Info.plist` requires Intune configuration keys. See Microsoft documentation for details.
+- **Android**: See [Android Configuration](docs/android-installation.md)
+- **iOS**: See [iOS Configuration](docs/ios-installation.md)
 
 ## Demo
 

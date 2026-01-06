@@ -60,5 +60,5 @@
     "vite": "~5.2.0",
     "vitest": "^0.34.6"
   },
-  "description": "An Ionic project"
+  "description": "Capacitor Intune Example App"
 }

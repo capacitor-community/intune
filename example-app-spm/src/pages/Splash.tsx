@@ -11,7 +11,7 @@ import { useCallback, useEffect } from "react";
 import ExploreContainer from "../components/ExploreContainer";
 import "./Home.css";
 
-import { IntuneMAM } from "@ionic-enterprise/intune";
+import { IntuneMAM } from "@capacitor-community/intune";
 
 const Splash: React.FC = () => {
   const history = useHistory();

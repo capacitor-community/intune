@@ -39,7 +39,7 @@ buildscript {
         // ADD THIS:
         classpath "org.javassist:javassist:3.29.2-GA"
         // Capacitor users: add reference to the gradle plugin
-        classpath files("../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/GradlePlugin/com.microsoft.intune.mam.build.jar")
+        classpath files("../node_modules/@capacitor-community/intune/android/ms-intune-app-sdk-android/GradlePlugin/com.microsoft.intune.mam.build.jar")
         // Cordova users: add this line instead
         // classpath files("./app/src/main/libs/com.microsoft.intune.mam.build.jar")
     }
@@ -75,7 +75,7 @@ apply plugin: 'com.microsoft.intune.mam'
 ```groovy
 dependencies {
     ...
-    implementation files("../../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
+    implementation files("../../node_modules/@capacitor-community/intune/android/ms-intune-app-sdk-android/Microsoft.Intune.MAM.SDK.aar")
 }
 ```
 
@@ -89,7 +89,7 @@ android.enableResourceOptimizations=false
 Add to your `<application` declaration this attribute at the end:
 
 ```xml
-android:name="com.ionicframework.intune.IntuneApplication"
+android:name="com.getcapacitor.community.intune.IntuneApplication"
 ```
 
 **For Android 16+ compatibility:** Also add the following attribute to opt out of predictive back animations (required because the MS Intune SDK has not yet implemented the new back navigation APIs):
@@ -108,7 +108,7 @@ So your `<application>` declaration will look similar to:
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
-    android:name="com.ionicframework.intune.IntuneApplication"
+    android:name="com.getcapacitor.community.intune.IntuneApplication"
     android:enableOnBackInvokedCallback="false">
 ```
 
