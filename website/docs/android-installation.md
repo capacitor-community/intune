@@ -11,7 +11,7 @@ On Android, the Intune App SDK functions by wrapping key Android API classes wit
 
 To start, open your app in Android Studio.
 
-If using Capacitor, run one of the following commands. If using Cordova, manually open your `platforms/android` folder in Android Studio.
+If using Capacitor, run one of the following commands.
 
 ```shell
 npx cap open android
@@ -40,8 +40,6 @@ buildscript {
         classpath "org.javassist:javassist:3.29.2-GA"
         // Capacitor users: add reference to the gradle plugin
         classpath files("../node_modules/@ionic-enterprise/intune/android/ms-intune-app-sdk-android/GradlePlugin/com.microsoft.intune.mam.build.jar")
-        // Cordova users: add this line instead
-        // classpath files("./app/src/main/libs/com.microsoft.intune.mam.build.jar")
     }
 }
 ```

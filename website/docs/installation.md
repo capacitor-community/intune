@@ -3,7 +3,7 @@ title: Installation
 sidebar_label: Installation
 ---
 
-Ionic's Intune integration supports [Capacitor](https://capacitorjs.com/) (strongly recommended), or Cordova.
+Ionic's Intune integration supports [Capacitor](https://capacitorjs.com/).
 
 ## Capacitor
 
@@ -21,6 +21,3 @@ Then make sure to sync your platforms per the [Capacitor development workflow](h
 
 When finished, follow the steps to complete the native installation and configuration for [iOS](./ios-installation) and/or [Android](./android-installation).
 
-## Cordova
-
-Follow the [Cordova Installation](./cordova) guide.

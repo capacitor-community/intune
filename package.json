@@ -6,16 +6,8 @@
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "unpkg": "dist/plugin.js",
-  "cordova": {
-    "id": "@ionic-enterprise/intune",
-    "platforms": [
-      "android",
-      "ios"
-    ]
-  },
   "files": [
     "android",
-    "cordova",
     "dist/",
     "scripts",
     "ios/IntuneMAMSwift.xcframework",
@@ -24,7 +16,6 @@
     "ios/Sources",
     "ios/Tests",
     "Package.swift",
-    "plugin.xml",
     "IonicEnterpriseIntune.podspec"
   ],
   "author": "",
@@ -86,14 +77,6 @@
     },
     "android": {
       "src": "android"
-    }
-  },
-  "engines": {
-    "cordovaDependencies": {
-      "7.0.0": {
-        "cordova-android": ">=13.0.0",
-        "cordova-ios": ">=7.0.0"
-      }
     }
   },
   "publishConfig": {
