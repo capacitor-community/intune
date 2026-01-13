@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "capacitor-swift-pm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ionic-team/capacitor-swift-pm.git",
+      "state" : {
+        "revision" : "3e7ccfb8ab4d321ffcbd4e490234758e139f8a09",
+        "version" : "8.0.1"
+      }
+    },
+    {
+      "identity" : "microsoft-authentication-library-for-objc",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AzureAD/microsoft-authentication-library-for-objc.git",
+      "state" : {
+        "revision" : "be848ee7fa9516cec47ae6de47cf1087d51bc774",
+        "version" : "1.9.0"
+      }
+    },
+    {
+      "identity" : "ms-intune-app-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/microsoftconnect/ms-intune-app-sdk-ios.git",
+      "state" : {
+        "revision" : "9aba5b0068e00898e6bd4e681b61f793b0872eb1",
+        "version" : "21.4.0"
+      }
+    }
+  ],
+  "version" : 2
+}
