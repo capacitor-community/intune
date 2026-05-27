@@ -61,6 +61,27 @@ export interface IntuneMAMPolicy {
   [key: string]: any;
 }
 
+export interface IntuneMAMRegisterAndEnrollAccountResult {
+	enrolled: boolean;
+	accountId: string;
+	resultCode?: IntuneMAMRegisterAndEnrollAccountResultCode;
+	resultName?: keyof typeof IntuneMAMRegisterAndEnrollAccountResultCode;
+	message?: string;
+}
+
+export enum IntuneMAMRegisterAndEnrollAccountResultCode {
+	ENROLLMENT_SUCCEEDED = 0,
+	ENROLLMENT_FAILED = 1,
+	WRONG_USER = 2,
+	MDM_ENROLLED = 3,
+	PENDING = 4,
+	NOT_LICENSED = 5,
+	UNENROLLMENT_SUCCEEDED = 6,
+	UNENROLLMENT_FAILED = 7,
+	AUTHORIZATION_NEEDED = 8,
+	COMPANY_PORTAL_REQUIRED = 9
+}
+
 export interface IntuneMAMPlugin {
   enrolledAccount: () => Promise<IntuneMAMUser>;
   acquireToken: (
@@ -71,7 +92,7 @@ export interface IntuneMAMPlugin {
   ) => Promise<IntuneMAMAcquireToken>;
   registerAndEnrollAccount: (
     options: IntuneMAMRegisterAndEnrollAccountOptions,
-  ) => Promise<void>;
+  ) => Promise<IntuneMAMRegisterAndEnrollAccountResult>;
   loginAndEnrollAccount: () => Promise<void>;
   deRegisterAndUnenrollAccount: (user: IntuneMAMUser) => Promise<void>;
   appConfig: (user: IntuneMAMUser) => Promise<IntuneMAMAppConfig>;
