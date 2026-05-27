@@ -226,11 +226,12 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
         }
         
         IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass() { (didSucceed: Bool, message: String) in
-            if didSucceed {
-                call.resolve()
-            } else {
-                call.reject(message)
-            }
+            let resolvedMessage = didSucceed ? "Enrollment succeeded" : message
+            call.resolve([
+                "enrolled": didSucceed,
+                "accountId": accountId,
+                "message": resolvedMessage
+            ])
             self.resetDelegate()
         }
         // Check if there's already an enrolled account and unenroll it first (without wipe)

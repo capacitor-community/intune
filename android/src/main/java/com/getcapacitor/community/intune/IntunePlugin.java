@@ -3,6 +3,8 @@ package com.getcapacitor.community.intune;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
+import android.os.Handler;
+import android.os.Looper;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Logger;
@@ -20,10 +22,13 @@ import com.microsoft.identity.client.exception.MsalUserCancelException;
 import com.microsoft.intune.mam.client.MAMSDKVersion;
 import com.microsoft.intune.mam.client.app.MAMComponents;
 import com.microsoft.intune.mam.client.identity.MAMPolicyManager;
+import com.microsoft.intune.mam.client.notification.MAMNotificationReceiverRegistry;
 import com.microsoft.intune.mam.policy.AppPolicy;
 import com.microsoft.intune.mam.policy.MAMEnrollmentManager;
 import com.microsoft.intune.mam.policy.appconfig.MAMAppConfig;
 import com.microsoft.intune.mam.policy.appconfig.MAMAppConfigManager;
+import com.microsoft.intune.mam.policy.notification.MAMEnrollmentNotification;
+import com.microsoft.intune.mam.policy.notification.MAMNotificationType;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,6 +51,8 @@ public class IntunePlugin extends Plugin {
     MAMEnrollmentManager mEnrollmentManager;
 
     PluginCall mLastEnrollCall;
+    PluginCall mLastEnrollmentCall;
+    boolean mEnrollmentResultReceiverRegistered = false;
 
     @Override
     public void load() {
@@ -54,6 +61,32 @@ public class IntunePlugin extends Plugin {
 
         final SharedPreferences prefs = getContext().getSharedPreferences(SETTINGS_PATH, Context.MODE_PRIVATE);
         mUserAccount = AppAccount.readFromSettings(prefs);
+    }
+
+     private void ensureEnrollmentResultReceiver() {
+        if (mEnrollmentResultReceiverRegistered) {
+            return;
+        }
+
+        MAMComponents
+            .get(MAMNotificationReceiverRegistry.class)
+            .registerReceiver(
+                notification -> {
+                    if (notification instanceof MAMEnrollmentNotification && mLastEnrollmentCall != null) {
+                        MAMEnrollmentManager.Result result = ((MAMEnrollmentNotification) notification).getEnrollmentResult();
+                        JSObject data = new JSObject();
+                        data.put("resultCode", result.getCode());
+                        data.put("resultName", result.name());
+                        data.put("enrolled", result == MAMEnrollmentManager.Result.ENROLLMENT_SUCCEEDED);
+                        mLastEnrollmentCall.resolve(data);
+                        mLastEnrollmentCall = null;
+                    }
+                    return true;
+                },
+                MAMNotificationType.MAM_ENROLLMENT_RESULT
+            );
+
+        mEnrollmentResultReceiverRegistered = true;
     }
 
     private void _acquireToken(PluginCall call, boolean interactive) {
@@ -113,17 +146,33 @@ public class IntunePlugin extends Plugin {
     @PluginMethod
     public void registerAndEnrollAccount(PluginCall call) {
         if (mUserAccount != null) {
+            if (mLastEnrollmentCall != null) {
+                call.reject("Enrollment already in progress");
+                return;
+            }
+
+            ensureEnrollmentResultReceiver();
+            mLastEnrollmentCall = call;
             mEnrollmentManager.registerAccountForMAM(
                 mUserAccount.getAccountId(),
                 mUserAccount.getAADID(),
                 mUserAccount.getTenantID(),
                 mUserAccount.getAuthority()
             );
+
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                if (mLastEnrollmentCall == call) {
+                    JSObject data = new JSObject();
+                    data.put("resultCode", -1);
+                    data.put("resultName", "TIMEOUT");
+                    data.put("enrolled", false);
+                    mLastEnrollmentCall.resolve(data);
+                    mLastEnrollmentCall = null;
+                }
+            }, 60000);
         } else {
             call.reject("No user account. Call acquireToken first");
-            return;
         }
-        call.resolve();
     }
 
     @PluginMethod
