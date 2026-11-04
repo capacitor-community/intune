@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# MSAL's dependencies reference classes that aren't in the app.
+-dontwarn com.google.auto.value.AutoValue
+-dontwarn com.google.crypto.tink.subtle.**
+-dontwarn edu.umd.cs.findbugs.annotations.**
+-dontwarn org.bouncycastle.**
