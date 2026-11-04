@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 
+import androidx.activity.EdgeToEdge;
 import com.getcapacitor.BridgeActivity;
 
 import java.security.MessageDigest;
@@ -29,5 +30,6 @@ public class MainActivity extends BridgeActivity {
             Log.e("exception", e.toString());
         }
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
     }
 }
