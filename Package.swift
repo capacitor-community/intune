@@ -11,7 +11,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/ionic-team/capacitor-swift-pm.git", .upToNextMajor(from: "8.0.0")),
+        .package(url: "https://github.com/ionic-team/capacitor.git", from: "9.0.0-beta.0"),
         .package(url: "https://github.com/AzureAD/microsoft-authentication-library-for-objc.git", .upToNextMajor(from: "1.9.0")),
         .package(url: "https://github.com/microsoftconnect/ms-intune-app-sdk-ios.git", .upToNextMajor(from: "21.2.0"))
     ],
@@ -19,8 +19,7 @@ let package = Package(
         .target(
             name: "IntunePlugin",
             dependencies: [
-                .product(name: "Capacitor", package: "capacitor-swift-pm"),
-                .product(name: "Cordova", package: "capacitor-swift-pm"),
+                .product(name: "Capacitor", package: "capacitor"),
                 .product(name: "MSAL", package: "microsoft-authentication-library-for-objc"),
                 .product(name: "IntuneMAMSwift", package: "ms-intune-app-sdk-ios")
             ],

@@ -1,16 +1,14 @@
 PODS:
-  - Capacitor (7.4.0):
-    - CapacitorCordova
-  - CapacitorApp (7.0.0):
+  - Capacitor (9.0.0-beta.0)
+  - CapacitorApp (9.0.0-alpha.2):
     - Capacitor
-  - CapacitorCordova (7.4.0)
-  - CapacitorHaptics (7.0.0):
+  - CapacitorHaptics (9.0.0-next.1):
     - Capacitor
-  - CapacitorKeyboard (7.0.0):
+  - CapacitorKeyboard (9.0.0-next.1):
     - Capacitor
-  - CapacitorStatusBar (7.0.0):
+  - CapacitorStatusBar (9.0.0-alpha.2):
     - Capacitor
-  - IonicEnterpriseIntune (8.0.0-dev.3):
+  - IonicEnterpriseIntune (8.0.0):
     - Capacitor
     - MSAL (~> 1.9.0)
   - MSAL (1.9.0):
@@ -20,11 +18,10 @@ PODS:
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
-  - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
-  - IonicEnterpriseIntune (from `../../../intune`)
+  - IonicEnterpriseIntune (from `../../..`)
 
 SPEC REPOS:
   trunk:
@@ -35,8 +32,6 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorApp:
     :path: "../../node_modules/@capacitor/app"
-  CapacitorCordova:
-    :path: "../../node_modules/@capacitor/ios"
   CapacitorHaptics:
     :path: "../../node_modules/@capacitor/haptics"
   CapacitorKeyboard:
@@ -44,18 +39,17 @@ EXTERNAL SOURCES:
   CapacitorStatusBar:
     :path: "../../node_modules/@capacitor/status-bar"
   IonicEnterpriseIntune:
-    :path: "../../../intune"
+    :path: "../../.."
 
 SPEC CHECKSUMS:
-  Capacitor: 10feab36396883c55373328124a677f118cd4b5f
-  CapacitorApp: 9cb31064a6c6bb2b1438583733a7bf45557fc1da
-  CapacitorCordova: 723e017d8a80ab2ede9959fbe37556c35ac860d5
-  CapacitorHaptics: 7be406a91e4eb87287f321c6c68e1709d6837b3a
-  CapacitorKeyboard: 4db71e694e7afb5d7c0be09b05495c19f7d6c914
-  CapacitorStatusBar: a8c4c83ed2e973bdafb979e80e4b00d027832cb7
-  IonicEnterpriseIntune: f55a6824de0aa17acaa20b4c48e6d561f0b2db84
+  Capacitor: 99cf3d4c60fdccb9c06541e1b353cd6beafa31c8
+  CapacitorApp: 1d870da64e84d2e7bba00c28a12ccf0208a17ee3
+  CapacitorHaptics: cf461bf71051a548bb99107554563ab05c4f3a06
+  CapacitorKeyboard: 222ced64b88632400503c87e0b188952f3ce8265
+  CapacitorStatusBar: 838088db4185b93e8168e69e3b1dcf1f093a305f
+  IonicEnterpriseIntune: c8ecd62da6370d9ae12010fdb3f365c9f20ee8f9
   MSAL: 1a32a1070ccf55d9641d31edd8869ea2b5a78beb
 
-PODFILE CHECKSUM: 18c8f4d042146b26de5cbc44b32aa3acee31f649
+PODFILE CHECKSUM: 6f1f9849306e16dfa9576c6fe790e29bc03d2fce
 
 COCOAPODS: 1.16.2

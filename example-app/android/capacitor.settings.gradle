@@ -2,6 +2,7 @@
 include ':capacitor-android'
 project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/android/capacitor')
 
+
 include ':capacitor-app'
 project(':capacitor-app').projectDir = new File('../node_modules/@capacitor/app/android')
 
@@ -15,4 +16,4 @@ include ':capacitor-status-bar'
 project(':capacitor-status-bar').projectDir = new File('../node_modules/@capacitor/status-bar/android')
 
 include ':ionic-enterprise-intune'
-project(':ionic-enterprise-intune').projectDir = new File('../../intune/android')
+project(':ionic-enterprise-intune').projectDir = new File('../../android')
