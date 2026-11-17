@@ -4,3 +4,10 @@ dist/
 .turbo
 *.tgz
 .env
+
+android/.gradle/
+android/build/
+android/local.properties
+.build/
+.swiftpm/
+*.iml
