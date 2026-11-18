@@ -1,16 +1,16 @@
 PODS:
-  - Capacitor (7.4.0):
+  - Capacitor (8.6.2):
     - CapacitorCordova
-  - CapacitorApp (7.0.0):
+  - CapacitorApp (8.1.2):
     - Capacitor
-  - CapacitorCordova (7.4.0)
-  - CapacitorHaptics (7.0.0):
+  - CapacitorCordova (8.6.2)
+  - CapacitorHaptics (8.0.2):
     - Capacitor
-  - CapacitorKeyboard (7.0.0):
+  - CapacitorKeyboard (8.0.6):
     - Capacitor
-  - CapacitorStatusBar (7.0.0):
+  - CapacitorStatusBar (8.0.4):
     - Capacitor
-  - IonicEnterpriseIntune (8.0.0-dev.3):
+  - IonicEnterpriseIntune (8.0.0):
     - Capacitor
     - MSAL (~> 1.9.0)
   - MSAL (1.9.0):
@@ -24,7 +24,7 @@ DEPENDENCIES:
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
-  - IonicEnterpriseIntune (from `../../../intune`)
+  - IonicEnterpriseIntune (from `../../..`)
 
 SPEC REPOS:
   trunk:
@@ -44,18 +44,18 @@ EXTERNAL SOURCES:
   CapacitorStatusBar:
     :path: "../../node_modules/@capacitor/status-bar"
   IonicEnterpriseIntune:
-    :path: "../../../intune"
+    :path: "../../.."
 
 SPEC CHECKSUMS:
-  Capacitor: 10feab36396883c55373328124a677f118cd4b5f
-  CapacitorApp: 9cb31064a6c6bb2b1438583733a7bf45557fc1da
-  CapacitorCordova: 723e017d8a80ab2ede9959fbe37556c35ac860d5
-  CapacitorHaptics: 7be406a91e4eb87287f321c6c68e1709d6837b3a
-  CapacitorKeyboard: 4db71e694e7afb5d7c0be09b05495c19f7d6c914
-  CapacitorStatusBar: a8c4c83ed2e973bdafb979e80e4b00d027832cb7
-  IonicEnterpriseIntune: f55a6824de0aa17acaa20b4c48e6d561f0b2db84
+  Capacitor: 0a406b8a50b1ddcfe49fbc5795515918d5294708
+  CapacitorApp: 7b7e43debe505bc61beedb83796aa1368c86078b
+  CapacitorCordova: 8e68a712e47128cf5b97e88b9c2b406b9b956b22
+  CapacitorHaptics: 296f771ecd89c7a1bd92a7b6826a7d268e2e70f5
+  CapacitorKeyboard: f9e85e685082e9f63404de15db4a4291448b0912
+  CapacitorStatusBar: ff844df1f126da6c4fbc4028272425fa3a91e7e3
+  IonicEnterpriseIntune: c8ecd62da6370d9ae12010fdb3f365c9f20ee8f9
   MSAL: 1a32a1070ccf55d9641d31edd8869ea2b5a78beb
 
-PODFILE CHECKSUM: 18c8f4d042146b26de5cbc44b32aa3acee31f649
+PODFILE CHECKSUM: 9a262c613b148be49565c993ddc6b938abdb9579
 
 COCOAPODS: 1.16.2
