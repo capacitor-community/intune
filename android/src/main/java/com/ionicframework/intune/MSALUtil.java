@@ -230,7 +230,6 @@ public final class MSALUtil {
             com.microsoft.identity.client.Logger msalLogger = com.microsoft.identity.client.Logger.getInstance();
             msalLogger.setEnableLogcatLog(true);
             msalLogger.setLogLevel(com.microsoft.identity.client.Logger.LogLevel.VERBOSE);
-            msalLogger.setEnablePII(true);
 
             int authConfig = appContext.getResources().getIdentifier("auth_config", "raw", appContext.getPackageName());
             mMsalClientApplication = PublicClientApplication.create(appContext, authConfig);

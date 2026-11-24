@@ -23,12 +23,13 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
         CAPPluginMethod(name: "displayDiagnosticConsole", returnType: CAPPluginReturnPromise),
     ];
     
-    weak var enrollmentDelegate: EnrollmentDelegateClass?
-    weak var policyDelegate = PolicyDelegateClass()
-    private var loginAndEnrollContinuation: CheckedContinuation<Any, Error>?
+    // Intune declares its enrollment delegate weak, so the plugin keeps it alive.
+    private var enrollmentDelegate: EnrollmentDelegateClass?
 
-    private func resetDelegate() {
-        IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass()
+    private func setEnrollmentDelegate(_ didSucceedCallback: ((Bool, String) -> Void)? = nil) {
+        let delegate = EnrollmentDelegateClass(didSucceedCallback)
+        enrollmentDelegate = delegate
+        IntuneMAMEnrollmentManager.instance().delegate = delegate
     }
     
     private func getAccount(from application: MSALPublicClientApplication, accountId: String) -> MSALAccount? {
@@ -48,8 +49,7 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
 
     override public func load() {
         print("IntuneMAM Loading")
-        self.resetDelegate()
-        IntuneMAMPolicyManager.instance().delegate = policyDelegate
+        self.setEnrollmentDelegate()
         // register for the IntuneMAMAppConfigDidChange notification
         IntuneMAMComplianceManager.instance().delegate = self
 
@@ -226,13 +226,13 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
             return
         }
         
-        IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass() { (didSucceed: Bool, message: String) in
+        setEnrollmentDelegate { (didSucceed: Bool, message: String) in
             if didSucceed {
                 call.resolve()
             } else {
                 call.reject(message)
             }
-            self.resetDelegate()
+            self.setEnrollmentDelegate()
         }
         // Check if there's already an enrolled account and unenroll it first (without wipe)
         // to prevent conflicts during re-enrollment
@@ -244,13 +244,13 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
     }
 
     @objc public func loginAndEnrollAccount(_ call: CAPPluginCall) {
-        IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass() { (didSucceed: Bool, message: String) in
+        setEnrollmentDelegate { (didSucceed: Bool, message: String) in
             if didSucceed {
                 call.resolve()
             } else {
                 call.reject(message)
             }
-            self.resetDelegate()
+            self.setEnrollmentDelegate()
         }
         IntuneMAMEnrollmentManager.instance().loginAndEnrollAccount(nil)
     }
@@ -288,13 +288,13 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
             }
         }
 
-        IntuneMAMEnrollmentManager.instance().delegate = EnrollmentDelegateClass() { (didSucceed: Bool, message: String) in
+        setEnrollmentDelegate { (didSucceed: Bool, message: String) in
             if didSucceed {
                 call.resolve()
             } else {
                 call.reject(message)
             }
-            self.resetDelegate()
+            self.setEnrollmentDelegate()
         }
         IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccountId(accountId, withWipe: true)
 

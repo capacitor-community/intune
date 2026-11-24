@@ -12,7 +12,6 @@
     "scripts",
     "ios/IntuneMAMSwift.xcframework",
     "ios/IntuneMAMSwiftStub.xcframework",
-    "ios/MSAL.xcframework",
     "ios/Sources",
     "ios/Tests",
     "Package.swift",

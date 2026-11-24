@@ -2,6 +2,9 @@ package com.ionicframework.intune;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.widget.Toast;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
@@ -17,7 +20,6 @@ import com.microsoft.identity.client.ICurrentAccountResult;
 import com.microsoft.identity.client.exception.MsalException;
 import com.microsoft.identity.client.exception.MsalIntuneAppProtectionPolicyRequiredException;
 import com.microsoft.identity.client.exception.MsalUserCancelException;
-import com.microsoft.intune.mam.client.MAMSDKVersion;
 import com.microsoft.intune.mam.client.app.MAMComponents;
 import com.microsoft.intune.mam.client.identity.MAMPolicyManager;
 import com.microsoft.intune.mam.policy.AppPolicy;
@@ -90,9 +92,12 @@ public class IntunePlugin extends Plugin {
                 } else {
                     MSALUtil.acquireTokenSilent(getActivity(), accountId, scopes, new AuthCallback(), forceRefresh);
                 }
-            } catch (MsalException | InterruptedException e) {
+            } catch (Exception e) {
+                // Also catches MSAL's unchecked errors, like a malformed auth_config.json.
                 Logger.error("Authentication exception occurred", e);
                 showMessage("Authentication exception occurred - check logcat for more details.");
+                mLastEnrollCall = null;
+                call.reject("Authentication failed: " + e.getMessage(), e);
             }
         });
         thread.start();
@@ -140,9 +145,12 @@ public class IntunePlugin extends Plugin {
                     loginHint = mUserAccount.getAccountId();
                 }
                 MSALUtil.acquireToken(getActivity(), MSAL_SCOPES, loginHint, forcePrompt, new AuthCallback());
-            } catch (MsalException | InterruptedException e) {
+            } catch (Exception e) {
+                // Also catches MSAL's unchecked errors, like a malformed auth_config.json.
                 Logger.error("Authentication exception occurred", e);
                 showMessage("Authentication exception occurred - check logcat for more details.");
+                mLastEnrollCall = null;
+                call.reject("Authentication failed: " + e.getMessage(), e);
             }
         });
         thread.start();
@@ -163,6 +171,10 @@ public class IntunePlugin extends Plugin {
     public void deRegisterAndUnenrollAccount(PluginCall call) {
         // Initiate an MSAL sign out on a background thread.
         final AppAccount effectiveAccount = mUserAccount;
+        if (effectiveAccount == null) {
+            call.resolve();
+            return;
+        }
 
         Thread thread = new Thread(() -> {
             boolean didSignout = false;
@@ -273,11 +285,20 @@ public class IntunePlugin extends Plugin {
 
     @PluginMethod
     public void sdkVersion(PluginCall call) {
-        MAMSDKVersion version = MAMComponents.get(MAMSDKVersion.class);
-
-        JSObject data = new JSObject();
-        data.put("version", version.VER_MAJOR + "." + version.VER_MINOR + "." + version.VER_PATCH);
-        call.resolve(data);
+        // The Intune SDK writes its version into the app manifest.
+        PackageManager pm = getContext().getPackageManager();
+        String packageName = getContext().getPackageName();
+        try {
+            ApplicationInfo info =
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+                    ? pm.getApplicationInfo(packageName, PackageManager.ApplicationInfoFlags.of(PackageManager.GET_META_DATA))
+                    : pm.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
+            JSObject data = new JSObject();
+            data.put("version", info.metaData.getString("com.microsoft.intune.mam.MAMSDKVersion"));
+            call.resolve(data);
+        } catch (PackageManager.NameNotFoundException e) {
+            call.reject("Couldn't read the Intune SDK version", e);
+        }
     }
 
     @PluginMethod
@@ -373,6 +394,10 @@ public class IntunePlugin extends Plugin {
         @Override
         public void onCancel() {
             showMessage("User cancelled auth attempt");
+            if (mLastEnrollCall != null) {
+                mLastEnrollCall.reject("User cancelled auth attempt");
+                mLastEnrollCall = null;
+            }
         }
     }
 }
