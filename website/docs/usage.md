@@ -63,6 +63,12 @@ try {
 
 The `forcePrompt` option can be used to force the user to re-enter their login information. The default is `false`.
 
+`registerAndEnrollAccount` resolves once Intune reports that the account is enrolled, and rejects if enrollment fails. The error's `code` is Intune's result:
+
+- Android: the `MAMEnrollmentManager.Result` name, such as `NOT_LICENSED` or `COMPANY_PORTAL_REQUIRED`.
+- iOS: the `IntuneMAMEnrollmentStatusCode` value, such as `"200"` (account not licensed).
+- Both: `TIMEOUT` if Intune doesn't report a result within 60 seconds.
+
 On successfully enrolling your application will close on iOS. If your application does not need to be managed by your company you do not need to call `registerAndEnrollAccount`.
 
 The response from `acquireToken` and `acquireTokenSilent` will be of the form:
