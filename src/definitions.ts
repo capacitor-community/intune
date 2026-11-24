@@ -10,8 +10,7 @@ export interface IntuneMAMAcquireTokenOptions {
   forcePrompt?: boolean;
 }
 
-export interface IntuneMAMAcquireTokenSilentOptions
-  extends IntuneMAMAcquireTokenOptions {
+export interface IntuneMAMAcquireTokenSilentOptions extends IntuneMAMAcquireTokenOptions {
   accountId: string;
 
   /**
@@ -63,15 +62,9 @@ export interface IntuneMAMPolicy {
 
 export interface IntuneMAMPlugin {
   enrolledAccount: () => Promise<IntuneMAMUser>;
-  acquireToken: (
-    options: IntuneMAMAcquireTokenOptions,
-  ) => Promise<IntuneMAMAcquireToken>;
-  acquireTokenSilent: (
-    options: IntuneMAMAcquireTokenSilentOptions,
-  ) => Promise<IntuneMAMAcquireToken>;
-  registerAndEnrollAccount: (
-    options: IntuneMAMRegisterAndEnrollAccountOptions,
-  ) => Promise<void>;
+  acquireToken: (options: IntuneMAMAcquireTokenOptions) => Promise<IntuneMAMAcquireToken>;
+  acquireTokenSilent: (options: IntuneMAMAcquireTokenSilentOptions) => Promise<IntuneMAMAcquireToken>;
+  registerAndEnrollAccount: (options: IntuneMAMRegisterAndEnrollAccountOptions) => Promise<void>;
   loginAndEnrollAccount: () => Promise<void>;
   deRegisterAndUnenrollAccount: (user: IntuneMAMUser) => Promise<void>;
   appConfig: (user: IntuneMAMUser) => Promise<IntuneMAMAppConfig>;

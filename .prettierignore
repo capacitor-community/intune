@@ -1,3 +1,4 @@
-build
-dist
+example-app
+example-app-spm
+website
 android/ms-intune-app-sdk-android/docs/**/*

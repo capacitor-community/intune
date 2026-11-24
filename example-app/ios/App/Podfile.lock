@@ -1,14 +1,12 @@
 PODS:
-  - Capacitor (8.6.2):
-    - CapacitorCordova
-  - CapacitorApp (8.1.2):
+  - Capacitor (9.0.0-beta.0)
+  - CapacitorApp (9.0.0-alpha.2):
     - Capacitor
-  - CapacitorCordova (8.6.2)
-  - CapacitorHaptics (8.0.2):
+  - CapacitorHaptics (9.0.0-next.1):
     - Capacitor
-  - CapacitorKeyboard (8.0.6):
+  - CapacitorKeyboard (9.0.0-next.1):
     - Capacitor
-  - CapacitorStatusBar (8.0.4):
+  - CapacitorStatusBar (9.0.0-alpha.2):
     - Capacitor
   - IonicEnterpriseIntune (8.0.0):
     - Capacitor
@@ -20,7 +18,6 @@ PODS:
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
-  - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
@@ -35,8 +32,6 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorApp:
     :path: "../../node_modules/@capacitor/app"
-  CapacitorCordova:
-    :path: "../../node_modules/@capacitor/ios"
   CapacitorHaptics:
     :path: "../../node_modules/@capacitor/haptics"
   CapacitorKeyboard:
@@ -47,15 +42,14 @@ EXTERNAL SOURCES:
     :path: "../../.."
 
 SPEC CHECKSUMS:
-  Capacitor: 0a406b8a50b1ddcfe49fbc5795515918d5294708
-  CapacitorApp: 7b7e43debe505bc61beedb83796aa1368c86078b
-  CapacitorCordova: 8e68a712e47128cf5b97e88b9c2b406b9b956b22
-  CapacitorHaptics: 296f771ecd89c7a1bd92a7b6826a7d268e2e70f5
-  CapacitorKeyboard: f9e85e685082e9f63404de15db4a4291448b0912
-  CapacitorStatusBar: ff844df1f126da6c4fbc4028272425fa3a91e7e3
+  Capacitor: 99cf3d4c60fdccb9c06541e1b353cd6beafa31c8
+  CapacitorApp: 1d870da64e84d2e7bba00c28a12ccf0208a17ee3
+  CapacitorHaptics: cf461bf71051a548bb99107554563ab05c4f3a06
+  CapacitorKeyboard: 222ced64b88632400503c87e0b188952f3ce8265
+  CapacitorStatusBar: 838088db4185b93e8168e69e3b1dcf1f093a305f
   IonicEnterpriseIntune: c8ecd62da6370d9ae12010fdb3f365c9f20ee8f9
   MSAL: 1a32a1070ccf55d9641d31edd8869ea2b5a78beb
 
-PODFILE CHECKSUM: 9a262c613b148be49565c993ddc6b938abdb9579
+PODFILE CHECKSUM: 6f1f9849306e16dfa9576c6fe790e29bc03d2fce
 
 COCOAPODS: 1.16.2

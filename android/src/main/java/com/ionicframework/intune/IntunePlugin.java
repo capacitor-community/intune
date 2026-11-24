@@ -77,26 +77,24 @@ public class IntunePlugin extends Plugin {
         final String[] scopes = scopesArray;
 
         // initiate the MSAL authentication on a background thread
-        Thread thread = new Thread(
-            () -> {
-                Logger.info("Starting " + (interactive ? "interactive" : "silent") + " auth");
+        Thread thread = new Thread(() -> {
+            Logger.info("Starting " + (interactive ? "interactive" : "silent") + " auth");
 
-                try {
-                    if (interactive) {
-                        String loginHint = null;
-                        if (mUserAccount != null && !forcePrompt) {
-                            loginHint = mUserAccount.getAccountId();
-                        }
-                        MSALUtil.acquireToken(getActivity(), scopes, loginHint, forcePrompt, new AuthCallback());
-                    } else {
-                        MSALUtil.acquireTokenSilent(getActivity(), accountId, scopes, new AuthCallback(), forceRefresh);
+            try {
+                if (interactive) {
+                    String loginHint = null;
+                    if (mUserAccount != null && !forcePrompt) {
+                        loginHint = mUserAccount.getAccountId();
                     }
-                } catch (MsalException | InterruptedException e) {
-                    Logger.error("Authentication exception occurred", e);
-                    showMessage("Authentication exception occurred - check logcat for more details.");
+                    MSALUtil.acquireToken(getActivity(), scopes, loginHint, forcePrompt, new AuthCallback());
+                } else {
+                    MSALUtil.acquireTokenSilent(getActivity(), accountId, scopes, new AuthCallback(), forceRefresh);
                 }
+            } catch (MsalException | InterruptedException e) {
+                Logger.error("Authentication exception occurred", e);
+                showMessage("Authentication exception occurred - check logcat for more details.");
             }
-        );
+        });
         thread.start();
     }
 
@@ -133,22 +131,20 @@ public class IntunePlugin extends Plugin {
         boolean forcePrompt = call.getBoolean("forcePrompt", false);
 
         // initiate the MSAL authentication on a background thread
-        Thread thread = new Thread(
-            () -> {
-                Logger.info("Starting interactive auth");
+        Thread thread = new Thread(() -> {
+            Logger.info("Starting interactive auth");
 
-                try {
-                    String loginHint = null;
-                    if (mUserAccount != null) {
-                        loginHint = mUserAccount.getAccountId();
-                    }
-                    MSALUtil.acquireToken(getActivity(), MSAL_SCOPES, loginHint, forcePrompt, new AuthCallback());
-                } catch (MsalException | InterruptedException e) {
-                    Logger.error("Authentication exception occurred", e);
-                    showMessage("Authentication exception occurred - check logcat for more details.");
+            try {
+                String loginHint = null;
+                if (mUserAccount != null) {
+                    loginHint = mUserAccount.getAccountId();
                 }
+                MSALUtil.acquireToken(getActivity(), MSAL_SCOPES, loginHint, forcePrompt, new AuthCallback());
+            } catch (MsalException | InterruptedException e) {
+                Logger.error("Authentication exception occurred", e);
+                showMessage("Authentication exception occurred - check logcat for more details.");
             }
-        );
+        });
         thread.start();
     }
 
@@ -168,29 +164,27 @@ public class IntunePlugin extends Plugin {
         // Initiate an MSAL sign out on a background thread.
         final AppAccount effectiveAccount = mUserAccount;
 
-        Thread thread = new Thread(
-            () -> {
-                boolean didSignout = false;
-                try {
-                    MSALUtil.signOutAccount(getContext(), effectiveAccount.getAADID());
-                    didSignout = true;
-                } catch (MsalException | InterruptedException e) {
-                    call.reject("Unable to log user out", e);
-                    Logger.error("Failed to sign out user " + effectiveAccount.getAADID(), e);
-                }
-
-                mEnrollmentManager.unregisterAccountForMAM(effectiveAccount.getAccountId());
-
-                final SharedPreferences prefs = getContext().getSharedPreferences(SETTINGS_PATH, Context.MODE_PRIVATE);
-                AppAccount.clearFromSettings(prefs);
-
-                mUserAccount = null;
-
-                if (didSignout) {
-                    call.resolve();
-                }
+        Thread thread = new Thread(() -> {
+            boolean didSignout = false;
+            try {
+                MSALUtil.signOutAccount(getContext(), effectiveAccount.getAADID());
+                didSignout = true;
+            } catch (MsalException | InterruptedException e) {
+                call.reject("Unable to log user out", e);
+                Logger.error("Failed to sign out user " + effectiveAccount.getAADID(), e);
             }
-        );
+
+            mEnrollmentManager.unregisterAccountForMAM(effectiveAccount.getAccountId());
+
+            final SharedPreferences prefs = getContext().getSharedPreferences(SETTINGS_PATH, Context.MODE_PRIVATE);
+            AppAccount.clearFromSettings(prefs);
+
+            mUserAccount = null;
+
+            if (didSignout) {
+                call.resolve();
+            }
+        });
         thread.start();
     }
 
@@ -199,19 +193,17 @@ public class IntunePlugin extends Plugin {
         final AppAccount effectiveAccount = mUserAccount;
 
         if (effectiveAccount != null) {
-            Thread thread = new Thread(
-                () -> {
-                    try {
-                        MSALUtil.signOutAccount(getContext(), effectiveAccount.getAADID());
-                        call.resolve();
-                    } catch (MsalException | InterruptedException e) {
-                        call.reject("Unable to log user out", e);
-                        Logger.error("Failed to sign out user " + effectiveAccount.getAADID(), e);
-                    }
-                    mEnrollmentManager.unregisterAccountForMAM(effectiveAccount.getAccountId());
-                    mUserAccount = null;
+            Thread thread = new Thread(() -> {
+                try {
+                    MSALUtil.signOutAccount(getContext(), effectiveAccount.getAADID());
+                    call.resolve();
+                } catch (MsalException | InterruptedException e) {
+                    call.reject("Unable to log user out", e);
+                    Logger.error("Failed to sign out user " + effectiveAccount.getAADID(), e);
                 }
-            );
+                mEnrollmentManager.unregisterAccountForMAM(effectiveAccount.getAccountId());
+                mUserAccount = null;
+            });
             thread.start();
         } else {
             call.resolve();
@@ -295,13 +287,9 @@ public class IntunePlugin extends Plugin {
     }
 
     private void showMessage(final String message) {
-        bridge
-            .getActivity()
-            .runOnUiThread(
-                () -> {
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            );
+        bridge.getActivity().runOnUiThread(() -> {
+            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        });
     }
 
     private class AuthCallback implements AuthenticationCallback {
@@ -333,7 +321,13 @@ public class IntunePlugin extends Plugin {
 
                 Logger.info("MsalIntuneAppProtectionPolicyRequiredException received.");
                 Logger.info(
-                    String.format("Data from broker: Account ID: %s; AAD ID: %s; Tenant ID: %s; Authority: %s", accountId, aadid, tenantId, authorityURL)
+                    String.format(
+                        "Data from broker: Account ID: %s; AAD ID: %s; Tenant ID: %s; Authority: %s",
+                        accountId,
+                        aadid,
+                        tenantId,
+                        authorityURL
+                    )
                 );
             } else if (exc instanceof MsalUserCancelException) {
                 showMessage("User cancelled sign-in request");
