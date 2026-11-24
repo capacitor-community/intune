@@ -25,9 +25,10 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
     
     // Intune declares its enrollment delegate weak, so the plugin keeps it alive.
     private var enrollmentDelegate: EnrollmentDelegateClass?
+    // How long registerAndEnrollAccount waits for Intune's result before rejecting with TIMEOUT.
+    private static let enrollmentTimeout = 60
 
-    private func setEnrollmentDelegate(_ didSucceedCallback: ((Bool, String) -> Void)? = nil) {
-        let delegate = EnrollmentDelegateClass(didSucceedCallback)
+    private func setEnrollmentDelegate(_ delegate: EnrollmentDelegateClass = EnrollmentDelegateClass()) {
         enrollmentDelegate = delegate
         IntuneMAMEnrollmentManager.instance().delegate = delegate
     }
@@ -226,13 +227,11 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
             return
         }
         
-        setEnrollmentDelegate { (didSucceed: Bool, message: String) in
-            if didSucceed {
-                call.resolve()
-            } else {
-                call.reject(message)
-            }
-            self.setEnrollmentDelegate()
+        let delegate = EnrollmentDelegateClass(settling: call)
+        setEnrollmentDelegate(delegate)
+        // Intune doesn't report again for an account whose enrollment already failed.
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(IntuneMAM.enrollmentTimeout)) {
+            delegate.takeCall()?.reject("Intune didn't report an enrollment result within \(IntuneMAM.enrollmentTimeout) seconds", "TIMEOUT")
         }
         // Check if there's already an enrolled account and unenroll it first (without wipe)
         // to prevent conflicts during re-enrollment
@@ -244,14 +243,7 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
     }
 
     @objc public func loginAndEnrollAccount(_ call: CAPPluginCall) {
-        setEnrollmentDelegate { (didSucceed: Bool, message: String) in
-            if didSucceed {
-                call.resolve()
-            } else {
-                call.reject(message)
-            }
-            self.setEnrollmentDelegate()
-        }
+        setEnrollmentDelegate(EnrollmentDelegateClass(settling: call))
         IntuneMAMEnrollmentManager.instance().loginAndEnrollAccount(nil)
     }
 
@@ -288,14 +280,7 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
             }
         }
 
-        setEnrollmentDelegate { (didSucceed: Bool, message: String) in
-            if didSucceed {
-                call.resolve()
-            } else {
-                call.reject(message)
-            }
-            self.setEnrollmentDelegate()
-        }
+        setEnrollmentDelegate(EnrollmentDelegateClass(settling: call, on: .unenroll))
         IntuneMAMEnrollmentManager.instance().deRegisterAndUnenrollAccountId(accountId, withWipe: true)
 
         DispatchQueue.main.async { [weak self] in

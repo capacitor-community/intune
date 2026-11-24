@@ -1,52 +1,50 @@
+import Capacitor
 import IntuneMAMSwift
 
+/// Settles a plugin call once, with Intune's result for the request it waits on.
 class EnrollmentDelegateClass: NSObject, IntuneMAMEnrollmentDelegate {
 
-    var presentingViewController: UIViewController?
-    var didSucceedCallback: ((Bool, String) -> Void)?
+    enum Request {
+        case enroll
+        case unenroll
+    }
 
-    init(_ didSucceedCallback: ((Bool, String) -> Void)? = nil) {
-        self.didSucceedCallback = didSucceedCallback
+    private var call: CAPPluginCall?
+    private let request: Request
+
+    init(settling call: CAPPluginCall? = nil, on request: Request = .enroll) {
+        self.call = call
+        self.request = request
         super.init()
     }
 
-    private func failureMessage(for status: IntuneMAMEnrollmentStatus) -> String {
-        status.errorString ?? "Intune returned status \(status.statusCode.rawValue)"
+    /// Returns the call if it isn't settled yet, and marks it settled. Use on the main thread.
+    func takeCall() -> CAPPluginCall? {
+        defer { call = nil }
+        return call
     }
 
     func enrollmentRequest(with status: IntuneMAMEnrollmentStatus) {
-        if status.didSucceed {
-            // If enrollment was successful, change from the current view (which should have been initialized with the class) to the desired page on the app (in this case ChatPage)
-            print("EnrollmentDelegate - enrollmentRequest - did succeed")
-            if self.didSucceedCallback != nil {
-                self.didSucceedCallback!(true, "")
-            }
-        } else {
-            print("Enrollment result for accountId \(status.accountId) with status code \(status.statusCode)")
-            print("Debug message: \(String(describing: status.errorString))")
-            if self.didSucceedCallback != nil {
-                self.didSucceedCallback!(false, failureMessage(for: status))
-            }
+        print("Enrollment result for accountId \(status.accountId): status code \(status.statusCode.rawValue)")
+        if request == .enroll {
+            settle(with: status)
         }
     }
 
-    /*
-     This is a method of the delegate that is triggered when an instance of this class is set as the delegate of the IntuneMAMEnrollmentManager and an unenrollment is attempted.
-     The status parameter is a member of the IntuneMAMEnrollmentStatus class. This object can be used to check for the status of an attempted unenrollment.
-     Logic for logout/token clearing is initiated here.
-     */
     func unenrollRequest(with status: IntuneMAMEnrollmentStatus) {
-        if status.didSucceed {
-            // If unenrollment was successful, change from the current view (which should have been initialized with the class) to the desired page on the app (in this case ChatPage)
-            print("EnrollmentDelegate - unenrollmentRequest - did succeed")
-            if self.didSucceedCallback != nil {
-                self.didSucceedCallback!(true, "")
-            }
-        } else {
-            print("Unenrollment result for accountId \(status.accountId) with status code \(status.statusCode)")
-            print("Debug message: \(String(describing: status.errorString))")
-            if self.didSucceedCallback != nil {
-                self.didSucceedCallback!(false, failureMessage(for: status))
+        print("Unenrollment result for accountId \(status.accountId): status code \(status.statusCode.rawValue)")
+        if request == .unenroll {
+            settle(with: status)
+        }
+    }
+
+    private func settle(with status: IntuneMAMEnrollmentStatus) {
+        DispatchQueue.main.async {
+            guard let call = self.takeCall() else { return }
+            if status.didSucceed {
+                call.resolve()
+            } else {
+                call.reject(status.errorString ?? "Intune returned status \(status.statusCode.rawValue)", String(status.statusCode.rawValue))
             }
         }
     }

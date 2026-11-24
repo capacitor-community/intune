@@ -64,6 +64,13 @@ export interface IntuneMAMPlugin {
   enrolledAccount: () => Promise<IntuneMAMUser>;
   acquireToken: (options: IntuneMAMAcquireTokenOptions) => Promise<IntuneMAMAcquireToken>;
   acquireTokenSilent: (options: IntuneMAMAcquireTokenSilentOptions) => Promise<IntuneMAMAcquireToken>;
+  /**
+   * Enrolls the account in Intune. Resolves once Intune reports the account is enrolled.
+   *
+   * Rejects when enrollment fails. The error's `code` is Intune's result: the `MAMEnrollmentManager.Result`
+   * name on Android (for example `NOT_LICENSED`), or the `IntuneMAMEnrollmentStatusCode` value on iOS
+   * (for example `"200"`). It's `TIMEOUT` when Intune doesn't report a result within 60 seconds.
+   */
   registerAndEnrollAccount: (options: IntuneMAMRegisterAndEnrollAccountOptions) => Promise<void>;
   loginAndEnrollAccount: () => Promise<void>;
   deRegisterAndUnenrollAccount: (user: IntuneMAMUser) => Promise<void>;

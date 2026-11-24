@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Toast;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
@@ -22,10 +24,14 @@ import com.microsoft.identity.client.exception.MsalIntuneAppProtectionPolicyRequ
 import com.microsoft.identity.client.exception.MsalUserCancelException;
 import com.microsoft.intune.mam.client.app.MAMComponents;
 import com.microsoft.intune.mam.client.identity.MAMPolicyManager;
+import com.microsoft.intune.mam.client.notification.MAMNotificationReceiver;
+import com.microsoft.intune.mam.client.notification.MAMNotificationReceiverRegistry;
 import com.microsoft.intune.mam.policy.AppPolicy;
 import com.microsoft.intune.mam.policy.MAMEnrollmentManager;
 import com.microsoft.intune.mam.policy.appconfig.MAMAppConfig;
 import com.microsoft.intune.mam.policy.appconfig.MAMAppConfigManager;
+import com.microsoft.intune.mam.policy.notification.MAMEnrollmentNotification;
+import com.microsoft.intune.mam.policy.notification.MAMNotificationType;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,13 +55,39 @@ public class IntunePlugin extends Plugin {
 
     PluginCall mLastEnrollCall;
 
+    // How long registerAndEnrollAccount waits for Intune's result before rejecting with TIMEOUT.
+    private static final int ENROLLMENT_TIMEOUT_SECONDS = 60;
+
+    // The registerAndEnrollAccount call waiting for Intune's result.
+    private PluginCall mPendingEnrollCall;
+
+    private final MAMNotificationReceiver mEnrollmentReceiver = (notification) -> {
+        if (notification instanceof MAMEnrollmentNotification) {
+            settleEnrollCall(((MAMEnrollmentNotification) notification).getEnrollmentResult());
+        }
+        return true;
+    };
+
     @Override
     public void load() {
         super.load();
         mEnrollmentManager = MAMComponents.get(MAMEnrollmentManager.class);
+        MAMComponents.get(MAMNotificationReceiverRegistry.class).registerReceiver(
+            mEnrollmentReceiver,
+            MAMNotificationType.MAM_ENROLLMENT_RESULT
+        );
 
         final SharedPreferences prefs = getContext().getSharedPreferences(SETTINGS_PATH, Context.MODE_PRIVATE);
         mUserAccount = AppAccount.readFromSettings(prefs);
+    }
+
+    @Override
+    protected void handleOnDestroy() {
+        MAMComponents.get(MAMNotificationReceiverRegistry.class).unregisterReceiver(
+            mEnrollmentReceiver,
+            MAMNotificationType.MAM_ENROLLMENT_RESULT
+        );
+        super.handleOnDestroy();
     }
 
     private void _acquireToken(PluginCall call, boolean interactive) {
@@ -115,18 +147,49 @@ public class IntunePlugin extends Plugin {
 
     @PluginMethod
     public void registerAndEnrollAccount(PluginCall call) {
-        if (mUserAccount != null) {
-            mEnrollmentManager.registerAccountForMAM(
-                mUserAccount.getAccountId(),
-                mUserAccount.getAADID(),
-                mUserAccount.getTenantID(),
-                mUserAccount.getAuthority()
-            );
-        } else {
+        final AppAccount account = mUserAccount;
+        if (account == null) {
             call.reject("No user account. Call acquireToken first");
             return;
         }
-        call.resolve();
+
+        synchronized (this) {
+            if (mPendingEnrollCall != null) {
+                mPendingEnrollCall.reject("Replaced by a newer registerAndEnrollAccount call");
+            }
+            mPendingEnrollCall = call;
+        }
+        mEnrollmentManager.registerAccountForMAM(account.getAccountId(), account.getAADID(), account.getTenantID(), account.getAuthority());
+        // acquireToken already registers the account, and Intune reports each result once, so check the current status too.
+        settleEnrollCall(mEnrollmentManager.getRegisteredAccountStatus(account.getAccountId(), account.getAADID()));
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            synchronized (this) {
+                if (mPendingEnrollCall == call) {
+                    call.reject("Intune didn't report an enrollment result within " + ENROLLMENT_TIMEOUT_SECONDS + " seconds", "TIMEOUT");
+                    mPendingEnrollCall = null;
+                }
+            }
+        }, ENROLLMENT_TIMEOUT_SECONDS * 1000L);
+    }
+
+    private synchronized void settleEnrollCall(MAMEnrollmentManager.Result result) {
+        if (mPendingEnrollCall == null || result == null) {
+            return;
+        }
+        switch (result) {
+            case ENROLLMENT_SUCCEEDED:
+                mPendingEnrollCall.resolve();
+                break;
+            case PENDING:
+            case UNENROLLMENT_SUCCEEDED:
+            case UNENROLLMENT_FAILED:
+                // Not this enrollment's final result.
+                return;
+            default:
+                mPendingEnrollCall.reject("Intune enrollment failed: " + result.name(), result.name());
+        }
+        mPendingEnrollCall = null;
     }
 
     @PluginMethod
