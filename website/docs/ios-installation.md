@@ -7,7 +7,9 @@ The following steps attempt to distill the [official Intune App SDK iOS integrat
 
 ## 0. Before starting
 
-Note that version 7.x of `@ionic-enterprise/intune` requires a deployment target of iOS 14 or higher and requires Xcode 15+.
+Version 9.x of `@ionic-enterprise/intune` requires a deployment target of iOS 18 or higher and Xcode 27+, because Intune App SDK 22 does.
+
+If your app uses Swift Package Manager, set `experimental.ios.spm.swiftToolsVersion` to `'6.0'` in your Capacitor config. The `CapApp-SPM` package that `cap sync` generates declares iOS 18, which needs Swift tools 6.0.
 
 ## 1. Add Frameworks
 
@@ -73,7 +75,7 @@ To enable Face ID support, add a description for `NSFaceIDUsageScription` also k
 
 ## 5. Update Target iOS Version
 
-The Intune App SDK supports iOS 13 and above, make sure to set the Deployment target for your app to 13 or higher (or 12.2 if you are using version 2.x of the plugin):
+Intune App SDK 22 supports iOS 18 and above, so set the Deployment target for your app to 18 or higher:
 
 [![iOS 13](/img/intune/ios-13.png)](/img/intune/ios-13.png)
 

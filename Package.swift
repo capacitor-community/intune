@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "IonicEnterpriseIntune",
-    platforms: [.iOS(.v17)],
+    platforms: [.iOS("18.0")],
     products: [
         .library(
             name: "IonicEnterpriseIntune",
@@ -12,8 +12,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/ionic-team/capacitor.git", from: "9.0.0-beta.0"),
-        .package(url: "https://github.com/AzureAD/microsoft-authentication-library-for-objc.git", .upToNextMajor(from: "1.9.0")),
-        .package(url: "https://github.com/microsoftconnect/ms-intune-app-sdk-ios.git", .upToNextMajor(from: "21.2.0"))
+        .package(url: "https://github.com/AzureAD/microsoft-authentication-library-for-objc.git", .upToNextMajor(from: "2.17.0")),
+        .package(url: "https://github.com/microsoftconnect/ms-intune-app-sdk-ios.git", .upToNextMajor(from: "22.2.0"))
     ],
     targets: [
         .target(

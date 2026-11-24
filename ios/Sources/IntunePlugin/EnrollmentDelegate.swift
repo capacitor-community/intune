@@ -10,6 +10,10 @@ class EnrollmentDelegateClass: NSObject, IntuneMAMEnrollmentDelegate {
         super.init()
     }
 
+    private func failureMessage(for status: IntuneMAMEnrollmentStatus) -> String {
+        status.errorString ?? "Intune returned status \(status.statusCode.rawValue)"
+    }
+
     func enrollmentRequest(with status: IntuneMAMEnrollmentStatus) {
         if status.didSucceed {
             // If enrollment was successful, change from the current view (which should have been initialized with the class) to the desired page on the app (in this case ChatPage)
@@ -21,7 +25,7 @@ class EnrollmentDelegateClass: NSObject, IntuneMAMEnrollmentDelegate {
             print("Enrollment result for accountId \(status.accountId) with status code \(status.statusCode)")
             print("Debug message: \(String(describing: status.errorString))")
             if self.didSucceedCallback != nil {
-                self.didSucceedCallback!(false, String(describing: status.errorString))
+                self.didSucceedCallback!(false, failureMessage(for: status))
             }
         }
     }
@@ -42,7 +46,7 @@ class EnrollmentDelegateClass: NSObject, IntuneMAMEnrollmentDelegate {
             print("Unenrollment result for accountId \(status.accountId) with status code \(status.statusCode)")
             print("Debug message: \(String(describing: status.errorString))")
             if self.didSucceedCallback != nil {
-                self.didSucceedCallback!(false, String(describing: status.errorString))
+                self.didSucceedCallback!(false, failureMessage(for: status))
             }
         }
     }

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.19.9 clang-1700.3.19.1)
-// swift-module-flags: -target x86_64-apple-ios17.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name IntuneMAMSwift
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.4 effective-5.10 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)
+// swift-module-flags: -target x86_64-apple-ios18.0-simulator -enable-objc-interop -enable-library-evolution -language-mode 5 -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name IntuneMAMSwift
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
 import AppleArchive
 import Dispatch
 import Foundation
@@ -9,6 +9,7 @@ import GroupActivities
 import ImagePlayground
 @_exported import IntuneMAMSwift
 import IntuneMAMSwiftStub
+import LiveCommunicationKit
 import Security
 import Swift
 import SwiftUI
@@ -20,65 +21,52 @@ import _GroupActivities_UIKit
 import _StringProcessing
 import _SwiftConcurrencyShims
 @_hasMissingDesignatedInitializers public class IntuneMAMSwiftContextManager {
-  #if compiler(>=5.3) && $NonescapableTypes
-  public static func getScopedAccountId() -> Swift.String?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public static func setAccountId(_ accountId: Swift.String?, forScope scope: @escaping () -> Swift.Void)
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public static func setAccountId(_ accountId: Swift.String?, forScope scope: @escaping () throws -> Swift.Void) throws
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
+  public static func getScopedAccountId() -> Swift::String?
+  public static func setAccountId(_ accountId: Swift::String?, forScope scope: @escaping () -> Swift::Void)
+  public static func setAccountId(_ accountId: Swift::String?, forScope scope: @escaping () throws -> Swift::Void) throws
   @available(iOS 15.0, *)
-  public static func setAccountId(_ accountId: Swift.String?, forScope scope: @escaping () async -> Swift.Void) async
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
+  public static func setAccountId(_ accountId: Swift::String?, forScope scope: @escaping () async -> Swift::Void) async
   @available(iOS 15.0, *)
-  public static func setAccountId(_ accountId: Swift.String?, forScope scope: @escaping () async throws -> Swift.Void) async throws
-  #endif
+  public static func setAccountId(_ accountId: Swift::String?, forScope scope: @escaping () async throws -> Swift::Void) async throws
   @objc deinit
 }
-public enum IntuneMAMSwiftWebViewPolicy : Swift.Int {
+public enum IntuneMAMSwiftWebViewPolicy : Swift::Int {
   case unset
   case unmanaged
   case currentIdentity
   case currentIdentityBlockUpload
-  #if compiler(>=5.3) && $NonescapableTypes
-  public init?(rawValue: Swift.Int)
-  #endif
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
+  public init?(rawValue: Swift::Int)
+  public typealias RawValue = Swift::Int
+  public var rawValue: Swift::Int {
     get
   }
 }
-extension SwiftUICore.View {
-  #if compiler(>=5.3) && $NonescapableTypes
-  @_Concurrency.MainActor @preconcurrency public func intuneMAMWebViewPolicy(_ policy: IntuneMAMSwift.IntuneMAMSwiftWebViewPolicy? = nil, isExternalURL: ((Foundation.URL) -> Swift.Bool)? = nil) -> some SwiftUICore.View
+extension SwiftUICore::View {
+  @_Concurrency::MainActor @preconcurrency public func intuneMAMWebViewPolicy(_ policy: IntuneMAMSwift::IntuneMAMSwiftWebViewPolicy? = nil, isExternalURL: ((Foundation::URL) -> Swift::Bool)? = nil) -> some SwiftUICore::View
   
-  #endif
 }
 public enum ECSEnvironment {
   case prod
   case sandbox
-  public static func == (a: IntuneMAMSwift.ECSEnvironment, b: IntuneMAMSwift.ECSEnvironment) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
+  public static func == (a: IntuneMAMSwift::ECSEnvironment, b: IntuneMAMSwift::ECSEnvironment) -> Swift::Bool
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
     get
   }
 }
-public enum IntuneMAMSwiftError : Swift.Error {
+public enum IntuneMAMSwiftError : Swift::Error {
   case GroupActivitiesBlocked
-  public static func == (a: IntuneMAMSwift.IntuneMAMSwiftError, b: IntuneMAMSwift.IntuneMAMSwiftError) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
+  case FailedToConstructDataFromEncryptedFile
+  public static func == (a: IntuneMAMSwift::IntuneMAMSwiftError, b: IntuneMAMSwift::IntuneMAMSwiftError) -> Swift::Bool
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
     get
   }
 }
-extension IntuneMAMSwift.IntuneMAMSwiftWebViewPolicy : Swift.Equatable {}
-extension IntuneMAMSwift.IntuneMAMSwiftWebViewPolicy : Swift.Hashable {}
-extension IntuneMAMSwift.IntuneMAMSwiftWebViewPolicy : Swift.RawRepresentable {}
-extension IntuneMAMSwift.ECSEnvironment : Swift.Equatable {}
-extension IntuneMAMSwift.ECSEnvironment : Swift.Hashable {}
-extension IntuneMAMSwift.IntuneMAMSwiftError : Swift.Equatable {}
-extension IntuneMAMSwift.IntuneMAMSwiftError : Swift.Hashable {}
+extension IntuneMAMSwift::IntuneMAMSwiftWebViewPolicy : Swift::Equatable {}
+extension IntuneMAMSwift::IntuneMAMSwiftWebViewPolicy : Swift::Hashable {}
+extension IntuneMAMSwift::IntuneMAMSwiftWebViewPolicy : Swift::RawRepresentable {}
+extension IntuneMAMSwift::ECSEnvironment : Swift::Equatable {}
+extension IntuneMAMSwift::ECSEnvironment : Swift::Hashable {}
+extension IntuneMAMSwift::IntuneMAMSwiftError : Swift::Equatable {}
+extension IntuneMAMSwift::IntuneMAMSwiftError : Swift::Hashable {}

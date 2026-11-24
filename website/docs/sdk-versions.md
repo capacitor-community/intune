@@ -13,6 +13,7 @@ The following table shows SDK versions vs plugin version.
 
 |Plugin Version|iOS SDK Version|Android SDK Version|iOS MSAL Version|Android MSAL Version|
 |--------------|---------------|-------------------|----------------|--------------------|
+|9.x           |22.2.0         |12.4.0             |2.17.0+         |8.7.0               |
 |8.x           |21.2.0         |11.0.0             |1.9.0           |5.10.0              |
 |7.x           |20.3.0         |11.0.0             |1.7.0           |5.10.0              |
 |6.x           |20.3.0         |11.0.0             |1.7.0           |5.10.0              |
