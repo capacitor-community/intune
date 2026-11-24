@@ -28,33 +28,28 @@ public class IntuneApplication extends Application {
          * actions based on MAM enrollment notifications.
          * More information is available here:
          * https://docs.microsoft.com/en-us/intune/app-sdk-android#types-of-notifications */
-        MAMComponents
-            .get(MAMNotificationReceiverRegistry.class)
-            .registerReceiver(
-                notification -> {
-                    if (notification instanceof MAMEnrollmentNotification) {
-                        MAMEnrollmentManager.Result result = ((MAMEnrollmentNotification) notification).getEnrollmentResult();
-                        switch (result) {
-                            case AUTHORIZATION_NEEDED:
-                            case NOT_LICENSED:
-                            case ENROLLMENT_SUCCEEDED:
-                            case ENROLLMENT_FAILED:
-                            case WRONG_USER:
-                            case UNENROLLMENT_SUCCEEDED:
-                            case UNENROLLMENT_FAILED:
-                            case PENDING:
-                            case COMPANY_PORTAL_REQUIRED:
-                            default:
-                                Log.d("Enrollment Receiver", result.name());
-                                break;
-                        }
-                    } else {
-                        Log.d("Enrollment Receiver", "Unexpected notification type received");
-                    }
-                    return true;
-                },
-                MAMNotificationType.MAM_ENROLLMENT_RESULT
-            );
+        MAMComponents.get(MAMNotificationReceiverRegistry.class).registerReceiver((notification) -> {
+            if (notification instanceof MAMEnrollmentNotification) {
+                MAMEnrollmentManager.Result result = ((MAMEnrollmentNotification) notification).getEnrollmentResult();
+                switch (result) {
+                    case AUTHORIZATION_NEEDED:
+                    case NOT_LICENSED:
+                    case ENROLLMENT_SUCCEEDED:
+                    case ENROLLMENT_FAILED:
+                    case WRONG_USER:
+                    case UNENROLLMENT_SUCCEEDED:
+                    case UNENROLLMENT_FAILED:
+                    case PENDING:
+                    case COMPANY_PORTAL_REQUIRED:
+                    default:
+                        Log.d("Enrollment Receiver", result.name());
+                        break;
+                }
+            } else {
+                Log.d("Enrollment Receiver", "Unexpected notification type received");
+            }
+            return true;
+        }, MAMNotificationType.MAM_ENROLLMENT_RESULT);
     }
 
     @Override

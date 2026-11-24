@@ -4,6 +4,7 @@ import IntuneMAMSwift
 import MSAL
 
 @objc(IntuneMAM)
+// swiftlint:disable:next type_body_length
 public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate {
     public let identifier = "IntuneMAM"
     public let jsName = "IntuneMAM"
@@ -96,7 +97,7 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
         notifyListeners("policyChange", data: nil)
     }
 
-    func _acquireToken(_ call: CAPPluginCall, interactive: Bool) {
+    func requestToken(_ call: CAPPluginCall, interactive: Bool) {
         // Used for refreshing a token
         let accountId = call.getString("accountId")
         if !interactive && accountId == nil {
@@ -127,8 +128,8 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
 
         var authority: MSALAuthority?
         if let authorityUri = authorityUriValue {
-            if let u = URL(string: authorityUri) {
-                authority = try? MSALAuthority(url: u)
+            if let url = URL(string: authorityUri) {
+                authority = try? MSALAuthority(url: url)
             }
         }
 
@@ -212,11 +213,11 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
     }
 
     @objc public func acquireToken(_ call: CAPPluginCall) {
-        _acquireToken(call, interactive: true)
+        requestToken(call, interactive: true)
     }
 
     @objc public func acquireTokenSilent(_ call: CAPPluginCall) {
-        _acquireToken(call, interactive: false)
+        requestToken(call, interactive: false)
     }
 
     @objc public func registerAndEnrollAccount(_ call: CAPPluginCall) {
@@ -282,8 +283,8 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
         let authorityUriValue = intuneSettings["ADALAuthority"] as? String
         var authority: MSALAuthority?
         if let authorityUri = authorityUriValue {
-            if let u = URL(string: authorityUri) {
-                authority = try? MSALAuthority(url: u)
+            if let url = URL(string: authorityUri) {
+                authority = try? MSALAuthority(url: url)
             }
         }
 
@@ -357,8 +358,8 @@ public class IntuneMAM: CAPPlugin, CAPBridgedPlugin, IntuneMAMComplianceDelegate
         let authorityUriValue = intuneSettings["ADALAuthority"] as? String
         var authority: MSALAuthority?
         if let authorityUri = authorityUriValue {
-            if let u = URL(string: authorityUri) {
-                authority = try? MSALAuthority(url: u)
+            if let url = URL(string: authorityUri) {
+                authority = try? MSALAuthority(url: url)
             }
         }
 

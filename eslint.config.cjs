@@ -6,6 +6,8 @@ module.exports = [
       '**/build/**',
       '**/dist/**',
       '**/example-app/**',
+      '**/example-app-spm/**',
+      '**/website/**',
       // the old lint script passed --ext ts, which flat config ignores
       '**/*.js',
       '**/*.mjs',
